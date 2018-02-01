@@ -1,0 +1,39 @@
+{
+    "port": 8080,
+    "mongoose": {
+        "uri": "mongodb://localhost/itr4",
+        "options": {
+            "server": {
+                "socketOptions": {
+                    "keepAlive": 1
+                }
+            }
+        }
+    },
+    "session": {
+        "secret": "it:demo:secret",
+        "key": "sid",
+        "cookie": {
+            "path": "/",
+            "httpOnly": true,
+            "maxAge": null
+        }
+    },
+    "VkAuth": {
+        "clientID": 6336378,
+        "clientSecret": "hzAijPF7BGUsvArvGQXn",
+        "callbackURL": "http://localhost:8080/auth/vk/callback"
+    },
+    "FacebookAuth": {
+        "clientID": 1972110239775501,
+        "clientSecret": "6b116a2d7e951ed99b516b0c74e583a7",
+        "callbackURL": "http://localhost:8080/auth/facebook/callback",
+        "profileURL": "https://graph.facebook.com/v2.5/me?fields=first_name,last_name,email",
+        "profileFields": ["id", "email", "name"]
+    },
+    "twitterAuth" : {
+        "consumerKey": "Y6BkuQ78KO2WbPe6oyCIs2uLe",
+        "consumerSecret": "8XccQMPAb1JDXAJPxWHiOHFk74k9rF4TqApGCgbXLrdK6r9Bad",
+        "callbackURL": "http://localhost:8080/auth/twitter/callback"
+    }
+}
