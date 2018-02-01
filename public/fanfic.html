@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Фанфик</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets\comment.css"/>
+</head>
+<body>
+
+<div class="mr-4">
+    <div class="container-fluid p-1 ">
+        <div class="form-inline justify-content-end">
+            <ul class="navbar-nav mr-2">
+                <!-- PROFILE DROPDOWN - scrolling off the page to the right -->
+                <li class="nav-item dropleft">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ann
+                    </a>
+                    <div class="dropdown-menu " aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">MyProfile</a>
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">FanFiction</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link text-primary" href="#">Главная <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Создать фанфик</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Жанры
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Жанр</a>
+                    <a class="dropdown-item" href="#">Жанр</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <div class="tab-content py-4">
+                    <h5 class="pb-2">Фанфик</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Описание </h6>
+                            <p>
+                               Описание фанфика
+                            </p>
+                            <h6>Автор</h6>
+                            <p>
+                                Автор
+                            </p>
+                            <h6>Жанр</h6>
+                            <p>
+                               Жанр
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Теги</h6>
+                            <a href="#" class="badge badge-dark badge-pill">html5</a>
+                            <a href="#" class="badge badge-dark badge-pill">react</a>
+                            <a href="#" class="badge badge-dark badge-pill">codeply</a>
+                            <a href="#" class="badge badge-dark badge-pill">angularjs</a>
+                            <a href="#" class="badge badge-dark badge-pill">css3</a>
+                            <a href="#" class="badge badge-dark badge-pill">jquery</a>
+                            <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
+                            <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
+                            <a href="#" class="badge badge-light badge-pill">Добавить тег</a>
+                        </div>
+                        <!--/row-->
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" class="mx-auto img-fluid img-circle d-block mt-2" alt="avatar">
+
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="container">
+<h4>Содержание</h4>
+    <div><a href="#" class="">Глава 1</a></div>
+    <div><a href="#" class="">Глава 2</a></div>
+</div>
+
+<div class="container">
+    <div class="comments">
+        <h6 class="title-comments mt-3">Комментарии (1)</h6>
+        <ul class="media-list">
+            <!-- Комментарий (уровень 1) -->
+            <li class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-rounded" src="https://i.mycdn.me/i?r=ADErzYVfayHh9JRE7l1rDgHG0GpI5wvJga9C87oNKPNJcyFEKHwKiL9QuGcq4J-B13c" alt="...">
+                    </a>
+                </div>
+                <div class="media-body ml-2">
+                    <div class="media-heading">
+                        <div class="author">Дима</div>
+                        <div class="metadata">
+                            <span class="date">16 ноября 2015, 13:43</span>
+                        </div>
+                    </div>
+                    <div class="media-text text-justify">Комментарий</div>
+                    <div class="footer-comment">
+        <span class="vote plus" title="Нравится">
+          <i class="fa fa-thumbs-up"></i>
+        </span>
+                        <span class="rating">
+          +1
+        </span>
+
+                    </div>
+                </div>
+            </li>
+            <div><a href="#" class="">Добавить комментарий</a></div>
+        </ul>
+
+
+    </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/de9db08d64.js"></script>
+</body>
+</html>
