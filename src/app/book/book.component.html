@@ -1,25 +1,35 @@
-<div class="container">
+<div class="container mt-3">
+    <div class="dropdown mb-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Выберите жанр
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" *ngFor="let cat of categories"
+          (click)="changeCategory(cat.name)">{{cat.name}}</a>
+        </div>
+      </div>
+  <div *ngFor="let book of books">
+    <div class="item list-group-item col-xs-4 col-lg-4" >
+        <div class="thumbnail">
+            <div class="caption">
 
-  <h1>Book List
+        
+            <a [routerLink]="['/book-details/', book._id]"><img  class="group list-group-image my" src='https://www.petmd.com/sites/default/files/petmd-cat-happy-10.jpg' border="0"  /></a>
+                <h4 class="group inner list-group-item-heading">
 
-  </h1>
+                    <a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h4>
 
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Category</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let book of books">
-      <td>{{ book.title }}</td>
-      <td>{{ book.author }}</td>
-      <td>{{ book.category }}</td>
-      <td><a [routerLink]="['/book-details/', book._id]" class="btn btn-default ">Show Detail</a></td>
-    </tr>
-    </tbody>
-  </table>
+                <p class="group inner list-group-item-text">
+                 Автор: {{ book.author }}</p>
+                <p class="group inner list-group-item-text">
+                   Жанр: {{ book.category }}</p>
+              <p class="group inner list-group-item-text">
+                   {{ book.description }}</p>
+            </div>
+        </div>
+    </div>
+
+  </div>
 </div>
+ 
+

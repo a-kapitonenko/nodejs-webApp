@@ -1,19 +1,93 @@
 <div class="container">
-  <h1>{{ book.title }}</h1>
-  <dl class="list">
-    <dt>Автор</dt>
-    <dd>{{ book.author }}</dd>
-    <dt>Описание</dt>
-    <dd>{{ book.description }}</dd>
-    <dt>Дата обновления</dt>
-    <dd>{{ book.updated_date }}</dd>
-    <dt>Жанр</dt>
-    <dd>{{ book.category }}</dd>
-  </dl>
+        <div class="row my-2">
+            <div class="col-lg-8 order-lg-2">
+                <div class="tab-content py-4">
+                        <h5 class="pb-2">{{ book.title }}</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Описание </h6>
+                                <p>
+                                        {{ book.description }}
+                                </p>
+                                <h6>Автор</h6>
+                                <p>
+                                        {{ book.author }}
+                                </p>
+                                <h6>Жанр</h6>
+                                <p>
+                                        {{ book.category }}
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Теги</h6>
+                                <a href="#" class="badge badge-dark badge-pill">html5</a>
+                                <a href="#" class="badge badge-dark badge-pill">react</a>
+                                <a href="#" class="badge badge-dark badge-pill">codeply</a>
+                                <a href="#" class="badge badge-dark badge-pill">angularjs</a>
+                                <a href="#" class="badge badge-dark badge-pill">css3</a>
+                                <a href="#" class="badge badge-dark badge-pill">jquery</a>
+                                <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
+                                <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
+                                <a href="#" class="badge badge-light badge-pill">Добавить тег</a>
+                            </div>
+                            <!--/row-->
+                        </div>
+                    </div>
+                </div>
+    
+            <div class="col-lg-4 order-lg-1 text-center">
+                <img src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" class="mx-auto img-fluid img-circle d-block mt-2" alt="avatar">
+    
+            </div>
+        </div>
+        
+    
     <div class="row">
-        <div class="col-md-12">
-            <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
-            <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
+            <div class="col-md-12">
+                <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
+                <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
+            </div>
+        </div>
+    <div class="container">
+    <h4>Содержание</h4>
+        <div><a href="#" class="">Глава 1</a></div>
+        <div><a href="#" class="">Глава 2</a></div>
+    </div>
+    
+    <div class="container">
+        <div class="comments">
+            <h6 class="title-comments mt-3">Комментарии (1)</h6>
+            <ul class="media-list">
+                <!-- Комментарий (уровень 1) -->
+                <li class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-rounded" src="https://i.mycdn.me/i?r=ADErzYVfayHh9JRE7l1rDgHG0GpI5wvJga9C87oNKPNJcyFEKHwKiL9QuGcq4J-B13c" alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body ml-2">
+                        <div class="media-heading">
+                            <div class="author">Дима</div>
+                            <div class="metadata">
+                                <span class="date">16 ноября 2015, 13:43</span>
+                            </div>
+                        </div>
+                        <div class="media-text text-justify">Комментарий</div>
+                        <div class="footer-comment">
+            <span class="vote plus" title="Нравится">
+              <i class="fa fa-thumbs-up"></i>
+            </span>
+                            <span class="rating">
+              +1
+            </span>
+    
+                        </div>
+                    </div>
+                </li>
+                <div><a href="#" class="">Добавить комментарий</a></div>
+            </ul>
+    
+    
         </div>
     </div>
-</div>
+    </div>

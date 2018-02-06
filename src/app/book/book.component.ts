@@ -13,6 +13,7 @@ export class BookComponent implements OnInit {
 
  private category: string=null;
 
+
   constructor(private repository: BookRepository,private route: ActivatedRoute) { 
    
   }
@@ -20,8 +21,17 @@ export class BookComponent implements OnInit {
   get books(): Book[]{
       return this.repository.getBooks(this.category);;
   }
+
+  get categories():string[]{
+    return this.repository.getCategories();
+  }
+
+    changeCategory(category){
+        this.category=category;
+    }
+
     ngOnInit() {
-        this.category = this.route.snapshot.params['mode'];
+        //this.category = this.route.snapshot.params['mode'];
         //this.books=this.repository.getBooks();
        /* this.http.get('/book').subscribe(data => {
         this.books = data;
