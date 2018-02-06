@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Add New Book</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="saveBook()" #bookForm="ngForm">
+      
+        <div class="form-group">
+          <label for="name">Название</label>
+          <input type="text" class="form-control" [(ngModel)]="book.title" name="title" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Автор</label>
+          <input type="text" class="form-control" [(ngModel)]="book.author" name="author" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Описание</label>
+          <input type="text" class="form-control" [(ngModel)]="book.description" name="description" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Жанр</label>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{book.category}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" *ngFor="let cat of categories"
+              (click)="changeCategory(cat.name)">{{cat.name}}</a>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

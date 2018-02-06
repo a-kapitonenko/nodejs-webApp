@@ -11,6 +11,8 @@ var mongoose = require('./database/mongoose');
 var User = require('./database/models/user').User;
 var MongoStore = require('connect-mongo')(session);
 
+var book = require('./routes/book');
+
 var app = express();
 
 app.set('port', config.get('port'));
@@ -27,7 +29,11 @@ sessionOptions.store = new MongoStore({mongooseConnection: mongoose.connection})
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
+
+//app.use('/books', express.static(path.join(__dirname, 'dist')));
  
+app.use('/book', book);
+
 require('./boot/index')(app);
 require('./routes/index')(app);
 
