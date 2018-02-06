@@ -3,7 +3,7 @@ var passport = require('passport');
 var AuthVKStrategy = require('passport-vkontakte').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
-//var User = require('../models/user').User;
+var User = require('../database/models/user').User;
 
 module.exports = (app)=> {
     passport.use('facebook', new FacebookStrategy({
@@ -12,7 +12,7 @@ module.exports = (app)=> {
             callbackURL: config.get("FacebookAuth:callbackURL"),
             profileFields: config.get("FacebookAuth:profileFields")
         },(accessToken, refreshToken, profile, done)=> {
-            /*User.findOne({'social_id': profile.id}, (err, user)=> {
+            User.findOne({'social_id': profile.id}, (err, user)=> {
                 if (err)
                     return done(err);
                 if (user) {
@@ -31,14 +31,14 @@ module.exports = (app)=> {
                         return done(null, newUser);
                     });
                 }
-            });*/
+            });
     }));
     passport.use('vk', new AuthVKStrategy({
         clientID: config.get("VkAuth:clientID"),
         clientSecret: config.get("VkAuth:clientSecret"),
         callbackURL: config.get("VkAuth:callbackURL")
     },(accessToken, refreshToken, params, profile, done)=> {
-        /*User.findOne({'social_id': profile.id}, (err, user)=> {
+        User.findOne({'social_id': profile.id}, (err, user)=> {
             if (err)
                 return done(err);
             if (user) {
@@ -57,7 +57,7 @@ module.exports = (app)=> {
                     return done(null, newUser);
                 });
             }
-        });*/
+        });
     }));
     passport.use('twitter', new TwitterStrategy({
         consumerKey: config.get("twitterAuth:consumerKey"),
@@ -65,7 +65,7 @@ module.exports = (app)=> {
         callbackURL: config.get("twitterAuth:callbackURL"),
         include_email: true
     },(token, tokenSecret, params, profile, done)=> {
-        /*User.findOne({'social_id': profile.id}, (err, user)=> {
+        User.findOne({'social_id': profile.id}, (err, user)=> {
             if (err)
                 return done(err);
             if (user) {
@@ -84,7 +84,7 @@ module.exports = (app)=> {
                     return done(null, newUser);
                 });
             }
-        });*/
+        });
     }));
     passport.serializeUser(function(user, done) {
         done(null, user.id);
