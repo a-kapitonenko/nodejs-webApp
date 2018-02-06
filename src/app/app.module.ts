@@ -14,6 +14,7 @@ import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { BookRepository } from "./model/book.repository";
 import { BookComponent } from './book/book.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
@@ -53,7 +54,7 @@ const appRoutes: Routes =[
 		BookDetailComponent,
 		BookCreateComponent,
 		BookEditComponent],
-  	imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
+  	imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule],
   	providers: [BookRepository],
   	bootstrap: [AppComponent]
 })
