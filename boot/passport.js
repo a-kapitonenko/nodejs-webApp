@@ -1,37 +1,65 @@
 var config = require('../config');
 var passport = require('passport');
+var LocalStrategy   = require('passport-local').Strategy;
 var AuthVKStrategy = require('passport-vkontakte').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var TwitterStrategy  = require('passport-twitter').Strategy;
 var User = require('../database/models/user').User;
+var verified = require('./nodemailer').verified;
+var rand;
 
 module.exports = (app)=> {
+    /*passport.use('local-signup', new LocalStrategy({
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true
+    },(req, email, password, done)=> {
+        User.findOne({ 'email' : email }, function(err, user) {
+            if (err)
+                return done(err);
+            if (user) {
+                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+            } else {
+                var newUser = new User();
+                newUser.email = email;
+                newUser.password = newUser.generateHash(password);
+                newUser.active = "false";
+                newUser.save(function(err) {
+                    if (err)
+                        throw err;
+                    rand = verified(email);
+                    return done(null, newUser);
+                });
+            }
+        });    
+    }));*/
     passport.use('facebook', new FacebookStrategy({
-            clientID: config.get("FacebookAuth:clientID"),
-            clientSecret: config.get("FacebookAuth:clientSecret"),
-            callbackURL: config.get("FacebookAuth:callbackURL"),
-            profileFields: config.get("FacebookAuth:profileFields")
-        },(accessToken, refreshToken, profile, done)=> {
-            User.findOne({'social_id': profile.id}, (err, user)=> {
-                if (err)
-                    return done(err);
-                if (user) {
-                    return done(null, user); 
-                } else {
-                    var newUser = new User();
-                    newUser.website = "facebook";
-                    newUser.social_id = profile.id;                             
-                    newUser.name  = profile.name.givenName + " " + profile.name.familyName;
-                    newUser.email  = profile.emails[0].value;
-                    newUser.status = "ok";
-                    newUser.creatdate = Date.now();
-                    newUser.save((err)=> {
-                        if (err)
-                            throw err;
-                        return done(null, newUser);
-                    });
-                }
-            });
+        clientID: config.get("FacebookAuth:clientID"),
+        clientSecret: config.get("FacebookAuth:clientSecret"),
+        callbackURL: config.get("FacebookAuth:callbackURL"),
+        profileFields: config.get("FacebookAuth:profileFields")
+    },(accessToken, refreshToken, profile, done)=> {
+        User.findOne({'social_id': profile.id}, (err, user)=> {
+            if (err)
+                return done(err);
+            if (user) {
+                return done(null, user); 
+            } else {
+                var newUser = new User();
+                newUser.website = "facebook";
+                newUser.social_id = profile.id;                             
+                newUser.name  = profile.name.givenName + " " + profile.name.familyName;
+                newUser.email  = profile.emails[0].value;
+                newUser.status = "ok";
+                newUser.active = "true";
+                newUser.creatdate = Date.now();
+                newUser.save((err)=> {
+                    if (err)
+                        throw err;
+                    return done(null, newUser);
+                });
+            }
+        });
     }));
     passport.use('vk', new AuthVKStrategy({
         clientID: config.get("VkAuth:clientID"),
@@ -50,6 +78,7 @@ module.exports = (app)=> {
                 newUser.name  = profile.displayName;
                 newUser.email  = params.email;
                 newUser.status = "ok";
+                newUser.active = "true";
                 newUser.creatdate = Date.now();
                 newUser.save((err)=> {
                     if (err)
@@ -77,6 +106,7 @@ module.exports = (app)=> {
                 newUser.name  = profile.displayName;
                 newUser.email  = "private";
                 newUser.status = "ok";
+                newUser.active = "true";
                 newUser.creatdate = Date.now();
                 newUser.save((err)=> {
                     if (err)
@@ -90,7 +120,6 @@ module.exports = (app)=> {
         done(null, user.id);
 
     });
-
     passport.deserializeUser(function(id, done) {
         User.findById(id, function(err, user) {
             done(err, user);

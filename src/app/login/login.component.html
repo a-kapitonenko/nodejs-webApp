@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+      <div class="mt-4">
+      <form role="form" #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
+          <div class="form-group row">
+             <label class="col-lg-3 col-form-label form-control-label">Email</label>
+              <div class="col-lg-9">
+                  <input class="form-control" type="email" value="" name="email"  ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label">Пароль</label>
+              <div class="col-lg-9">
+                  <input class="form-control" type="password" value="" name="password" ngModel>
+              </div>
+          </div>
+          <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label"></label>
+              <div class="col-lg-9">
+                  <input type="reset" class="btn btn-secondary" value="Отмена">
+          <input type="submit" [disabled]="myForm.invalid" 
+              class="btn btn-primary" value="Войти">
+              </div>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
