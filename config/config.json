@@ -1,4 +1,9 @@
 {
+    "nodemailer": {
+        "service": "Gmail",
+        "user": "corp.fanfiction@gmail.com",
+        "pass": "fanfic12345"
+    },
     "port": 8080,
     "mongoose": {
         "uri": "mongodb://localhost/kursach",

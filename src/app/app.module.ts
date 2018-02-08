@@ -2,19 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import {Routes, RouterModule} from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
+import { UserRepository } from './model/user.repository'
 import { CreatefanficComponent } from './createfanfic/createfanfic.component';
-import { CreateprofileComponent } from './createprofile/createprofile.component';
+import { SignUpComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { BookRepository } from "./model/book.repository";
 import { BookComponent } from './book/book.component';
-import { HttpClientModule } from '@angular/common/http';
 
 import { FileDropModule } from 'ngx-file-drop';
 
@@ -28,7 +30,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
     { path: 'createfanfic', component: CreatefanficComponent},
-	{ path: 'createprofile', component: CreateprofileComponent },
+	{ path: 'signup', component: SignUpComponent },
+	{ path: 'login', component: LoginComponent },
 
 	{
         path: 'books',
@@ -59,7 +62,7 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-  	declarations: [AppComponent, NavbarComponent, HomeComponent, CreatefanficComponent, CreateprofileComponent, BookComponent,
+  	declarations: [AppComponent, NavbarComponent, HomeComponent, CreatefanficComponent, SignUpComponent, LoginComponent, BookComponent,
 		BookDetailComponent,
 		BookCreateComponent,
 		BookEditComponent],
