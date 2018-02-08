@@ -9,12 +9,12 @@
         </div>
       </div>
   <div *ngFor="let book of books">
-    <div class="item list-group-item col-xs-4 col-lg-4" >
+    <div class="item list-group-item col-xs-4 " ><!--  col-lg-4 -->
         <div class="thumbnail">
             <div class="caption">
 
         
-            <a [routerLink]="['/book-details/', book._id]"><img  class="group list-group-image my" src='https://www.petmd.com/sites/default/files/petmd-cat-happy-10.jpg' border="0"  /></a>
+            <a [routerLink]="['/book-details/', book._id]"><img  class="group list-group-image my" [src]='book.image' border="0"  /></a>
                 <h4 class="group inner list-group-item-heading">
 
                     <a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h4>

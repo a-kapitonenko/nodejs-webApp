@@ -1,3 +1,4 @@
+
 export class Book {
     constructor(
 
@@ -6,5 +7,6 @@ export class Book {
         public category?: string,
         public description?: string,
         public updated_date?: Date,
+        public image?: string
        ) { }
 }

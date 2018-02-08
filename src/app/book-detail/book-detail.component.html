@@ -1,7 +1,7 @@
 <div class="container">
         <div class="row my-2">
             <div class="col-lg-8 order-lg-2">
-                <div class="tab-content py-4">
+                <div class="tab-content py-4"> 
                         <h5 class="pb-2">{{ book.title }}</h5>
                         <div class="row">
                             <div class="col-md-6">
@@ -18,7 +18,12 @@
                                         {{ book.category }}
                                 </p>
                             </div>
+
                             <div class="col-md-6">
+                                    
+                                <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
+                                <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
+                                       
                                 <h6>Теги</h6>
                                 <a href="#" class="badge badge-dark badge-pill">html5</a>
                                 <a href="#" class="badge badge-dark badge-pill">react</a>
@@ -34,20 +39,18 @@
                         </div>
                     </div>
                 </div>
-    
-            <div class="col-lg-4 order-lg-1 text-center">
-                <img src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" class="mx-auto img-fluid img-circle d-block mt-2" alt="avatar">
+            <div *ngIf="(book.image!=null)">
+            <div class="col-lg-4 order-lg-1 text-center mt-4">
+                <img style="width: 300px" [src]="book.image" alt="avatar">
     
             </div>
+        </div>
         </div>
         
     
-    <div class="row">
-            <div class="col-md-12">
-                <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
-                <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
-            </div>
-        </div>
+
+            
+   
     <div class="container">
     <h4>Содержание</h4>
         <div><a href="#" class="">Глава 1</a></div>

@@ -16,6 +16,15 @@ import { BookRepository } from "./model/book.repository";
 import { BookComponent } from './book/book.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FileDropModule } from 'ngx-file-drop';
+
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+
+
+
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
     { path: 'createfanfic', component: CreatefanficComponent},
@@ -54,7 +63,10 @@ const appRoutes: Routes =[
 		BookDetailComponent,
 		BookCreateComponent,
 		BookEditComponent],
-  	imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule],
+      imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireStorageModule],
   	providers: [BookRepository],
   	bootstrap: [AppComponent]
 })
