@@ -1,7 +1,8 @@
 export class User {
     constructor(
-    public name?: string,
     public email?: string,
-    public active?: string,
-    public status?: string) { }
+    public password?: string,
+    public name?: string,
+    public isActive?: boolean,
+    public isBlocked?: boolean) { }
 }

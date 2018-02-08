@@ -5,6 +5,7 @@ var rand;
 
 exports.register = function(req,res,next) {
     var data = req.body;
+    console.log(data);
     User.findOne({ 'email' : data.email }, function(err, user) {
         if (err)  throw err;
         if (user) {
@@ -14,13 +15,15 @@ exports.register = function(req,res,next) {
             res.end();
         } else {
             var newUser = new User();
-            newUser.website = "fanfiction";
             newUser.email = data.email;
-            newUser.name = data.name;
             newUser.password = newUser.generateHash(data.password);
-            newUser.status = "ok";
-            newUser.active = "false";
-            newUser.creatdate = Date.now();
+            newUser.name = data.name;
+            newUser.role = "user";
+            newUser.isActive = false;
+            newUser.isBlocked = false;
+            newUser.website = "fanfiction";
+            newUser.social_id = null;
+            newUser.creat_date = Date.now();
             newUser.save(function(err) {
                 if (err) throw err;
                 rand = verified(data.email);
@@ -34,7 +37,7 @@ exports.register = function(req,res,next) {
 };
 exports.verify = function(req,res) {
     if(req.query.id == rand){
-        User.findOneAndUpdate({email: req.query.email}, {active: "true"}, (error, user)=> {
+        User.findOneAndUpdate({ email: req.query.email }, { isActive: true }, (error, user)=> {
             if(error) throw error;
             res.sendfile('dist/index.html');
         });

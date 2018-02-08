@@ -12,9 +12,9 @@ import { User } from '../model/user.model'
 export class LoginComponent {
   private user: User;
   constructor(private serv: UserRepository) { }
-
   onSubmit(form: NgForm){
-      this.user = new User('', form.form.controls.email.value, 'false','ok');
+    var data = form.form.controls;
+      this.user = new User(data.email.value, data.password.value);
       this.serv.login(this.user).subscribe(data=> {
         console.log(data);
       });
