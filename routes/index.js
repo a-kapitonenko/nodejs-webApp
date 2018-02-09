@@ -5,11 +5,8 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 module.exports = (app)=> {
     app.post('/registeruser', require('./registerUser').register);
-    app.get('/verify',require('./registerUser').verify);
-    app.post('/login',require('./login').post);
-    app.get('/',isBlocked,  function(req, res) {
-        res.sendfile('dist/index.html');
-    });
+    app.get('/verify', require('./registerUser').verify);
+    app.post('/login', require('./login').post);
     app.get('/getuser', function(req, res) {
         if(req.user){
             res.send({

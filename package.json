@@ -24,8 +24,13 @@
     "@tinymce/tinymce-angular": "^1.0.2",
     "angular-tinymce": "^3.2.0",
     "angular4-files-upload": "^1.0.2",
+<<<<<<< HEAD
     "angularfire2": "^5.0.0-rc.6",
     "bcrypt-nodejs": "0.0.3",
+=======
+    "angularfire2": "*",
+    "bcrypt-nodejs": "*",
+>>>>>>> a057b38236cdf64e074104aa007d68a72d83f79e
     "body-parser": "~1.18.2",
     "connect-flash": "*",
     "connect-mongo": "^2.0.1",

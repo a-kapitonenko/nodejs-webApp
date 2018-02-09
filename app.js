@@ -18,9 +18,12 @@ app.set('port', config.get('port'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'dist')));
+<<<<<<< HEAD
 app.use('/books', express.static(path.join(__dirname, 'dist')));
 //app.use('/assets', express.static(path.join(__dirname, 'dist')));
 
+=======
+>>>>>>> a057b38236cdf64e074104aa007d68a72d83f79e
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,7 +33,7 @@ app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
- var book=require('./routes/book');
+var book=require('./routes/book');
 app.use('/book', book);
 
 require('./boot/index')(app);

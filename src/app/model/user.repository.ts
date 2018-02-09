@@ -4,8 +4,8 @@ import {User} from './user.model';
    
 @Injectable()
 export class UserRepository{
-    private User: User = null;
-    private Users: any = [];
+    private selectedUser: User = null;
+    private users: any = [];
     constructor(private http: HttpClient){}
     createUser(user: User){
         return this.http.post('/registeruser', user); 
