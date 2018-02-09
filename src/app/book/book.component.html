@@ -13,8 +13,9 @@
         <div class="thumbnail">
             <div class="caption">
 
-        
+            <div *ngIf="(book.image!=null)">
             <a [routerLink]="['/book-details/', book._id]"><img  class="group list-group-image my" [src]='book.image' border="0"  /></a>
+            </div>
                 <h4 class="group inner list-group-item-heading">
 
                     <a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h4>

@@ -9,6 +9,11 @@ import { UploadEvent, UploadFile } from 'ngx-file-drop';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable'; 
+
+
+
+
+
 /* 
 @Component({
     selector: 'app-book-create',
@@ -47,9 +52,12 @@ export class BookCreateComponent implements OnInit {
      snapshot: Observable<any>;
      task: AngularFireUploadTask;
      filePath: string;
+     content: string;
 
     public files: UploadFile[] = null;
  
+   
+
     public dropped(event: UploadEvent) {
     this.files = event.files;
     for (const file of event.files) {
@@ -71,8 +79,26 @@ export class BookCreateComponent implements OnInit {
     // observe percentage changes
     
   }
+
+  /* tinymce.init({
+    selector: "angular-tinymce",  // change this value according to your HTML
+    plugin: 'textpattern',
+    textpattern_patterns: [
+       {start: '*', end: '*', format: 'italic'},
+       {start: '**', end: '**', format: 'bold'},
+       {start: '#', format: 'h1'},
+       {start: '##', format: 'h2'},
+       {start: '###', format: 'h3'},
+       {start: '####', format: 'h4'},
+       {start: '#####', format: 'h5'},
+       {start: '######', format: 'h6'},
+       {start: '1. ', cmd: 'InsertOrderedList'},
+       {start: '* ', cmd: 'InsertUnorderedList'},
+       {start: '- ', cmd: 'InsertUnorderedList'}
+    ]
+  }); */
  
-  public fileOver(event){
+   public fileOver(event){
     console.log(event);
   }
  
@@ -82,6 +108,7 @@ export class BookCreateComponent implements OnInit {
 
     constructor(private repository: BookRepository, private router: Router, 
         private storage: AngularFireStorage) {
+            
     }
 
     ngOnInit() {
@@ -102,32 +129,10 @@ export class BookCreateComponent implements OnInit {
             //const file = info;
             this.filePath = `/${new Date().getTime()}_${file.name}`;
             this.task = this.storage.upload(this.filePath, file);
-            
-            
+                      
         }
-        /* 
-        let filePath = `/${new Date().getTime()}_${file.name}`;
-        console.log(filePath);
-        this.task = this.storage.upload(filePath, file);
-
-        this.uploadPercent = this.task.percentageChanges();
-        // get notified when the download URL is available
-        this.downloadURL = this.task.downloadURL();
-
-        /* this.path = `/${new Date().getTime()}_${this.files[0].relativePath}`;
-        console.log ("path"+this.path);
-        this.task = this.storage.upload(this.path, this.files[0].fileEntry);
-        console.log ("sended");
-        this.downloadURL = this.task.downloadURL(); 
-        console.log(this.downloadURL);*/
     } 
     
-
-    getImage(){
-        
-        
-        
-    }
  
     saveBook() {
     

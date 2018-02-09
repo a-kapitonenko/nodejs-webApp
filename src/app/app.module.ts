@@ -25,6 +25,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
+import { TinyMceModule } from 'angular-tinymce';
+
+
 
 
 const appRoutes: Routes =[
@@ -68,8 +71,28 @@ const appRoutes: Routes =[
 		BookEditComponent],
       imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFirestoreModule,
-        AngularFireStorageModule],
+        AngularFireStorageModule,
+        TinyMceModule.forRoot({
+            tinymceScriptURL: 'assets/tinymce/tinymce.min.js',
+            baseURL: '',
+            skin_url: '/assets/tinymce/skins/lightgray',
+            theme_url: '/assets/tinymce/themes/modern/theme.min.js',
+            selector: 'angular-tinymce',
+            plugins: ['textpattern'],
+            textpattern_patterns: [
+               {start: '*', end: '*', format: 'italic'},
+               {start: '**', end: '**', format: 'bold'},
+               {start: '#', format: 'h1'},
+               {start: '##', format: 'h2'},
+               {start: '###', format: 'h3'},
+               {start: '####', format: 'h4'},
+               {start: '#####', format: 'h5'},
+               {start: '######', format: 'h6'},
+               {start: '1. ', cmd: 'InsertOrderedList'},
+               {start: '* ', cmd: 'InsertUnorderedList'},
+               {start: '- ', cmd: 'InsertUnorderedList'}
+            ]
+        })],
   	providers: [BookRepository],
   	bootstrap: [AppComponent]
 })
