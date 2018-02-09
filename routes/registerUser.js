@@ -6,18 +6,19 @@ var rand;
 exports.register = function(req,res,next) {
     var data = req.body;
     console.log(data);
-    User.findOne({ 'email' : data.email }, function(err, user) {
-        if (err)  throw err;
+    User.findOne({ "email" : data.email }, function(err, user) {
+        if (err) throw err;
         if (user) {
             res.send({
-                "send": 'That email is already taken.'
+                "send": "That email is already taken."
             });
             res.end();
-        } else {
+        }else {
             var newUser = new User();
             newUser.email = data.email;
             newUser.password = newUser.generateHash(data.password);
-            newUser.name = data.name;
+            newUser.first_name = data.name;
+            newUser.second_name = "";
             newUser.role = "user";
             newUser.isActive = false;
             newUser.isBlocked = false;
@@ -39,10 +40,9 @@ exports.verify = function(req,res) {
     if(req.query.id == rand){
         User.findOneAndUpdate({ email: req.query.email }, { isActive: true }, (error, user)=> {
             if(error) throw error;
-            res.sendfile('dist/index.html');
+            res.sendfile("dist/index.html");
         });
-    }
-    else{
+    }else {
         res.end("<h1>Bad Request</h1>");
     }
 }
