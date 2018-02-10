@@ -93,7 +93,7 @@ const appRoutes: Routes =[
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
         })],
-  	providers: [BookRepository],
+  	providers: [BookRepository, UserRepository],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

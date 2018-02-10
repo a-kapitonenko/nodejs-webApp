@@ -20,9 +20,7 @@ exports.post = function(req,res) {
             }else {
                 req.session.passport = {};
                 req.session.passport.user = user._id;
-                res.send({
-                    "send": "success"
-                });
+                res.json(user);
             }
         }else {
             res.send({
