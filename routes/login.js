@@ -18,6 +18,7 @@ exports.post = function(req,res) {
                     "send": "Email is not verifyed"
                 });
             }else {
+                req.session.passport = {};
                 req.session.passport.user = user._id;
                 res.send({
                     "send": "success"
