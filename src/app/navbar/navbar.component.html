@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div [ngClass]="{'toolbar-fullscreen': (fullscreen$)}">
 <div class="mr-1">
   	<div class="container-fluid  row">
@@ -20,12 +21,42 @@
       	</div>
   	</div>
 </div>
+=======
+<div *ngIf="userRepository.selectedUser == null; then nonAutorise else autorise"></div>   
+<ng-template #nonAutorise>
+	<div class="mr-4">
+		<div class="container-fluid p-1 ">
+			<div class="form-inline justify-content-end">
+				<span class="lead"><a routerLink="login" class="mr-1"> Войдите </a> / <a routerLink="signup" class="ml-1"> Зарегистрируйстесь</a> <span class="mx-2"> или </span> </span>
+				<a class=" btn  btn-social btn-vk"
+				href="/auth/vk">
+					<span class="fa fa-vk"></span>
+				</a>
+				<a class=" btn  btn-social btn-twitter" href="/auth/twitter">
+					<span class="fa fa-twitter"></span>
+				</a>
+				<a class=" btn  btn-social btn-facebook" href="/auth/facebook">
+					<span class="fa fa-facebook"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+</ng-template>  
+<ng-template #autorise>
+	<div class="mr-4">
+		<div class="container-fluid p-1 ">
+			<div class="form-inline justify-content-end">
+				<span class="mx-2">Привет {{userRepository.selectedUser.first_name}}</span>
+			</div>
+		</div>
+	</div>
+</ng-template>  
+>>>>>>> 1888e4047f0179856680e87ff4aa0a0baab96308
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="#">FanFiction</a>
+	<a class="navbar-brand" [routerLink]="['/']">FanFiction</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-  
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">

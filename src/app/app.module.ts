@@ -98,8 +98,13 @@ const appRoutes: Routes =[
                {start: '* ', cmd: 'InsertUnorderedList'},
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
+<<<<<<< HEAD
         }), MatProgressBarModule],
   	providers: [BookRepository, FullscreenService],
+=======
+        })],
+  	providers: [BookRepository, UserRepository],
+>>>>>>> 1888e4047f0179856680e87ff4aa0a0baab96308
   	bootstrap: [AppComponent]
 })
 export class AppModule { }
