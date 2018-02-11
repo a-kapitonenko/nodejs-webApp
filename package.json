@@ -13,24 +13,21 @@
   },
   "dependencies": {
     "@angular/animations": "^5.2.0",
+    "@angular/cdk": "^5.2.0",
     "@angular/common": "^5.2.0",
     "@angular/compiler": "^5.2.0",
     "@angular/core": "^5.2.0",
     "@angular/forms": "^5.2.0",
     "@angular/http": "^5.2.0",
+    "@angular/material": "^5.2.0",
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "@tinymce/tinymce-angular": "^1.0.2",
     "angular-tinymce": "^3.2.0",
     "angular4-files-upload": "^1.0.2",
-<<<<<<< HEAD
     "angularfire2": "^5.0.0-rc.6",
     "bcrypt-nodejs": "0.0.3",
-=======
-    "angularfire2": "*",
-    "bcrypt-nodejs": "*",
->>>>>>> a057b38236cdf64e074104aa007d68a72d83f79e
     "body-parser": "~1.18.2",
     "connect-flash": "*",
     "connect-mongo": "^2.0.1",

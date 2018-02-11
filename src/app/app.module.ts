@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { UserRepository } from './model/user.repository'
-import { CreatefanficComponent } from './createfanfic/createfanfic.component';
 import { SignUpComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 
@@ -22,27 +21,22 @@ import { FileDropModule } from 'ngx-file-drop';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
 import { TinyMceModule } from 'angular-tinymce';
+import { AddChapterComponent } from './add-chapter/add-chapter.component';
+import { BookReadComponent } from './book-read/book-read.component';
 
-
-
+import { FullscreenService } from './fullscreen.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
-    { path: 'createfanfic', component: CreatefanficComponent},
 	{ path: 'signup', component: SignUpComponent },
 	{ path: 'login', component: LoginComponent },
 
 	{
         path: 'books',
-        component: BookComponent,
-        data: { title: 'Book List' }
-    },
-    {
-        path: 'books/:mode',
         component: BookComponent,
         data: { title: 'Book List' }
     },
@@ -60,15 +54,27 @@ const appRoutes: Routes =[
         path: 'book-edit/:id',
         component: BookEditComponent,
         data: { title: 'Edit Book' }
+    },
+    {
+        path: 'book-read/:id/:num',
+        component: BookReadComponent,
+        data: { title: 'Read Book' }
+    },
+    {
+        path: 'add-chapter/:id',
+        component: AddChapterComponent,
+        data: { title: 'Write Book' }
 	},
 	{ path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
-  	declarations: [AppComponent, NavbarComponent, HomeComponent, CreatefanficComponent, SignUpComponent, LoginComponent, BookComponent,
+  	declarations: [AppComponent, NavbarComponent, HomeComponent, SignUpComponent, LoginComponent, BookComponent,
 		BookDetailComponent,
 		BookCreateComponent,
-		BookEditComponent],
+		BookEditComponent,
+		AddChapterComponent,
+		BookReadComponent],
       imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireStorageModule,
@@ -92,8 +98,8 @@ const appRoutes: Routes =[
                {start: '* ', cmd: 'InsertUnorderedList'},
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
-        })],
-  	providers: [BookRepository],
+        }), MatProgressBarModule],
+  	providers: [BookRepository, FullscreenService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

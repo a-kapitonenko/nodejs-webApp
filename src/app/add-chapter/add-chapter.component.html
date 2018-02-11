@@ -1,0 +1,66 @@
+<div class="container">    
+                  <div class="row mt-4">
+                      <div class="col-md-6">
+                          <h4 class="pb-2">{{ book.title }}</h4>
+                      </div>
+                  </div>
+                  <div class="container">
+                    <h6>Содержание</h6>
+                        <div *ngFor="let chapter of chapters; let i = index;" class="mb-1">        
+                            Глава {{i+1}}:<a [routerLink]="['/book-read', book._id, chapter.number]" class=""> "{{chapter.name}}"</a> 
+                          <a (click)="startEditChapter(chapter.number)" class="btn btn-success btn-sm">EDIT</a>
+                          <button class="btn btn-danger btn-sm" type="button" (click)="deleteChapter(chapter.number)">DELETE</button>
+                         </div>                      
+                    <div *ngIf="(isCreating!=true) && (isEditing!=true)">
+                        <a (click)="startCreateChapter()" class="btn btn-success">ADD CHAPTER</a>
+                    </div>                  
+              </div>
+              <div *ngIf="(isCreating==true)">
+                  <label for="name">Название главы</label>
+                  <input type="text" class="form-control mb-3" [(ngModel)]="newChapter.name" name="name" id="name" required>
+                  <label class="mb-2">Обложка для главы</label>
+                  <div *ngIf="(files==null);else other_content" class="mb-3">                    
+                    <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+                      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                    </file-drop>
+                  </div>                
+                  <ng-template #other_content>                        
+                      <div><img style="width: 300px" [src]="downloadURL | async"></div>
+                        <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
+                        Хочу другую картинку
+                      </button></div>                        
+                  </ng-template>
+                  <angular-tinymce  [(ngModel)]='newChapter.text' name='content'  ></angular-tinymce>
+                  <button class="btn btn-success mt-3" type="button" (click)="addChapter()">ADD CHAPTER</button>
+                  <button class="btn btn-secondary mt-3" type="button" (click)="cancel()">CANCEL</button>
+                </div>
+                <div *ngIf="(isEditing==true)">
+                    <label for="name">Название главы</label>
+                    <input type="text" class="form-control mb-3" [(ngModel)]="newChapter.name" name="name" id="name" required>
+                    <label class="mb-2">Обложка для главы</label>
+                    <div *ngIf="(newChapter.image==null);else otherImage">
+                    <div *ngIf="(files==null);else other_content" class="mb-3">                    
+                      <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+                        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                      </file-drop>
+                    </div>                
+                    <ng-template #other_content>                        
+                        <div><img style="width: 300px" [src]="downloadURL | async"></div>
+                          <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
+                          Хочу другую картинку
+                        </button></div>                        
+                    </ng-template>
+                  </div>
+                  <ng-template #otherImage>
+                      <div *ngIf="(newChapter.image!=null)">
+                      <div><img style="width: 300px" [src]="newChapter.image"></div>
+                      <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="newChapter.image=null">
+                      Хочу другую картинку
+                       </button></div>  
+                      </div>             
+                  </ng-template>
+                    <angular-tinymce  [(ngModel)]='newChapter.text' name='content'  ></angular-tinymce>
+                    <button class="btn btn-success mt-3" type="button" (click)="editChapter()">EDIT CHAPTER</button>
+                  </div>
+          </div> 
+

@@ -1,4 +1,4 @@
-
+import {Chapter} from '../model/chapter.model';
 export class Book {
     constructor(
 
@@ -7,6 +7,7 @@ export class Book {
         public category?: string,
         public description?: string,
         public updated_date?: Date,
-        public image?: string
+        public image?: string,
+        public chapters?: Array<Chapter>
        ) { }
 }

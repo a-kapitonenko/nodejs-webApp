@@ -48,11 +48,12 @@ import { Observable } from 'rxjs/Observable';
 export class BookCreateComponent implements OnInit {
 
     book: Book={} ;
-     public downloadURL: Observable<string>;
-     snapshot: Observable<any>;
-     task: AngularFireUploadTask;
-     filePath: string;
-     content: string;
+    public downloadURL: Observable<string>;
+    snapshot: Observable<any>;
+    task: AngularFireUploadTask;
+    filePath: string;
+    content: string;
+    uploadPercent: Observable<number>;
 
     public files: UploadFile[] = null;
  
@@ -70,6 +71,7 @@ export class BookCreateComponent implements OnInit {
     setTimeout(()=>{    //<<<---    using ()=> syntax
         // get notified when the download URL is available
         this.downloadURL = this.task.downloadURL();
+        
         this.downloadURL.subscribe(res => {
             this.book.image=res;
                  
@@ -78,29 +80,11 @@ export class BookCreateComponent implements OnInit {
    },800);
     // observe percentage changes
     
-  }
+  } 
 
-  /* tinymce.init({
-    selector: "angular-tinymce",  // change this value according to your HTML
-    plugin: 'textpattern',
-    textpattern_patterns: [
-       {start: '*', end: '*', format: 'italic'},
-       {start: '**', end: '**', format: 'bold'},
-       {start: '#', format: 'h1'},
-       {start: '##', format: 'h2'},
-       {start: '###', format: 'h3'},
-       {start: '####', format: 'h4'},
-       {start: '#####', format: 'h5'},
-       {start: '######', format: 'h6'},
-       {start: '1. ', cmd: 'InsertOrderedList'},
-       {start: '* ', cmd: 'InsertUnorderedList'},
-       {start: '- ', cmd: 'InsertUnorderedList'}
-    ]
-  }); */
- 
    public fileOver(event){
     console.log(event);
-  }
+   }
  
     public fileLeave(event){
     console.log(event);
@@ -129,6 +113,7 @@ export class BookCreateComponent implements OnInit {
             //const file = info;
             this.filePath = `/${new Date().getTime()}_${file.name}`;
             this.task = this.storage.upload(this.filePath, file);
+            this.uploadPercent = this.task.percentageChanges();
                       
         }
     } 

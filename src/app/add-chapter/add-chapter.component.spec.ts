@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreatefanficComponent } from './createfanfic.component';
+import { AddChapterComponent } from './add-chapter.component';
 
-describe('CreatefanficComponent', () => {
-  let component: CreatefanficComponent;
-  let fixture: ComponentFixture<CreatefanficComponent>;
+describe('AddChapterComponent', () => {
+  let component: AddChapterComponent;
+  let fixture: ComponentFixture<AddChapterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatefanficComponent ]
+      declarations: [ AddChapterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreatefanficComponent);
+    fixture = TestBed.createComponent(AddChapterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

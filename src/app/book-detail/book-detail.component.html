@@ -20,9 +20,11 @@
                                 </p>
                             </div>
 
-                            <div class="col text-right">
+                            <div class="col ">
                                     
                                 <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
+                                <a [routerLink]="['/add-chapter', book._id]" class="btn btn-success">ADD CHAPTER</a>
+                                <a *ngIf="(book.chapters[0]!=null)" [routerLink]="['/book-read', book._id, book.chapters[0].number]" class="btn btn-success">READ</a>
                                 <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
                                        
                                 <h6>Теги</h6>
@@ -46,18 +48,7 @@
     
             </div>
         </div>
-        </div>
-        
-    
-
-            
-   
-    <div class="container">
-    <h4>Содержание</h4>
-        <div><a href="#" class="">Глава 1</a></div>
-        <div><a href="#" class="">Глава 2</a></div>
-    </div>
-    
+        </div>  
     <div class="container">
         <div class="comments">
             <h6 class="title-comments mt-3">Комментарии (1)</h6>
