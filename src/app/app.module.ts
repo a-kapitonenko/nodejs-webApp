@@ -30,6 +30,8 @@ import { BookReadComponent } from './book-read/book-read.component';
 import { FullscreenService } from './fullscreen.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
+import { User } from './model/user.model';
+
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
@@ -98,13 +100,8 @@ const appRoutes: Routes =[
                {start: '* ', cmd: 'InsertUnorderedList'},
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
-<<<<<<< HEAD
         }), MatProgressBarModule],
-  	providers: [BookRepository, FullscreenService],
-=======
-        })],
-  	providers: [BookRepository, UserRepository],
->>>>>>> 1888e4047f0179856680e87ff4aa0a0baab96308
+  	providers: [BookRepository, UserRepository, FullscreenService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -22,9 +22,7 @@ export class BookReadComponent implements OnInit {
    index: number;
    private subscriptions: Subscription[] = [];
    fullscreen$;
-   color = 'primary';
-   mode = 'determinate';
-   value=40;
+   value: number=0;
 
   constructor(private repository: BookRepository, private router: Router, private route: ActivatedRoute,
     private fullScreenService: FullscreenService) {
@@ -44,7 +42,6 @@ export class BookReadComponent implements OnInit {
         this.fullscreen$ = fullscreen$;
        });
       this.subscriptions.push(subscription);
-      console.log(this.fullscreen$);
    }
 
    changeFullScreen(){
@@ -55,13 +52,11 @@ export class BookReadComponent implements OnInit {
 
     if(index==0){
       this.isFirst = true;
-      console.log("isFirst"+this.isFirst);
     } else {
       this.isFirst = false;
     }
     if(index==(this.chapters.length-1)){
       this.isLast = true;
-      console.log("isLast"+this.isLast);
     } else {
       this.isLast = false;
     }
@@ -77,12 +72,11 @@ export class BookReadComponent implements OnInit {
     this.curChapter = this.book.chapters[this.index];
     this.chapterNum=this.index+1;
     this.checkChapter(this.index);
-    //this.getValue();
+    this.getValue();
   }
 
   getValue(){
-      this.value=(this.chapterNum/this.chapters.length)*100;
-      console.log(this.value+ ' '+ this.chapterNum+'  '+this.chapters.length );
+      this.value=Math.round((this.chapterNum/this.chapters.length)*100);
   }
 
   get chapters():Chapter[] {

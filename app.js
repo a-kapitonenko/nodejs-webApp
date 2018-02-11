@@ -17,14 +17,10 @@ app.set('port', config.get('port'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/books', express.static(path.join(__dirname, 'dist')));
 
 
-=======
-
->>>>>>> 1888e4047f0179856680e87ff4aa0a0baab96308
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
