@@ -2,7 +2,7 @@
     display: none;
 }
 
-#purple-btn:hover {
+#search-btn:hover {
     background-color:#8c1aff;
     color: white !important;
 }

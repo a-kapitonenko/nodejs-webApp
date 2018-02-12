@@ -58,16 +58,26 @@
 			</li>
 		</ul>
 		
-		<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 30%;">
-		<button class="btn btn-outline-primary my-2 my-sm-0" style="color:#8c1aff; border-color:#8c1aff;  " id="purple-btn" type="submit">Search</button>
+		<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" aria-label="Search" style="width: 30%;" id="search">
+		<button class="btn btn-outline-primary my-2 my-sm-0" style="color:#8c1aff; border-color:#8c1aff;  " for ="search" id="search-btn" type="submit">Search</button>
 		</form>
 	
 				<div *ngIf="userRepository.selectedUser == null; then nonAutorise else autorise"></div>   
 				<ng-template #nonAutorise>
-					<div class="">
-						<div class="container-fluid p-1  " style="padding-left:0px; padding-right: 0px;">
+					
+						
 							<div class="form-inline justify-content-end align-middle">
-								<span class="lead"><a routerLink="login" class="mr-1"> Войдите </a> / <a routerLink="signup" class="ml-1"> Зарегистрируйстесь</a> <span class="mx-2"> или </span> </span>
+							<!-- 	<span class="lead"> -->
+										<ul class="navbar-nav"><!--  mr-auto -->
+											<li class="nav-item active">
+													<a routerLink="login" style="color:#8c1aff " class="nav-link "> Вход </a> 
+											</li>
+											<li class="nav-item">
+													<a routerLink="signup" class="nav-link"> Регистрация</a> 
+											</li>
+										
+										</ul>					
+							   
 								<a class=" btn  btn-social btn-vk"
 								href="/auth/vk">
 									<span class="fa fa-vk"></span>
@@ -78,17 +88,17 @@
 								<a class=" btn  btn-social btn-facebook" href="/auth/facebook">
 									<span class="fa fa-facebook"></span>
 								</a>
-							</div>
+							
 						</div>
-					</div>
+					
 				</ng-template>  
 				<ng-template #autorise>
 					<div class="">
-						<div class="container-fluid p-1 " style="padding-left:0px; padding-right: 0px;">
+						
 							<div class="form-inline justify-content-end align-middle">
 								<span class="mx-2">Привет {{userRepository.selectedUser.first_name}}</span>
 							</div>
-						</div>
+						
 					</div>
 				</ng-template>  
 			<!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
