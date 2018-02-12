@@ -35,7 +35,8 @@ import { User } from './model/user.model';
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
-	{ path: 'login', component: LoginComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'logout', redirectTo: '/' },
 
 	{
         path: 'books',

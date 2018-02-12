@@ -13,29 +13,25 @@ import { UserRepository } from '../model/user.repository';
   	styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  private subscriptions: Subscription[] = [];
-  fullscreen$ :boolean;
-
-  ngOnInit() {
-  const subscription = this.fullScreenService.fullscreen$
-    .subscribe((fullscreen$) => {
-      this.fullscreen$ = fullscreen$;
-    });
-  console.log(this.fullscreen$);
-  this.subscriptions.push(subscription);
-  }
-
-  ngOnDestroy() {
-  this.subscriptions
-    .forEach(s => s.unsubscribe());
-  }
-
-  constructor(private router: Router,private repository: BookRepository, 
-    private fullScreenService: FullscreenService, private userRepository: UserRepository) { 
-
-  }
-
-  get categories():string[]{
-    return this.repository.getCategories();
-  }
+  	private subscriptions: Subscription[] = [];
+  	fullscreen$ :boolean;
+  	ngOnInit() {
+  		const subscription = this.fullScreenService.fullscreen$.subscribe((fullscreen$)=> {
+      		this.fullscreen$ = fullscreen$;
+    	});
+  		console.log(this.fullscreen$);
+  		this.subscriptions.push(subscription);
+  	}
+  	ngOnDestroy() {
+  		this.subscriptions.forEach(s => s.unsubscribe());
+  	}
+  	constructor(private router: Router,private repository: BookRepository, 
+    	private fullScreenService: FullscreenService, private userRepository: UserRepository) { 
+  	}
+  	get categories():string[] {
+    	return this.repository.getCategories();
+	}
+	logout() {
+		this.userRepository.selectUser(null);
+	}
 }

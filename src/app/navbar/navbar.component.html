@@ -1,115 +1,68 @@
 <div [ngClass]="{'toolbar-fullscreen': (fullscreen$)}">
-  	<!-- <div class="container-fluid  row" style="padding-left:0px; padding-right: 0px;">
-		  <div class = "justify-content-start ml-4 col-6 mt-1 mb-1">
-			  <img src="https://firebasestorage.googleapis.com/v0/b/nodejs-webapp-956d6.appspot.com/o/logo.png?alt=media&token=76af09f4-9500-4d5e-9bdc-b86aed8d751f" 
-			  style="width: 140px;">
-		  </div>
-      	<div class=" col justify-content-end">
-				<div *ngIf="userRepository.selectedUser == null; then nonAutorise else autorise"></div>   
-				<ng-template #nonAutorise>
-					<div class="">
-						<div class="container-fluid p-1  " style="padding-left:0px; padding-right: 0px;">
-							<div class="form-inline justify-content-end align-middle">
-								<span class="lead"><a routerLink="login" class="mr-1"> Войдите </a> / <a routerLink="signup" class="ml-1"> Зарегистрируйстесь</a> <span class="mx-2"> или </span> </span>
-								<a class=" btn  btn-social btn-vk"
-								href="/auth/vk">
-									<span class="fa fa-vk"></span>
-								</a>
-								<a class=" btn  btn-social btn-twitter" href="/auth/twitter">
-									<span class="fa fa-twitter"></span>
-								</a>
-								<a class=" btn  btn-social btn-facebook" href="/auth/facebook">
-									<span class="fa fa-facebook"></span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</ng-template>  
-				<ng-template #autorise>
-					<div class="">
-						<div class="container-fluid p-1 " style="padding-left:0px; padding-right: 0px;">
-							<div class="form-inline justify-content-end align-middle">
-								<span class="mx-2">Привет {{userRepository.selectedUser.first_name}}</span>
-							</div>
-						</div>
-					</div>
-				</ng-template>  
-      	</div>
-  	</div> -->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" [routerLink]="['/']">
-		<img src="https://firebasestorage.googleapis.com/v0/b/nodejs-webapp-956d6.appspot.com/o/logo.png?alt=media&token=76af09f4-9500-4d5e-9bdc-b86aed8d751f" 
-		style="width: 140px;"></a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse " id="navbarSupportedContent">
-		<form class="form-inline my-2 my-lg-0 align-middle mr-auto">
-		<ul class="navbar-nav"><!--  mr-auto -->
-			<li class="nav-item active">
-				<a class="nav-link" style="color:#8c1aff " [routerLink]="['/']">Главная <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link " [routerLink]="['/book-create']">Создать фанфик</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" [routerLink]="['/books']">Фанфики</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link">Light theme</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link">Dark theme</a>
-			</li>
-		</ul>
-		
-		<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" aria-label="Search" style="width: 30%;" id="search">
-		<button class="btn btn-outline-primary my-2 my-sm-0" style="color:#8c1aff; border-color:#8c1aff;  " for ="search" id="search-btn" type="submit">Search</button>
-		</form>
-	
-				<div *ngIf="userRepository.selectedUser == null; then nonAutorise else autorise"></div>   
-				<ng-template #nonAutorise>
-					
-						
-							<div class="form-inline justify-content-end align-middle">
-							<!-- 	<span class="lead"> -->
-										<ul class="navbar-nav"><!--  mr-auto -->
-											<li class="nav-item active">
-													<a routerLink="login" style="color:#8c1aff " class="nav-link "> Вход </a> 
-											</li>
-											<li class="nav-item">
-													<a routerLink="signup" class="nav-link"> Регистрация</a> 
-											</li>
-										
-										</ul>					
-							   
-								<a class=" btn  btn-social btn-vk"
-								href="/auth/vk">
-									<span class="fa fa-vk"></span>
-								</a>
-								<a class=" btn  btn-social btn-twitter" href="/auth/twitter">
-									<span class="fa fa-twitter"></span>
-								</a>
-								<a class=" btn  btn-social btn-facebook" href="/auth/facebook">
-									<span class="fa fa-facebook"></span>
-								</a>
-							
-						</div>
-					
-				</ng-template>  
-				<ng-template #autorise>
-					<div class="">
-						
-							<div class="form-inline justify-content-end align-middle">
-								<span class="mx-2">Привет {{userRepository.selectedUser.first_name}}</span>
-							</div>
-						
-					</div>
-				</ng-template>  
-			<!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button> -->
-
-	</div>
-  </nav>
+  	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  	<a class="navbar-brand" [routerLink]="['/']">
+			<img src="https://firebasestorage.googleapis.com/v0/b/nodejs-webapp-956d6.appspot.com/o/logo.png?alt=media&token=76af09f4-9500-4d5e-9bdc-b86aed8d751f" 
+			  		style="width: 140px;">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" 
+				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+				aria-expanded="false" aria-label="Toggle navigation">
+		  	<span class="navbar-toggler-icon"></span>
+	 	</button>
+	  	<div class="collapse navbar-collapse " id="navbarSupportedContent">
+		  	<form class="form-inline my-2 my-lg-0 align-middle mr-auto">
+		  		<ul class="navbar-nav">
+					<li class="nav-item active">
+						<a class="nav-link" style="color:#8c1aff " [routerLink]="['/']">Главная <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " [routerLink]="['/book-create']">Создать фанфик</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" [routerLink]="['/books']">Фанфики</a>
+					</li>
+		  		</ul>
+				<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" 
+				  		aria-label="Search" style="width: 30%;" id="search">
+				<button class="btn btn-outline-primary my-2 my-sm-0" style="color:#8c1aff; border-color:#8c1aff;  " 
+				  		for ="search" id="search-btn" type="submit">Search</button>
+		  	</form>
+			<div *ngIf="userRepository.selectedUser == null; then nonAutorise else autorise"></div>   
+			<ng-template #nonAutorise>
+				<div class="form-inline justify-content-end align-middle">	
+					<ul class="navbar-nav">
+						<li class="nav-item active">
+							<a routerLink="login" style="color:#8c1aff " class="nav-link "> Вход </a> 
+						</li>
+						<li class="nav-item">
+							<a routerLink="signup" class="nav-link"> Регистрация</a> 
+						</li>
+					</ul>					
+					<a class=" btn  btn-social btn-vk" href="/auth/vk">
+						<span class="fa fa-vk"></span>
+					</a>
+					<a class=" btn  btn-social btn-twitter" href="/auth/twitter">
+						<span class="fa fa-twitter"></span>
+					</a>
+					<a class=" btn  btn-social btn-facebook" href="/auth/facebook">
+					  	<span class="fa fa-facebook"></span>
+				  	</a>
+				</div>
+			</ng-template>  
+			<ng-template #autorise>
+				<div class="dropdown show">
+					<a class="btn my-2 my-sm-0 dropdown-toggle" 
+							style="color:#8c1aff;"
+							id="dropdownMenuLink" data-toggle="dropdown" 
+							aria-haspopup="true" aria-expanded="false">
+						{{userRepository.selectedUser.username}}
+					</a>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<a class="dropdown-item" >Профиль</a>
+					<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
+				</div>
+			</div>
+			</ng-template>  	
+	  	</div>
+	</nav>
 </div>
