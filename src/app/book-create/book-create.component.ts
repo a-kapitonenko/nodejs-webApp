@@ -56,10 +56,12 @@ export class BookCreateComponent implements OnInit {
     uploadPercent: Observable<number>;
 
     public files: UploadFile[] = null;
- 
+    isLoading=false;
+
    
 
     public dropped(event: UploadEvent) {
+    this.isLoading = true;
     this.files = event.files;
     for (const file of event.files) {
       file.fileEntry.file(info => {
@@ -74,6 +76,7 @@ export class BookCreateComponent implements OnInit {
         
         this.downloadURL.subscribe(res => {
             this.book.image=res;
+            this.isLoading=false;
                  
         });
 

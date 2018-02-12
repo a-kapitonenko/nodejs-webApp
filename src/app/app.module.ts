@@ -31,6 +31,7 @@ import { FullscreenService } from './fullscreen.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { User } from './model/user.model';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
@@ -100,7 +101,7 @@ const appRoutes: Routes =[
                {start: '* ', cmd: 'InsertUnorderedList'},
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
-        }), MatProgressBarModule],
+        }), MatProgressBarModule, MatProgressSpinnerModule],
   	providers: [BookRepository, UserRepository, FullscreenService],
   	bootstrap: [AppComponent]
 })
