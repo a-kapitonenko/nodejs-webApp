@@ -14,7 +14,7 @@ export class SignUpComponent {
   	constructor(private serv: UserRepository) { }
  	onSubmit(form: NgForm){
 		var data = form.form.controls;
-    	this.user = new User(data.email.value, data.password.value, data.name.value);
+		this.user = new User(data.email.value, data.password.value, data.name.value);
     	this.serv.createUser(this.user).subscribe(data=> {
         	console.log(data);
     	});

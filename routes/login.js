@@ -3,6 +3,7 @@ var User = require('../database/models/user').User;
 exports.post = function(req,res) {
     var data = req.body;
     User.findOne({ email : data.email }, function(err, user) {
+        console.log(user);
         if(err) throw err;
         if(user) {
             if(!user.validPassword(data.password)) {
