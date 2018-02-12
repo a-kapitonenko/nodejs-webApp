@@ -21,8 +21,9 @@
 <ng-template #autorise>
 	<div class="mr-4">
 		<div class="container-fluid p-1 ">
+				
 			<div class="form-inline justify-content-end">
-				<span class="mx-2">Привет {{userRepository.selectedUser.first_name}}</span>
+				<span class="mx-2">Привет {{userRepository.selectedUser.username}}</span>
 			</div>
 		</div>
 	</div>
@@ -42,6 +43,12 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" [routerLink]="['/books']">Фанфики</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link">Light theme</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link">Dark theme</a>
 			</li>
 		</ul>
 		<form class="form-inline my-2 my-lg-0">

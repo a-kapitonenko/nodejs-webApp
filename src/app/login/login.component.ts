@@ -14,8 +14,12 @@ export class LoginComponent {
   	onSubmit(form: NgForm){
     	var data = form.form.controls;
       	this.user = new User(data.email.value, data.password.value);
-      	this.userrepository.login(this.user).subscribe(data=> {
-        	this.userrepository.selectUser(data);
+      	this.userrepository.login(this.user).subscribe(res=> {
+			if (res["send"]) {
+				console.log((res["send"]));
+			}else {
+				this.userrepository.selectUser(res);
+			}
       	});
 	}
 }

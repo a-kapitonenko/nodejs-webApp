@@ -13,6 +13,7 @@ module.exports = (app)=> {
             callbackURL: config.get("FacebookAuth:callbackURL"),
             profileFields: config.get("FacebookAuth:profileFields")
         },(accessToken, refreshToken, profile, done)=> {
+            console.log(profile);
             User.findOne({'social_id': profile.id}, (err, user)=> {
                 if (err)
                     return done(err);
@@ -22,8 +23,8 @@ module.exports = (app)=> {
                     var newUser = new User();
                     newUser.email  = profile.emails[0].value;
                     newUser.password = null;
-                    newUser.first_name = profile.name.givenName;
-                    newUser.second_name = profile.name.familyName;
+                    newUser.username = profile.name.givenName
+                    newUser.realname = profile.name.givenName;
                     newUser.role = "user";
                     newUser.isActive = true;
                     newUser.isBlocked = false;
@@ -53,8 +54,8 @@ module.exports = (app)=> {
                     var newUser = new User();
                     newUser.email  = params.email;
                     newUser.password = null;
-                    newUser.first_name = profile.displayName;
-                    newUser.second_name = "";
+                    newUser.username = profile.username;
+                    newUser.realname = profile.name.givenName;
                     newUser.role = "user";
                     newUser.isActive = true;
                     newUser.isBlocked = false;
@@ -85,8 +86,8 @@ module.exports = (app)=> {
                     var newUser = new User();
                     newUser.email  = "private";
                     newUser.password = null;
-                    newUser.first_name = profile.displayName;
-                    newUser.second_name = profile.name.familyName;
+                    newUser.username = profile.username;
+                    newUser.realname = profile.displayNameName;
                     newUser.role = "user";
                     newUser.isActive = true;
                     newUser.isBlocked = false;
