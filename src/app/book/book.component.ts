@@ -11,8 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class BookComponent implements OnInit {
 
- private category: string=null;
-
+  private category: string=null;
 
   constructor(private repository: BookRepository,private route: ActivatedRoute) { 
    
@@ -26,16 +25,12 @@ export class BookComponent implements OnInit {
     return this.repository.getCategories();
   }
 
-    changeCategory(category){
-        this.category=category;
-    }
+  changeCategory(category){
+    this.category=category;
+  }
 
-    ngOnInit() {
-        //this.category = this.route.snapshot.params['mode'];
-        //this.books=this.repository.getBooks();
-       /* this.http.get('/book').subscribe(data => {
-        this.books = data;
-    }); */
-    }
+  ngOnInit() {
+
+  }
 
 }

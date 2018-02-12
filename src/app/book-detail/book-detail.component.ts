@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from "../model/book.model";
 import { BookRepository } from "../model/book.repository";
@@ -14,7 +13,7 @@ export class BookDetailComponent implements OnInit {
 
     book:any = {};
 
-    constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository, private http: HttpClient) {
+    constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository) {
         
      }
     ngOnInit() {

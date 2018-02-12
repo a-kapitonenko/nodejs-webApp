@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Book = require('../database/models/Book.js');
 var Categories = require('../database/models/Categories.js');
+var User = require('../database/models/user').User;
 
 
 
@@ -42,6 +43,10 @@ router.get('/', function(req, res, next) {
         if (err) return next(err);
         res.json(products);
     });
+    // User.findByIdAndRemove(req.session.passport.user, (err, user)=> {
+    //     res.json(user);
+    // });
+    
 });
 
 router.get('/categories', function(req, res, next) {

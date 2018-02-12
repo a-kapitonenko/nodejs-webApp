@@ -5,16 +5,16 @@
         <div class='row'>
       <div class="col">
         <div class="form-group">
-          <label for="name">Название</label>
-          <input type="text" class="form-control" [(ngModel)]="book.title" name="title" required>
+          <label for="title">Название</label>
+          <input type="text" class="form-control" [(ngModel)]="book.title" name="title" id="title" required>
         </div>
         <div class="form-group">
-          <label for="name">Автор</label>
-          <input type="text" class="form-control" [(ngModel)]="book.author" name="author" required>
+          <label for="author">Автор</label>
+          <input type="text" class="form-control" [(ngModel)]="book.author" name="author" id="author" required>
         </div>
         <div class="form-group">
-          <label for="name">Описание</label>
-          <textarea class="form-control" [(ngModel)]="book.description" name="description" required></textarea>
+          <label for="description">Описание</label>
+          <textarea class="form-control" [(ngModel)]="book.description" name="description" id="description" required></textarea>
         </div>
         <div class="form-group">
   
@@ -45,7 +45,7 @@
     <div class="col" >
       <div class="upload-img">
         <div>
-        <label for="name">Обложка для фанфика</label>
+        <label>Обложка для фанфика</label>
       </div>
         <div *ngIf="(files==null);else other_content">
           <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
@@ -61,31 +61,16 @@
           </button></div>
           
         </ng-template>
-      </div>
+        </div>
+        </div>
+        
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Create</button>
+          </div>
+      </form>
     </div>
-  </div>
-    <h6 class="mt-2 mb-4">Начните создавать прямо сейчас!</h6>
-<!--     <editor apiKey="test" [init]="{plugin: 'textpattern',
-    textpattern_patterns: [
-       {start: '*', end: '*', format: 'italic'},
-       {start: '**', end: '**', format: 'bold'},
-       {start: '#', format: 'h1'},
-       {start: '##', format: 'h2'},
-       {start: '###', format: 'h3'},
-       {start: '####', format: 'h4'},
-       {start: '#####', format: 'h5'},
-       {start: '######', format: 'h6'},
-       {start: '1. ', cmd: 'InsertOrderedList'},
-       {start: '* ', cmd: 'InsertUnorderedList'},
-       {start: '- ', cmd: 'InsertUnorderedList'}
-    ]}"  [(ngModel)]='content' name='content'></editor> -->
-  <angular-tinymce [(ngModel)]='content' name='content'  ></angular-tinymce>
-    <div class="form-group mt-3">
-        <button type="submit" class="btn btn-success" [disabled]="!bookForm.form.valid">Save</button>
-      </div>
+ 
 
-    </form>
-    <div [innerHTML]="content"></div>
-</div>
 
 

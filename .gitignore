@@ -8,6 +8,10 @@
 
 # dependencies
 /node_modules
+/assets
+/src/assets
+
+
 
 # IDEs and editors
 /.idea
