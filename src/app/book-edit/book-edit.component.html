@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <h1>Edit Book</h1>
   <div class="row">
     <div class="col-md-6">
@@ -33,4 +33,88 @@
       </form>
     </div>
   </div>
-</div>
+</div> -->
+
+<div class="container">
+    <h3 class="mt-2">Редактирование фанфика</h3>
+        <form (ngSubmit)="updateBook(book._id)" #bookForm="ngForm">
+          <div class='row'>
+        <div class="col">
+          <div class="form-group">
+            <label for="title">Название</label>
+            <input type="text" class="form-control" [(ngModel)]="book.title" name="title" id="title" required>
+          </div>
+          <div class="form-group">
+            <label for="author">Автор</label>
+            <input type="text" class="form-control" [(ngModel)]="book.author" name="author" id="author" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Описание</label>
+            <textarea class="form-control" [(ngModel)]="book.description" name="description" id="description" required></textarea>
+          </div>
+          <div class="form-group">
+    
+            <div class="dropdown">  
+              
+              <div *ngIf="(book.category==undefined);else other_content1">
+                  Выберите жанр <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Жанры
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" *ngFor="let cat of categories"
+                        (click)="changeCategory(cat.name)">{{cat.name}}</a>
+                      </div>
+              </div>
+              
+              <ng-template #other_content1>
+                  Выберите жанр <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{book.category}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" *ngFor="let cat of categories"
+                    (click)="changeCategory(cat.name)">{{cat.name}}</a>
+                  </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      <div class="col" >
+        <div class="upload-img">
+          <div>
+          <label>Обложка для фанфика</label>
+        </div>
+        <mat-spinner *ngIf="(isLoading==true);else showImage"></mat-spinner>
+        <ng-template #showImage>      
+        <div *ngIf="(book.image==null);else otherImage">
+            <div *ngIf="(files==null);else other_content" class="mb-3">                    
+              <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+              </file-drop>
+            </div>                
+            <ng-template #other_content>                        
+                <div><img style="width: 300px" [src]="downloadURL | async"></div>
+                  <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
+                  Хочу другую картинку
+                </button></div>                        
+            </ng-template>
+          </div>
+          <ng-template #otherImage>
+              <div *ngIf="(book.image!=null)">
+              <div><img style="width: 300px" [src]="book.image"></div>
+              <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="book.image=null">
+              Хочу другую картинку
+               </button></div>  
+              </div>             
+          </ng-template>
+          </ng-template>
+        </div>
+        
+          </div>
+          </div>
+          
+        
+          <div class="form-group">
+              <button type="submit" class="btn button-submit" [disabled]="!bookForm.form.valid">Редактировать</button>
+            </div>
+        </form>
+      </div>
