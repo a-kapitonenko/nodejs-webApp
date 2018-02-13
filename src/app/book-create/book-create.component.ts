@@ -10,6 +10,8 @@ import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage'
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable'; 
 
+import { User } from '../model/user.model';
+import { UserRepository } from '../model/user.repository';
 
 
 
@@ -94,7 +96,7 @@ export class BookCreateComponent implements OnInit {
     }
 
     constructor(private repository: BookRepository, private router: Router, 
-        private storage: AngularFireStorage) {
+        private storage: AngularFireStorage, private userRepository: UserRepository) {
             
     }
 
@@ -123,6 +125,7 @@ export class BookCreateComponent implements OnInit {
     
  
     saveBook() {
+        this.book.author = this.userRepository.selectedUser.username;
     
         this.repository.saveBook(this.book, null);
         this.router.navigate(['/books']);

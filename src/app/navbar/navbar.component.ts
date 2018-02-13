@@ -21,7 +21,6 @@ export class NavbarComponent implements OnInit {
     .subscribe((fullscreen$) => {
       this.fullscreen$ = fullscreen$;
     });
-  console.log(this.fullscreen$);
   this.subscriptions.push(subscription);
   }
 
