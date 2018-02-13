@@ -9,10 +9,6 @@
           <input type="text" class="form-control" [(ngModel)]="book.title" name="title" id="title" required>
         </div>
         <div class="form-group">
-          <label for="author">Автор</label>
-          <input type="text" class="form-control" [(ngModel)]="book.author" name="author" id="author" required>
-        </div>
-        <div class="form-group">
           <label for="description">Описание</label>
           <textarea class="form-control" [(ngModel)]="book.description" name="description" id="description" required></textarea>
         </div>
@@ -41,6 +37,9 @@
             </ng-template>
           </div>
         </div>
+        <div class="form-group">
+            <button type="submit" class="btn button-submit" [disabled]="!bookForm.form.valid">Create</button>
+          </div>
       </div>
     <div class="col" >
       <div class="upload-img">
@@ -68,9 +67,7 @@
         </div>
         
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn button-submit" [disabled]="!bookForm.form.valid">Create</button>
-          </div>
+        
       </form>
     </div>
  

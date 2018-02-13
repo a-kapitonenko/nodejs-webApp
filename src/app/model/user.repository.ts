@@ -4,7 +4,7 @@ import {User} from './user.model';
    
 @Injectable()
 export class UserRepository {
-    private selectedUser: User;
+    public selectedUser: User;
     private users: any = [];
     constructor(private http: HttpClient) {
         this.http.get('/selectuser').subscribe(data => {
