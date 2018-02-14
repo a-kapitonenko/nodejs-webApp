@@ -40,7 +40,6 @@ const appRoutes: Routes =[
 	{ path: 'signup', component: SignUpComponent },
     { path: 'login', component: LoginComponent },
     { path: 'logout', redirectTo: '/' },
-
 	{
         path: 'books',
         component: BookComponent,

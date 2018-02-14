@@ -32,5 +32,6 @@ export class NavbarComponent implements OnInit {
 	}
 	logout() {
 		this.userRepository.selectUser(null);
+		this.userRepository.logout();
 	}
 }

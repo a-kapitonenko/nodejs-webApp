@@ -17,7 +17,6 @@ app.set('port', config.get('port'));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/books', express.static(path.join(__dirname, 'dist')));
 
 let http = require('http').Server(app);

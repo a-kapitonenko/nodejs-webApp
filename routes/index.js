@@ -9,8 +9,5 @@ module.exports = (app)=> {
     app.get('/auth/vk/callback', require('./passport').vkCallback);
     app.get('/auth/twitter', require('./passport').twitter); 
     app.get('/auth/twitter/callback', require('./passport').twitterCallback);
-    app.get('/logout', function(req, res) {
-        req.logout();
-        res.redirect('/');
-    }); 
+    app.get('/logout', require('./user').logout); 
 };

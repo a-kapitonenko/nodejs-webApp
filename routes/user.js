@@ -1,6 +1,6 @@
 var User = require('../database/models/user').User;
 
-exports.selectUser = function(req, res) {
+exports.selectUser = (req, res)=> {
     if(req.session.passport != undefined) {
         User.findById(req.session.passport.user, (err, user)=> {
             user.password = null;
@@ -11,8 +11,12 @@ exports.selectUser = function(req, res) {
         console.log("null");
     }
 }
-exports.getUsers = function(req, res) {
+exports.getUsers = (req, res)=> {
     User.find({}, (err, user)=> {
         res.send(200,JSON.stringify(user));
     });
+}
+exports.logout = (req, res)=> {
+    req.session.passport = undefined;
+    res.end();
 }
