@@ -1,5 +1,46 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+/*Dark theme*/
+.dark {
+    background-color: #111111;
+}
+.dark a {
+    color: #D7D7D7;
+    text-decoration: none;
+}
+.dark .navbar {
+    background-color: #232323;
+}
+.dark #search {
+    border: none;
+    background-color: #111111;
+    color:#D7D7D7;
+}
+
+.dark #search-btn {
+    border: none;
+    background-color: #414141;
+    color:#D7D7D7;
+}
+.dark #search-btn:hover {
+    background-color: #343434;
+}
+.dark #search-btn:focus {
+    border-color: #8c1aff;
+    background-color: #8c1aff;
+    box-shadow: unset;
+}
+.dark .btn-social {
+    border: none;
+    color: #8c1aff;
+}
+.dark .col-form-label, .dark .card-title, .dark .card-text  {
+    color:#D7D7D7
+}
+.dark .card-body {
+    background-color:#111111
+}
+/*/////////*/
 
 a {
     color: #8c1aff;
@@ -34,9 +75,9 @@ a:focus {
 .form-control:focus {
     border-color: #8c1aff;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #ab5afc;
-  }
+}
 
 .button-submit:focus {
     border-color: #8c1aff;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #ab5afc;
-  }
+}
