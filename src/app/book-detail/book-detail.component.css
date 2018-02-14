@@ -52,3 +52,8 @@ html {
 .media-object {
     width: 70px;
 }
+
+.comment {
+    margin-top: 20px;
+    margin-left: 80px;
+}

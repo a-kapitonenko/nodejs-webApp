@@ -12,5 +12,6 @@ export const environment = {
     projectId: "nodejs-webapp-956d6",
     storageBucket: "gs://nodejs-webapp-956d6.appspot.com/",
     messagingSenderId: "533232003352"
-  }
+  },
+  ws_url:'http://localhost:5000'
 };

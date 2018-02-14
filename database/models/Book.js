@@ -12,6 +12,14 @@ var BookSchema = new mongoose.Schema({
         text: String,
         image: String
     }],
-    image: String 
+    image: String, 
+    comments: [{
+        id: Number,
+        author: String,
+        text: String,
+        date: String,
+        likes : { type : Number , "default" :0 },
+        userslikes: {type : Array , "default" : []}
+    }]
 });
 module.exports = mongoose.model('Book', BookSchema);

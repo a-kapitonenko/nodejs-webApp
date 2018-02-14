@@ -1,4 +1,5 @@
 import {Chapter} from '../model/chapter.model';
+import {Comment} from '../model/comment.model';
 export class Book {
     constructor(
 
@@ -8,6 +9,7 @@ export class Book {
         public description?: string,
         public updated_date?: Date,
         public image?: string,
-        public chapters?: Array<Chapter>
+        public chapters?: Array<Chapter>,
+        public comments?: Array<Comment>
        ) { }
 }
