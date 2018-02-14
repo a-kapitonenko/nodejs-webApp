@@ -32,6 +32,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { User } from './model/user.model';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {CommentsService} from './comments.service';
+import {WebsocketService} from './websocket.service';
 
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
@@ -103,7 +105,7 @@ const appRoutes: Routes =[
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
         }), MatProgressBarModule, MatProgressSpinnerModule],
-  	providers: [BookRepository, UserRepository, FullscreenService],
+  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

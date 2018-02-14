@@ -26,6 +26,7 @@
                                 <a [routerLink]="['/add-chapter', book._id]" class="btn btn-success">ADD CHAPTER</a>
                                 <a *ngIf="(book.chapters[0]!=null)" [routerLink]="['/book-read', book._id, book.chapters[0].number]" class="btn btn-success">READ</a>
                                 <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
+                                <button class="btn btn-success" (click)="sendMessage()">Send Message</button>
                                        
                                 <h6>Теги</h6>
                                 <a href="#" class="badge badge-dark badge-pill">html5</a>
@@ -51,35 +52,64 @@
         </div>  
     <div class="container">
         <div class="comments">
-            <h6 class="title-comments mt-3">Комментарии (1)</h6>
+            <h6 class="title-comments mt-3">Комментарии ({{book.comments.length}})</h6>
             <ul class="media-list">
                 <!-- Комментарий (уровень 1) -->
-                <li class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object img-rounded" src="https://i.mycdn.me/i?r=ADErzYVfayHh9JRE7l1rDgHG0GpI5wvJga9C87oNKPNJcyFEKHwKiL9QuGcq4J-B13c" alt="...">
-                        </a>
+                <li *ngFor="let curComment of book.comments" class="media">
+                    <div class="media-left">                        
+                        <img *ngIf="(curComment.image==null);else image" class="media-object img-rounded" src="https://firebasestorage.googleapis.com/v0/b/nodejs-webapp-956d6.appspot.com/o/anonim.png?alt=media&token=f9352069-3f67-4870-9891-5d3b1baf0c44" alt="...">
+                        <ng-template #image>
+                            <img  class="media-object img-rounded" src="curComment.image" alt="...">  
+                        </ng-template>                     
                     </div>
                     <div class="media-body ml-2">
                         <div class="media-heading">
-                            <div class="author">Дима</div>
+                            <div class="author">{{curComment.author}}</div>
                             <div class="metadata">
-                                <span class="date">16 ноября 2015, 13:43</span>
+                                <span class="date">{{curComment.date.toString()}}</span>
                             </div>
                         </div>
-                        <div class="media-text text-justify">Комментарий</div>
+                        <div class="media-text text-justify" [innerHTML]="curComment.text"></div>
                         <div class="footer-comment">
-            <span class="vote plus" title="Нравится">
-              <i class="fa fa-thumbs-up"></i>
+            <span class="vote plus" title="Нравится" >
+              <i class="fa fa-thumbs-up" (click)="like(curComment)"></i>
             </span>
-                            <span class="rating">
-              +1
+            <span class="rating">
+                {{curComment.likes}}
             </span>
     
                         </div>
                     </div>
                 </li>
-                <div><a href="#" class="">Добавить комментарий</a></div>
+                <div><a (click)="(isTyping=true)" style="color: white;" *ngIf="(isTyping==false)" class="btn btn-sm button-submit">Добавить комментарий</a></div>
+                
+                <form (ngSubmit)="sendComment()"  #bookForm="ngForm" *ngIf="(isTyping==true)">
+                   
+                         
+                        <ul class="media-list">
+                                <!-- Комментарий (уровень 1) -->
+                                <li  class="media">
+                                    <div class="media-left">                        
+                                            <img *ngIf="(userRepository.selectedUser.image==null);else image" class="media-object img-rounded" src="https://firebasestorage.googleapis.com/v0/b/nodejs-webapp-956d6.appspot.com/o/anonim.png?alt=media&token=f9352069-3f67-4870-9891-5d3b1baf0c44" alt="...">
+                                            <ng-template #image>
+                                                <img  class="media-object img-rounded" src="userRepository.selectedUser.image" alt="...">  
+                                            </ng-template>                     
+                                    </div>
+                                    <div class="media-body ml-2">
+                                        <div class="media-heading mb-1">
+                                            <div class="author">{{userRepository.selectedUser.username}}</div>
+                                        </div>
+                                       <angular-tinymce  [(ngModel)]='comment.text' name='content' required ></angular-tinymce>
+                                       <div class="form-group">
+                                            <button type="submit" class="btn button-submit mt-2" [disabled]="!bookForm.form.valid">Create</button>
+                                          </div>
+                                    </div>
+                                </li>
+                                </ul>
+                
+               
+                </form>
+        
             </ul>
     
     

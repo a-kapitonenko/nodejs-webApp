@@ -13,34 +13,6 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../model/user.model';
 import { UserRepository } from '../model/user.repository';
 
-
-
-
-/* 
-@Component({
-    selector: 'app-book-create',
-    template: `
-      <input type="file" (change)="uploadFile($event)" />
-      <div>{{ uploadPercent | async }}</div>
-      <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
-   `
-  })
-  export class BookCreateComponent {
-    uploadPercent: Observable<number>;
-    downloadURL: Observable<string>;
-    constructor(private storage: AngularFireStorage) {}
-    uploadFile(event) {
-      const file = event.target.files[0];
-      const filePath = '/test';
-      const task = this.storage.upload(filePath, file);
-      
-      // observe percentage changes
-      this.uploadPercent = task.percentageChanges();
-      // get notified when the download URL is available
-      this.downloadURL = task.downloadURL();
-    }
-  } */
-
   @Component({
     selector: 'app-book-create',
     templateUrl: './book-create.component.html',

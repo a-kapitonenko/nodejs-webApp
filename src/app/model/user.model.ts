@@ -6,5 +6,6 @@ export class User {
     public realname?: String,
     public role?: String,
     public isActive?: boolean,
-    public isBlocked?: boolean) { }
+    public isBlocked?: boolean,
+    public image?: string) { }
 }
