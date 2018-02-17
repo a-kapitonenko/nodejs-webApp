@@ -50,14 +50,14 @@
 				</div>
 			</ng-template>  
 			<ng-template #autorise>
-				<div class="dropdown show">
+				<div class="dropdown ">
 					<a class="btn my-2 my-sm-0 dropdown-toggle" 
 							style="color:#8c1aff;"
 							id="dropdownMenuLink" data-toggle="dropdown" 
 							aria-haspopup="true" aria-expanded="false">
 						{{userRepository.selectedUser.username}}
 					</a>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="right: 0; left: auto;">
 					<a class="dropdown-item" >Профиль</a>
 					<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
 				</div>

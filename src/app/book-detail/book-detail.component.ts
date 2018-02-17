@@ -5,6 +5,7 @@ import { BookRepository } from "../model/book.repository";
 import { CommentsService } from '../comments.service';
 import { Comment } from "../model/comment.model";
 import { UserRepository } from '../model/user.repository';
+//import { setTimeout } from 'timers';
 
 @Component({
     selector: 'app-book-detail',
@@ -20,22 +21,35 @@ export class BookDetailComponent implements OnInit {
 
     constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository,
         private chat: CommentsService, private userRepository: UserRepository) {
-        
+            
      }
+     
     ngOnInit() {
-        this.getBookDetail(this.route.snapshot.params['id']);
+        console.log("in oninit");
+        this.book.chapters=[];
+        this.book.comments=[];
+        
+            this.getBookDetail(this.route.snapshot.params['id']);
+               
+        console.log("id:"+this.route.snapshot.params['id']);
+        console.log(this.book.chapters);
+        
         this.chat.messages.subscribe(msg => {
             console.log(msg);
             msg = JSON.parse(msg.message);
             if(msg.id==this.book._id &&  this.userRepository.selectedUser.username!=msg.comment.author ){
                 this.book.comments.push(msg.comment);
             }
-          })
-        //this.book._id=this.route.snapshot.params['id'];
+          });
+       
     }
 
     getBookDetail(id) {
-        this.book=this.repository.getBook(id);
+       this.repository.getBook(id).subscribe(res=>{
+            this.book=res;
+        }
+        );
+        console.log("book:"+this.book);
         /* this.http.get('/book/'+id).subscribe(data => {
             this.book=data;
         }); */ 
@@ -56,7 +70,8 @@ export class BookDetailComponent implements OnInit {
     sendComment(){
         this.comment.id=this.book.comments.length;
         this.comment.author = this.userRepository.selectedUser.username;
-        this.comment.image =  this.userRepository.selectedUser.image;     
+        this.comment.image =  this.userRepository.selectedUser.image;   
+        console.log(this.comment.image);
         this.comment.date= this.getStringDate(new Date());
         this.comment.userslikes= [];
         this.comment.likes=0;

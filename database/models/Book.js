@@ -18,8 +18,10 @@ var BookSchema = new mongoose.Schema({
         author: String,
         text: String,
         date: String,
+        image: String,
         likes : { type : Number , "default" :0 },
-        userslikes: {type : Array , "default" : []}
+        userslikes: {type : Array , "default" : [],
+        }
     }]
 });
 module.exports = mongoose.model('Book', BookSchema);

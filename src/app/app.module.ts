@@ -35,6 +35,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {CommentsService} from './comments.service';
 import {WebsocketService} from './websocket.service';
 
+import {ImageuploadService} from './imageUpload.service';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
+
+
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
@@ -103,8 +108,8 @@ const appRoutes: Routes =[
                {start: '* ', cmd: 'InsertUnorderedList'},
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
-        }), MatProgressBarModule, MatProgressSpinnerModule],
-  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService],
+        }), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule],
+  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

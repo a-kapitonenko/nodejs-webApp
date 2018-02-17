@@ -5,9 +5,10 @@ import { Chapter } from "../model/chapter.model";
 import { BookRepository } from "../model/book.repository";
 import { UploadEvent, UploadFile } from 'ngx-file-drop';
 
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable'; 
+import {ImageuploadService} from '../imageUpload.service';
 
 
 @Component({
@@ -22,60 +23,48 @@ export class AddChapterComponent implements OnInit {
   isCreating = false;
   newChapter: Chapter={};
   public downloadURL: Observable<string>;
-  snapshot: Observable<any>;
-  task: AngularFireUploadTask;
-  filePath: string;
+  
   content: string;
+  isLoading=false;
+   
 
-  public files: UploadFile[] = null;
+    public dropped(event: UploadEvent) {
+        this.isLoading = true;
+        for (const file of event.files) {
+            file.fileEntry.file(info => {
+              console.log(info);
+              this.imageService.sendFile(info).subscribe(res => {
+                this.newChapter.image=res;
+                this.isLoading = false;
+                     
+            });;
+        });
+        }    
+  } 
 
   constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository,
-    private storage: AngularFireStorage) { }
+    private imageService: ImageuploadService) { }
 
-  public dropped(event: UploadEvent) {
-    this.files = event.files;
-    for (const file of event.files) {
-      file.fileEntry.file(info => {
-        console.log(info);
-         this.uploadFiles(info);
-        
-      });
-    }
-    setTimeout(()=>{    //<<<---    using ()=> syntax
-        // get notified when the download URL is available
-        this.downloadURL = this.task.downloadURL();
-        this.downloadURL.subscribe(res => {
-            this.newChapter.image=res;
-                 
-        });
-
-   },800);
-   this.downloadURL = null;
-  }
+  
 
   otherImage(){
-    this.files= null;
+
     this.downloadURL = null;
  }    
 
-  uploadFiles(file) {
-      if(file.type.indexOf('image')===-1){
-          this.files=null;
-      } else { 
-          //this.uploadFiles(info);
-          //const file = info;
-          this.filePath = `/${new Date().getTime()}_${file.name}`;
-          this.task = this.storage.upload(this.filePath, file);
-                    
-      }
-  } 
+
 
   ngOnInit() {
-    this.getBookDetail(this.route.snapshot.params['id']);
+
+      this.getBookDetail(this.route.snapshot.params['id']);
+
   }
 
   getBookDetail(id) {
-      this.book=this.repository.getBook(id);
+    this.repository.getBook(id).subscribe(res=>{
+      this.book=res;
+  }
+  );
   }
     
   get chapters():Chapter[] {
@@ -88,7 +77,7 @@ export class AddChapterComponent implements OnInit {
     this.repository.saveBook(this.book, this.book._id);
     this.isCreating= false;
     this.newChapter = {};
-    this.files = null;
+    this.downloadURL = null;
     
   }
 
@@ -108,16 +97,8 @@ export class AddChapterComponent implements OnInit {
       findIndex(p => p.number == this.newChapter.number), 1, this.newChapter);
       this.repository.saveBook(this.book, this.book._id);
       this.isEditing=false;
-      this.files=null;
+      this.downloadURL=null;
       this.newChapter = {};
-  }
-
-  public fileOver(event){
-    console.log(event);
-   }
- 
-  public fileLeave(event){
-    console.log(event);
   }
 
   deleteChapter(num: number){

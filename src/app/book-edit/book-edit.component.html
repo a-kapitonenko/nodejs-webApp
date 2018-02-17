@@ -87,7 +87,7 @@
         <div *ngIf="(book.image==null);else otherImage">
             <div *ngIf="(files==null);else other_content" class="mb-3">                    
               <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
-                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                (onFileOver)="imageService.fileOver($event)" (onFileLeave)="imageService.fileLeave($event)">
               </file-drop>
             </div>                
             <ng-template #other_content>                        
