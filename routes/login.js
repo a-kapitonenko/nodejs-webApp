@@ -1,12 +1,10 @@
 var User = require('../database/models/user').User;
 
 exports.post = function(req,res) {
-    var data = req.body;
-    User.findOne({ email : data.email }, function(err, user) {
-        console.log(user);
+    User.findOne({ email : req.body.email }, function(err, user) {
         if(err) throw err;
-        if(user) {
-            if(!user.validPassword(data.password)) {
+        if(user && !user.social_id) {
+            if(!user.validPassword(req.body.password)) {
                 res.send({
                     "send": "Wrong password!"
                 });

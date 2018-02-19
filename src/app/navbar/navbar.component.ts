@@ -6,6 +6,7 @@ import { FullscreenService } from '../fullscreen.service';
 import { Subscription } from 'rxjs/Subscription';
 import { User } from '../model/user.model';
 import { UserRepository } from '../model/user.repository';
+import { InterfaceService } from '../model/interface.service';
 
 @Component({
   	selector: 'app-navbar',
@@ -25,7 +26,8 @@ export class NavbarComponent implements OnInit {
   		this.subscriptions.forEach(s => s.unsubscribe());
   	}
   	constructor(private router: Router,private repository: BookRepository, 
-    	private fullScreenService: FullscreenService, private userRepository: UserRepository) { 
+		private fullScreenService: FullscreenService, private userRepository: UserRepository,
+		private interfaceService: InterfaceService) { 
   	}
   	get categories():string[] {
     	return this.repository.getCategories();
@@ -33,5 +35,8 @@ export class NavbarComponent implements OnInit {
 	logout() {
 		this.userRepository.selectUser(null);
 		this.userRepository.logout();
+	}
+	changeTheme() {
+		this.interfaceService.changeTheme();
 	}
 }

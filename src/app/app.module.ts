@@ -34,11 +34,12 @@ import { User } from './model/user.model';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {CommentsService} from './comments.service';
 import {WebsocketService} from './websocket.service';
+import {InterfaceService} from './model/interface.service';
 
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'login', component: LoginComponent,data: { title: 'Войти' } },
     { path: 'logout', redirectTo: '/' },
 	{
         path: 'books',
@@ -104,7 +105,7 @@ const appRoutes: Routes =[
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
         }), MatProgressBarModule, MatProgressSpinnerModule],
-  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService],
+  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService, InterfaceService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

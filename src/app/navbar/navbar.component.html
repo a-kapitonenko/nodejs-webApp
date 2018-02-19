@@ -26,8 +26,11 @@
 				<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" 
 				  		aria-label="Search" style="width: 30%;" id="search">
 				<button class="btn btn-outline-primary my-2 my-sm-0" 
-				  		for ="search" id="search-btn" type="submit">Поиск</button>
-		  	</form>
+						for ="search" id="search-btn" type="submit">Поиск</button>
+				<button class="theme-btn" (click)="changeTheme()">
+					<i class="fab fa-medapps" style="size:60px"></i>
+				</button>
+			</form>
 			<div *ngIf="userRepository.selectedUser == null; then nonAutorise else autorise"></div>   
 			<ng-template #nonAutorise>
 				<div class="form-inline justify-content-end align-middle">	
@@ -40,13 +43,13 @@
 						</li>
 					</ul>					
 					<a class="btn  btn-social btn-vk" href="/auth/vk">
-						<span class="fa fa-vk"></span>
+						<span class="fab fa-vk"></span>
 					</a>
 					<a class="btn  btn-social btn-twitter" href="/auth/twitter">
-						<span class="fa fa-twitter"></span>
+						<span class="fab fa-twitter"></span>
 					</a>
 					<a class="btn  btn-social btn-facebook" href="/auth/facebook">
-					  	<span class="fa fa-facebook"></span>
+					  	<span class="fab fa-facebook-f"></span>
 				  	</a>
 				</div>
 			</ng-template>  
@@ -58,11 +61,11 @@
 							aria-haspopup="true" aria-expanded="false">
 						{{userRepository.selectedUser.username}}
 					</a>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item" >Профиль</a>
-					<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<a class="dropdown-item" [routerLink]="['/profile']">Профиль</a>
+						<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
+					</div>
 				</div>
-			</div>
 			</ng-template>  	
 	  	</div>
 	</nav>
