@@ -20,6 +20,10 @@ import {ImageuploadService} from '../imageUpload.service';
 export class BookEditComponent implements OnInit {
 
     book : Book= {};
+    tags:any[]=[];
+    items: any[]=[];
+    allTags: any[];
+    bookTags: any[];
 
     public downloadURL: Observable<string>;
     isLoading=false;
@@ -40,7 +44,22 @@ export class BookEditComponent implements OnInit {
             });;
         });
         }    
-  } 
+     } 
+
+    getAllTags(){
+        this.repository.getAllTags().subscribe(res=>{
+        this.allTags=res.map(p=>p.name);
+        });
+    }
+
+    getBookTags(id: number){
+        this.repository.getBookTags(id).subscribe(res=>{
+            this.bookTags=res;
+        }
+        );
+     }
+
+    
 
     constructor(private repository: BookRepository, private router: Router, 
         private storage: AngularFireStorage,  private route: ActivatedRoute, private imageService: ImageuploadService) {
@@ -54,6 +73,8 @@ export class BookEditComponent implements OnInit {
     ngOnInit() {
         
             this.getBook(this.route.snapshot.params['id']);
+            this.getBookTags(this.route.snapshot.params['id']);
+            this.getAllTags();
        
     }
 
@@ -65,7 +86,7 @@ export class BookEditComponent implements OnInit {
     }
 
     updateBook(id) {
-        this.repository.saveBook(this.book,id);
+        this.repository.saveBook(this.book,id, this.bookTags);
         this.router.navigate(['/book-details',id ]);
     }
 

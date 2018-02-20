@@ -1,0 +1,37 @@
+
+/* colors */
+/* angular-tag-cloud.custom-css > a        { color: #8c1aff; }
+angular-tag-cloud.custom-css > a:hover  { color: #6600cc; }
+angular-tag-cloud.custom-css > span.w10 { color: #67606e; }
+angular-tag-cloud.custom-css > span.w9  { color: #a980d3; }
+angular-tag-cloud.custom-css > span.w8  { color: #884ec2; }
+angular-tag-cloud.custom-css > span.w7  { color: #403749; }
+angular-tag-cloud.custom-css > span.w6  { color: #480091; }
+angular-tag-cloud.custom-css > span.w5  { color: #9a35ff; }
+angular-tag-cloud.custom-css > span.w4  { color: #999999; }
+angular-tag-cloud.custom-css > span.w3  { color: #561e8f; }
+angular-tag-cloud.custom-css > span.w2  { color: #792ac9; }
+angular-tag-cloud.custom-css > span.w1  { color: #470d81; } */
+
+.badge-round {
+    background-color: white;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    color:#8c1aff !important ; 
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 2px;
+}
+
+.badge {
+    background-color:#8c1aff !important ; 
+    color: white !important;
+}
+
+.badge:hover {
+    color: white !important;
+}
+

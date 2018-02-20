@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -37,8 +37,11 @@ import {WebsocketService} from './websocket.service';
 
 import {ImageuploadService} from './imageUpload.service';
 import { TagInputModule } from 'ngx-chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BookTagComponent } from './book-tag/book-tag.component'; 
 
+//import { TagCloudModule } from 'angular-tag-cloud-module';
+import { SearchComponent } from './search/search.component';
 
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
@@ -46,6 +49,16 @@ const appRoutes: Routes =[
     { path: 'login', component: LoginComponent },
     { path: 'logout', redirectTo: '/' },
 	{
+        path: 'books/:tagId',
+        component: BookTagComponent,
+        data: { title: 'Book List' }
+    },
+    {
+        path: 'search/:text',
+        component: SearchComponent,
+        data: { title: 'Book List' }
+    },
+    {
         path: 'books',
         component: BookComponent,
         data: { title: 'Book List' }
@@ -84,7 +97,9 @@ const appRoutes: Routes =[
 		BookCreateComponent,
 		BookEditComponent,
 		AddChapterComponent,
-		BookReadComponent],
+		BookReadComponent,
+		BookTagComponent,
+		SearchComponent],
       imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireStorageModule,
@@ -108,7 +123,7 @@ const appRoutes: Routes =[
                {start: '* ', cmd: 'InsertUnorderedList'},
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
-        }), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule],
+        }), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule, ReactiveFormsModule],
   	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService],
   	bootstrap: [AppComponent]
 })

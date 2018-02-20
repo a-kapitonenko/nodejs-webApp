@@ -5,30 +5,28 @@ import { BookRepository } from "../model/book.repository";
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-book',
-  templateUrl: './book.component.html',
-  styleUrls: ['./book.component.css']
+  selector: 'app-book-tag',
+  templateUrl: './book-tag.component.html',
+  styleUrls: ['./book-tag.component.css']
 })
-export class BookComponent implements OnInit {
+export class BookTagComponent implements OnInit {
 
   private category: string=null;
   tagId: string=null;
-
+  books: Book[]=[];
 
   constructor(private repository: BookRepository,private route: ActivatedRoute) { 
    
   }
 
- get books(): Book[]{
+/*  get books(): Book[]{
 
       return this.repository.getBooks(this.category);
 
-  } 
+  }  */
 
-  /* getBooksByTag(){
-    if(this.tagId==null){
-      this.books = this.repository.getBooks(this.category);
-    } else {
+  getBooksByTag(){
+    
       this.repository.getTag(this.tagId).subscribe(res=>{
       console.log("tag:"+ res.name);
       for(let bookId of res.books){
@@ -36,23 +34,16 @@ export class BookComponent implements OnInit {
         this.repository.getBook(bookId).subscribe(res=>{
           this.books.push(res);
         });
-      }
-    });
-  }
+      
+    }
+  });
     
-  } */
-
-  get categories():string[]{
-    return this.repository.getCategories();
-  }
-
-  changeCategory(category){
-    this.category=category;
   }
 
   ngOnInit() {
     this.tagId=this.route.snapshot.params['tagId'];
-    //this.getBooksByTag();
+    this.getBooksByTag();
   }
 
 }
+

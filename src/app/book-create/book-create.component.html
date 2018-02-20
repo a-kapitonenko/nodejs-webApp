@@ -36,11 +36,13 @@
                 </div>
             </ng-template>
           </div>
-          <label for="tads">Теги</label>
-          <tag-input name="tags" id="tags" [ngModel]=" [{id: 0, name: 'Angular'}, {id: 1, name: 'React'}]" [identifyBy]="'id'" [displayBy]="'name'">
-              <tag-input-dropdown [autocompleteItems]="[{display: 'Item1', value: 0}, 'item2', 'item3']">
+          <label for="tags">Теги</label>
+          <tag-input [(ngModel)]="items" (onRemove)="onItemRemoved($event)" 
+          (onAdd)="onItemAdded($event)"  name="tags" id="tags"  [identifyBy]="'name'" [displayBy]="'name'">
+              <tag-input-dropdown [autocompleteItems]="allTags">
               </tag-input-dropdown>
        </tag-input>
+
         </div>
         <div class="form-group">
             <button type="submit" class="btn button-submit" [disabled]="!bookForm.form.valid">Create</button>

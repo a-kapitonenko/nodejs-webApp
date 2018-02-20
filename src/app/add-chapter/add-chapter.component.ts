@@ -74,7 +74,7 @@ export class AddChapterComponent implements OnInit {
   addChapter(){
     this.newChapter.number=this.chapters.length+1;
     this.book.chapters.push(this.newChapter);
-    this.repository.saveBook(this.book, this.book._id);
+    this.repository.saveBook(this.book, this.book._id, null);
     this.isCreating= false;
     this.newChapter = {};
     this.downloadURL = null;
@@ -95,7 +95,7 @@ export class AddChapterComponent implements OnInit {
   editChapter (){
     this.book.chapters.splice(this.book.chapters.
       findIndex(p => p.number == this.newChapter.number), 1, this.newChapter);
-      this.repository.saveBook(this.book, this.book._id);
+      this.repository.saveBook(this.book, this.book._id,null);
       this.isEditing=false;
       this.downloadURL=null;
       this.newChapter = {};
@@ -108,7 +108,7 @@ export class AddChapterComponent implements OnInit {
     }
     this.book.chapters.splice(this.book.chapters.
       findIndex(p => p.number == num), 1);
-    this.repository.saveBook(this.book, this.book._id);
+    this.repository.saveBook(this.book, this.book._id, null);
 
   }
 

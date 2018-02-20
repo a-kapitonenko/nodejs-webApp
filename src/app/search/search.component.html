@@ -1,0 +1,29 @@
+<div class="container mt-3">
+  <div *ngIf="(isFound==true)">
+ <div  *ngFor="let book of books">
+   <div class="item list-group-item col-xs-4 " ><!--  col-lg-4 -->
+       <div class="thumbnail">
+           <div class="caption">
+
+           <div *ngIf="(book.image!=null)">
+           <a [routerLink]="['/book-details/', book._id]"><img  class="group list-group-image my" [src]='book.image' border="0"  /></a>
+           </div>
+               <h4 class="group inner list-group-item-heading">
+
+                   <a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h4>
+
+               <p class="group inner list-group-item-text">
+                Автор: {{ book.author }}</p>
+               <p class="group inner list-group-item-text">
+                  Жанр: {{ book.category }}</p>
+             <p class="group inner list-group-item-text">
+                  {{ book.description }}</p>
+           </div>
+       </div>
+   </div>
+
+ </div>
+
+
+</div>
+</div>

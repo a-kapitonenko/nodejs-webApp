@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation,  EventEmitter } from '@angular/co
 import { Router } from '@angular/router';
 import { Book } from "../model/book.model";
 import { BookRepository } from "../model/book.repository";
-
+import { Tag } from "../model/tag.model";
 
 import { UploadEvent, UploadFile } from 'ngx-file-drop';
 
@@ -25,7 +25,9 @@ export class BookCreateComponent implements OnInit {
     book: Book={} ;
     public downloadURL: Observable<string>;
     isLoading=false;
-    itemsAsObjects = [{id: 0, name: 'Angular'}, {id: 1, name: 'React'}];
+    tags:any[]=[];
+    items: any[]=[];
+    allTags: any[];
 
     public dropped(event: UploadEvent) {
         this.isLoading = true;
@@ -44,13 +46,41 @@ export class BookCreateComponent implements OnInit {
         }    
   } 
 
+  getAllTags(){
+      this.repository.getAllTags().subscribe(res=>{
+        this.allTags=res.map(p=>p.name);
+      });
+  }
+
+  /* saveTags(){
+      for(let tag of this.tags){
+          tag.books=[];
+          console.log(tag.name);
+          this.repository.saveTag(tag,this.book);
+      }
+  } */
+
+  onItemAdded($event){
+      this.tags.push($event);
+      console.log(this.tags);
+    //this.repository.saveTag($event,this.book);
+  }
+
+  onItemRemoved($event){
+      this.tags.splice(this.tags.findIndex(p=> p.name==$event.name),1);
+      console.log(this.tags);
+  }
+
+ 
+  
+
     constructor(private repository: BookRepository, private router: Router, 
          private userRepository: UserRepository, private imageService: ImageuploadService) {
             
     }
 
     ngOnInit() {
-        
+        this.getAllTags();
     }
 
     otherImage(){
@@ -61,7 +91,7 @@ export class BookCreateComponent implements OnInit {
     saveBook() {
         this.book.author = this.userRepository.selectedUser.username;
     
-        this.repository.saveBook(this.book, null);
+        this.repository.saveBook(this.book, null,this.tags);
         this.router.navigate(['/books']);
     } 
 

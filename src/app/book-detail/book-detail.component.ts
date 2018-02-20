@@ -5,7 +5,7 @@ import { BookRepository } from "../model/book.repository";
 import { CommentsService } from '../comments.service';
 import { Comment } from "../model/comment.model";
 import { UserRepository } from '../model/user.repository';
-//import { setTimeout } from 'timers';
+
 
 @Component({
     selector: 'app-book-detail',
@@ -18,10 +18,18 @@ export class BookDetailComponent implements OnInit {
     book:any = {};
     isTyping = false;
     comment: Comment={};
+    bookTags: any[]=[];
 
     constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository,
         private chat: CommentsService, private userRepository: UserRepository) {
             
+     }
+
+     getBookTags(id: number){
+        this.repository.getBookTags(id).subscribe(res=>{
+            this.bookTags=res;
+        }
+        );
      }
      
     ngOnInit() {
@@ -29,7 +37,8 @@ export class BookDetailComponent implements OnInit {
         this.book.chapters=[];
         this.book.comments=[];
         
-            this.getBookDetail(this.route.snapshot.params['id']);
+        this.getBookDetail(this.route.snapshot.params['id']);
+        this.getBookTags(this.route.snapshot.params['id']);
                
         console.log("id:"+this.route.snapshot.params['id']);
         console.log(this.book.chapters);
@@ -77,7 +86,7 @@ export class BookDetailComponent implements OnInit {
         this.comment.likes=0;
         this.sendMessage();
         this.book.comments.push(this.comment);
-        this.repository.saveBook(this.book, this.book._id);
+        this.repository.saveBook(this.book, this.book._id,null);
         this.isTyping = false;
         this.comment = {};
     
@@ -95,7 +104,7 @@ export class BookDetailComponent implements OnInit {
         }
         this.book.comments.splice(this.book.comments.
             findIndex(p => p.id == curComment.id), 1, likedComment);
-        this.repository.saveBook(this.book, this.book._id);
+        this.repository.saveBook(this.book, this.book._id, null);
     }
 
     deleteBook(id) {

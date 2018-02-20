@@ -51,31 +51,58 @@ export class BookRepository implements OnInit {
         
     }
 
-    getAllTags(): Observable<Object> {
+    getAllTags(): Observable<any> {
         return this.http.get('/book/tags').map(data => {
             console.log(data);
             return data;
         });
     }
 
-    getBookTags(id: number): Observable<Object> {
+    getBookTags(id: number): Observable<any> {
         return this.http.get('/book/tags/'+id).map(data => {
             console.log(data);
             return data;
         });
     }
 
-    saveTag(tag: any) {
+    getTag(id: string): Observable<any> {
+        /* let loadBook=this.loadBooks.find(p => p._id == id);
+        if(loadBook!=undefined){
+            console.log("saved book");
+            return loadBook;
+        } else { */
+            return this.http.get('/book/tag/'+id).map(data => {
+                console.log(data);
+                return data;
+            });
+        //}
+
+        
+        //return this.books.find(p => p._id == id);
+        
+    }
+
+    saveTags(tags: any[], book: any) {
+        if(book==null) return;
         let alltags: any;
         this.getAllTags().subscribe((res)=>{
             alltags = res;
-            if(alltags.find(p => p._id == tag._id)){
-                this.http.put('/book/tag/'+tag._id, tag)
+            for(let tag of tags){
+            if(tag.books==undefined) tag.books=[];           
+            let curTag = alltags.find(p => p.name == tag.name);
+            if(curTag!=undefined){
+                if(curTag.books.findIndex(p=>p==book._id)==-1) curTag.books.push(book._id);
+                this.http.put('/book/tag/'+curTag._id, curTag)
                  .subscribe();
+                 console.log(curTag.name+"tag uptated:"+book._id);
             }else {
+                tag.books.push(book._id);
+                console.log(book._id);
                 this.http.post('/book/tag', tag)
                  .subscribe();
+                 console.log(tag.name+"tag saved:"+book._id);
             }
+        }
         });
     }
        
@@ -84,20 +111,38 @@ export class BookRepository implements OnInit {
         return this.categories;
     }
 
-    saveBook(book: Book, id: number) {
+    saveBook(book: Book, id: number, tags: any[]) {
         if (id == null || id == 0) {
             this.http.post('/book', book)
-            .subscribe(res => this.books.push(res));
+            .subscribe(res => {
+                this.books.push(res);
+                if(tags!=null) this.saveTags(tags,res);
+            });
         } else {
             this.http.put('/book/'+id, book)
             .subscribe(res => {
                 this.books.splice(this.books.
                 findIndex(p => p._id == id), 1, book);
+                if(tags!=null) this.saveTags(tags,res);
             });
         }
     }
 
+    searchBooks(text: string): Observable<any> {
+            return this.http.get('/book/find/'+text).map(data => {
+                console.log(data);
+                return data;
+            });        
+    }
+
     deleteBook(id: number) {
+        this.getBookTags(id).subscribe(res=>{
+            for(let tag of res){
+                tag.books.splice(tag.books.findIndex(res=>res==id),1);
+                this.http.put('/book/tag/'+tag._id, tag)
+                .subscribe();
+            }
+        });
         this.http.delete('/book/'+id)
             .subscribe(res => {
             this.books.splice(this.books.

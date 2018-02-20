@@ -72,6 +72,11 @@
                   </div>
               </ng-template>
             </div>
+            <label for="tags">Теги</label>
+          <tag-input [(ngModel)]="bookTags"  name="tags" id="tags"  [identifyBy]="'name'" [displayBy]="'name'">
+              <tag-input-dropdown [autocompleteItems]="allTags">
+              </tag-input-dropdown>
+            </tag-input>
           </div>
           <div class="form-group">
               <button type="submit" class="btn button-submit" [disabled]="!bookForm.form.valid">Редактировать</button>

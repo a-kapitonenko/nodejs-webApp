@@ -15,6 +15,17 @@ router.get('/', function(req, res, next) {
     });    
 });
 
+router.get('/find/:text', function(req,res,next){
+    console.log("server: "+req.params.text);
+    Book.find({$text: {$search:  req.params.text}})
+    //.skip(20).limit(10)
+    .exec(function(err, docs) {
+        if (err) return next(err);
+        console.log(docs);
+        res.json(docs);
+      });
+})
+
 router.get('/categories', function(req, res, next) {
     
     Categories.find(function (err, products) {
@@ -40,15 +51,22 @@ router.get('/tags/:id', function(req, res, next) {
 });
 
 router.post('/tag', function(req, res, next) {
-    Tag.create(req.body, function (err, post) {
+    Tags.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
 
-router.put('tag/:id', function(req, res, next) {
-    Tag.findByIdAndUpdate( req.params.id, req.body, function (err, post) {
+router.put('/tag/:id', function(req, res, next) {
+    Tags.findByIdAndUpdate( req.params.id, req.body, function (err, post) {
+        if (err) return next(err);
+        res.json(post);
+    });
+});
+
+router.get('/tag/:id', function(req, res, next) {
+    Tags.findById( req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });

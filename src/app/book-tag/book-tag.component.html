@@ -1,14 +1,5 @@
 <div class="container mt-3">
-    <div class="dropdown mb-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         Выберите жанр
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" *ngFor="let cat of categories"
-          (click)="changeCategory(cat.name)">{{cat.name}}</a>
-        </div>
-      </div>
-    
+   <div *ngIf="(books[0]!=undefined)">
   <div  *ngFor="let book of books">
     <div class="item list-group-item col-xs-4 " ><!--  col-lg-4 -->
         <div class="thumbnail">
@@ -31,8 +22,7 @@
         </div>
     </div>
 
+  </div>
+
 
 </div>
-</div>
- 
-

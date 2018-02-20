@@ -1,4 +1,6 @@
 <div class="container">
+    <div class="row">
+   <div class="col">
     <div class="card-header text-center ">
         <span class="lead">Лидеры по рейтингу</span>
     </div>
@@ -169,5 +171,27 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    </div>
+<!-- 
+        <angular-tag-cloud *ngIf="(data[0]!=undefined)" >
+            [data]="data"
+            [width]="options.width"
+            [height]="options.height"
+            [overflow]="options.overflow"
+            [zoomOnHover]="zoomOnHoverOptions">
+        </angular-tag-cloud> -->
+        <div class="col-sm-3" *ngIf="(allTags[0]!==undefined)">
+                <div class="card">
+                        <div class="card-header">
+                         Tag Cloud
+                        </div>
+                        <div class="card-block mt-1 ml-1 mb-1">
+                                <a class = "badge mr-1" *ngFor="let tag of allTags" 
+                                  [routerLink]="['/books/', tag._id]">{{tag.name}}<span class="badge-round">{{tag.books.length}}</span></a>
+                        </div>
+                </div>
+            
+        </div>
 
+    </div>
 </div>
