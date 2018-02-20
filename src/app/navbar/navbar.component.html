@@ -61,16 +61,10 @@
 							aria-haspopup="true" aria-expanded="false">
 						{{userRepository.selectedUser.username}}
 					</a>
-<<<<<<< HEAD
 				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="right: 0; left: auto;">
 					<a class="dropdown-item" >Профиль</a>
 					<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
-=======
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" [routerLink]="['/profile']">Профиль</a>
-						<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
-					</div>
->>>>>>> 8b2b8d367eb05d02ac4b8072fa8c95ed78c1119a
+				</div>
 				</div>
 			</ng-template>  	
 	  	</div>
