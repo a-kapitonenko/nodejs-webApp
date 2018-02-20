@@ -16,6 +16,7 @@ var app = express();
 app.set('port', config.get('port'));
 
 app.set('views', path.join(__dirname, 'views'));
+app.set('dirname', __dirname);
 app.set('view engine', 'jade');
 app.use('/books', express.static(path.join(__dirname, 'dist')));
 
