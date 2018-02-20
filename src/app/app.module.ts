@@ -34,6 +34,7 @@ import { User } from './model/user.model';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {CommentsService} from './comments.service';
 import {WebsocketService} from './websocket.service';
+import {InterfaceService} from './model/interface.service';
 
 import {ImageuploadService} from './imageUpload.service';
 import { TagInputModule } from 'ngx-chips';
@@ -46,7 +47,7 @@ import { SearchComponent } from './search/search.component';
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
-    { path: 'login', component: LoginComponent },
+    { path: 'login', component: LoginComponent,data: { title: 'Войти' } },
     { path: 'logout', redirectTo: '/' },
 	{
         path: 'books/:tagId',
@@ -124,7 +125,7 @@ const appRoutes: Routes =[
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
         }), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule, ReactiveFormsModule],
-  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService],
+  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService,InterfaceService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

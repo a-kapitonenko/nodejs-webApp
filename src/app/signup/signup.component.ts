@@ -8,8 +8,7 @@ import { UploadEvent, UploadFile } from 'ngx-file-drop';
 @Component({
   	selector: 'app-signup',
   	templateUrl: './signup.component.html',
-  	styleUrls: ['./signup.component.css'],
-  	providers: [UserRepository]
+  	styleUrls: ['./signup.component.css']
 })
 export class SignUpComponent {
 	  private user: User;
