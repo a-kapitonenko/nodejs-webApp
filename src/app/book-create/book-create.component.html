@@ -17,8 +17,8 @@
           <div class="dropdown">  
             
             <div *ngIf="(book.category==undefined);else other_content1">
-                Выберите жанр <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   Жанры
+              <label>Выберите жанр</label> <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <label>Жанры</label>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" *ngFor="let cat of categories"
@@ -27,7 +27,7 @@
             </div>
             
             <ng-template #other_content1>
-                Выберите жанр <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <label>Выберите жанр</label> <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{book.category}}
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -58,7 +58,7 @@
           
           <div><img style="width: 300px" [src]="downloadURL | async"></div>
             <div class="mt-2"><button class="btn btn-secondary" type="button" (click)="otherImage()">
-            Хочу другую картинку
+              <label>Хочу другую картинку</label>
           </button></div>
           
         </ng-template>

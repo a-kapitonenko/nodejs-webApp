@@ -4,12 +4,3 @@
 .active {
     color:#8c1aff;
 }
-.light #search-btn {
-    color:#8c1aff; 
-    border-color:#8c1aff;
-}
-.light #search-btn:hover {
-    background-color:#8c1aff;
-    color: white !important;
-}
-

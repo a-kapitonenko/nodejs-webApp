@@ -7,7 +7,7 @@
 		<button class="navbar-toggler" type="button" data-toggle="collapse" 
 				data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
 				aria-expanded="false" aria-label="Toggle navigation">
-		  	<span class="navbar-toggler-icon"></span>
+			  <span class="fas fa-bars"></span>
 	 	</button>
 	  	<div class="collapse navbar-collapse " id="navbarSupportedContent">
 		  	<form class="form-inline my-2 my-lg-0 align-middle mr-auto">
@@ -27,8 +27,8 @@
 				  		aria-label="Search" style="width: 30%;" id="search">
 				<button class="btn btn-outline-primary my-2 my-sm-0" 
 						for ="search" id="search-btn" type="submit">Поиск</button>
-				<button class="theme-btn" (click)="changeTheme()">
-					<i class="fab fa-medapps" style="size:60px"></i>
+				<button class="btn theme-btn" (click)="changeTheme()">
+					<i class="fab fa-medapps"></i>
 				</button>
 			</form>
 			<div *ngIf="userRepository.selectedUser == null; then nonAutorise else autorise"></div>   
