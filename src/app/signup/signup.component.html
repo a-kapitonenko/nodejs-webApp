@@ -1,5 +1,6 @@
 <div class="container">
   	<div class="row">
+		<div class="col">
       	<div class="mt-4">
   			<form role="form" #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
      			<div class="form-group row">
@@ -35,6 +36,38 @@
           			</div>
       			</div>
   			</form>
-  		</div>
+		  </div>
+		  </div>
+		  <div class="col">
+				<div class="upload-img mt-4">
+						<div>
+						<label>Выберите Аватар</label>
+					  </div>
+					  <mat-spinner *ngIf="(isLoading==true);else showImage"></mat-spinner>
+						<ng-template #showImage>      
+						<div *ngIf="(imageURL==null);else otherImage">
+							<div *ngIf="(files==null);else other_content" class="mb-3">                    
+							  <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+								(onFileOver)="imageService.fileOver($event)" (onFileLeave)="imageService.fileLeave($event)">
+							  </file-drop>
+							</div>                
+							<ng-template #other_content>                        
+								<div><img style="width: 300px" [src]="imageURL"></div>
+								  <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
+								  Хочу другую картинку
+								</button></div>                        
+							</ng-template>
+						  </div>
+						  <ng-template #otherImage>
+							  <div *ngIf="(imageURL!=null)">
+							  <div><img style="width: 300px" [src]="imageURL"></div>
+							  <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="imageURL=null">
+							  Хочу другую картинку
+							   </button></div>  
+							  </div>             
+						  </ng-template>
+						  </ng-template>
+						</div>
+		  </div>
   	</div>
 </div>

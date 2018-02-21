@@ -25,6 +25,7 @@ exports.register = function(req,res,next) {
             newUser.website = "fanfiction";
             newUser.social_id = null;
             newUser.creat_date = Date.now();
+            newUser.image=data.image;
             newUser.save(function(err) {
                 if (err) throw err;
                 rand = verified(data.email);

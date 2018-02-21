@@ -72,6 +72,11 @@
                   </div>
               </ng-template>
             </div>
+            <label for="tags">Теги</label>
+          <tag-input [(ngModel)]="bookTags"  name="tags" id="tags"  [identifyBy]="'name'" [displayBy]="'name'">
+              <tag-input-dropdown [autocompleteItems]="allTags">
+              </tag-input-dropdown>
+            </tag-input>
           </div>
           <div class="form-group">
               <button type="submit" class="btn button-submit" [disabled]="!bookForm.form.valid">Редактировать</button>
@@ -87,7 +92,7 @@
         <div *ngIf="(book.image==null);else otherImage">
             <div *ngIf="(files==null);else other_content" class="mb-3">                    
               <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
-                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                (onFileOver)="imageService.fileOver($event)" (onFileLeave)="imageService.fileLeave($event)">
               </file-drop>
             </div>                
             <ng-template #other_content>                        

@@ -2,16 +2,17 @@ import { Component, OnInit, ViewEncapsulation,  EventEmitter } from '@angular/co
 import { Router } from '@angular/router';
 import { Book } from "../model/book.model";
 import { BookRepository } from "../model/book.repository";
-
+import { Tag } from "../model/tag.model";
 
 import { UploadEvent, UploadFile } from 'ngx-file-drop';
 
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable'; 
 
 import { User } from '../model/user.model';
 import { UserRepository } from '../model/user.repository';
+import {ImageuploadService} from '../imageUpload.service';
 
   @Component({
     selector: 'app-book-create',
@@ -23,94 +24,75 @@ export class BookCreateComponent implements OnInit {
 
     book: Book={} ;
     public downloadURL: Observable<string>;
-    snapshot: Observable<any>;
-    task: AngularFireUploadTask;
-    filePath: string;
-    content: string;
-    uploadPercent: Observable<number>;
-
-    public files: UploadFile[] = null;
     isLoading=false;
-
-   
+    tags:any[]=[];
+    items: any[]=[];
+    allTags: any[];
 
     public dropped(event: UploadEvent) {
-    this.isLoading = true;
-    this.files = event.files;
-    for (const file of event.files) {
-      file.fileEntry.file(info => {
-        console.log(info);
-         this.uploadFiles(info);
-        
-      });
-    }
-    setTimeout(()=>{    //<<<---    using ()=> syntax
-        // get notified when the download URL is available
-        this.downloadURL = this.task.downloadURL();
-        
-        this.downloadURL.subscribe(res => {
-            this.book.image=res;
-            this.isLoading=false;
-                 
+        this.isLoading = true;
+        for (const file of event.files) {
+            file.fileEntry.file(info => {
+              console.log(info);
+              this.imageService.sendFile(info).subscribe(res => {
+                console.log(res);
+                this.book.image=res;
+                console.log(this.book.image);
+                this.isLoading = false;
+                console.log(this.isLoading);
+                     
+            });;
         });
-
-   },800);
-    // observe percentage changes
-    
+        }    
   } 
 
-   public fileOver(event){
-    console.log(event);
-   }
+  getAllTags(){
+      this.repository.getAllTags().subscribe(res=>{
+        this.allTags=res.map(p=>p.name);
+      });
+  }
+
+  /* saveTags(){
+      for(let tag of this.tags){
+          tag.books=[];
+          console.log(tag.name);
+          this.repository.saveTag(tag,this.book);
+      }
+  } */
+
+  onItemAdded($event){
+      this.tags.push($event);
+      console.log(this.tags);
+    //this.repository.saveTag($event,this.book);
+  }
+
+  onItemRemoved($event){
+      this.tags.splice(this.tags.findIndex(p=> p.name==$event.name),1);
+      console.log(this.tags);
+  }
+
  
-    public fileLeave(event){
-    console.log(event);
-    }
+  
 
     constructor(private repository: BookRepository, private router: Router, 
-        private storage: AngularFireStorage, private userRepository: UserRepository) {
+         private userRepository: UserRepository, private imageService: ImageuploadService) {
             
     }
 
     ngOnInit() {
-        
+        this.getAllTags();
     }
 
     otherImage(){
-        this.files= null;
-        this.downloadURL = null;
+        this.book.image = null;
 
     }    
-
-    uploadFiles(file) {
-        if(file.type.indexOf('image')===-1){
-            this.files=null;
-        } else { 
-            //this.uploadFiles(info);
-            //const file = info;
-            this.filePath = `/${new Date().getTime()}_${file.name}`;
-            this.task = this.storage.upload(this.filePath, file);
-            this.uploadPercent = this.task.percentageChanges();
-                      
-        }
-    } 
-    
  
     saveBook() {
         this.book.author = this.userRepository.selectedUser.username;
     
-        this.repository.saveBook(this.book, null);
+        this.repository.saveBook(this.book, null,this.tags);
         this.router.navigate(['/books']);
-        
-        
-        /* this.http.post('/book', this.book)
-            .subscribe(res => {
-                    let id = res['_id'];
-                    this.router.navigate(['/book-details', id]);
-                }, (err) => {
-                    console.log(err);
-                }
-            );*/
     } 
 
     get categories():string[]{

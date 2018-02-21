@@ -1,5 +1,5 @@
 <mat-progress-bar mode="determinate" [value]="value"></mat-progress-bar>
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="(chapters!=undefined)">
 <div class="float-right mr-3 text-sm" style="color: #673ab7;" >
   {{value}}%
 </div>
@@ -53,7 +53,7 @@
             </ul>
         </div>
     </nav>
-<div class="container mt-3">
+<div *ngIf="(curChapter!=undefined)" class="container mt-3">
   <div class="text-center mb-3">
     <h4>Глава {{chapterNum}}: {{curChapter.name}}</h4>
   </div>

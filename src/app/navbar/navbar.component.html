@@ -23,14 +23,23 @@
 						<a class="nav-link" [routerLink]="['/books']" routerLinkActive="active">Фанфики</a>
 					</li>
 		  		</ul>
+<<<<<<< HEAD
 				<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" 
 				  		aria-label="Search" style="width: 30%;" id="search">
 				<button class="btn btn-outline-primary my-2 my-sm-0" 
 						for ="search" id="search-btn" type="submit">Поиск</button>
 				<button class="btn theme-btn" (click)="changeTheme()">
 					<i class="fab fa-medapps"></i>
+=======
+				<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" [(ngModel)]="input"
+				  		aria-label="Search" style="width: 30%;" id="search" name="input" >
+				<button class="btn btn-outline-primary my-2 my-sm-0" [routerLink]="['/search/', input]" 
+						  for ="search" id="search-btn" type="submit" (click)="input=null">Поиск</button>
+				<button class="theme-btn" (click)="changeTheme()">
+					<i class="fab fa-medapps" style="size:60px"></i>
+>>>>>>> d19d8a2cdb6189d3e210a318baeac564b5ff965d
 				</button>
-			</form>
+		  	</form>
 			<div *ngIf="userRepository.selectedUser == null; then nonAutorise else autorise"></div>   
 			<ng-template #nonAutorise>
 				<div class="form-inline justify-content-end align-middle">	
@@ -54,17 +63,17 @@
 				</div>
 			</ng-template>  
 			<ng-template #autorise>
-				<div class="dropdown show">
+				<div class="dropdown ">
 					<a class="btn my-2 my-sm-0 dropdown-toggle" 
 							style="color:#8c1aff;"
 							id="dropdownMenuLink" data-toggle="dropdown" 
 							aria-haspopup="true" aria-expanded="false">
 						{{userRepository.selectedUser.username}}
 					</a>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-						<a class="dropdown-item" [routerLink]="['/profile']">Профиль</a>
-						<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
-					</div>
+				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="right: 0; left: auto;">
+					<a class="dropdown-item" >Профиль</a>
+					<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
+				</div>
 				</div>
 			</ng-template>  	
 	  	</div>

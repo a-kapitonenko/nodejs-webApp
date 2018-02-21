@@ -11,7 +11,8 @@ var userSchema = new mongoose.Schema({
     isBlocked: Boolean,
     website: String,
     social_id: String,
-    creat_date: Date
+    creat_date: Date,
+    image: String
 });
 userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

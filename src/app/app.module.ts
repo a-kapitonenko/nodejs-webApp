@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -36,12 +36,30 @@ import {CommentsService} from './comments.service';
 import {WebsocketService} from './websocket.service';
 import {InterfaceService} from './model/interface.service';
 
+import {ImageuploadService} from './imageUpload.service';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BookTagComponent } from './book-tag/book-tag.component'; 
+
+//import { TagCloudModule } from 'angular-tag-cloud-module';
+import { SearchComponent } from './search/search.component';
+
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
     { path: 'login', component: LoginComponent,data: { title: 'Войти' } },
     { path: 'logout', redirectTo: '/' },
 	{
+        path: 'books/:tagId',
+        component: BookTagComponent,
+        data: { title: 'Book List' }
+    },
+    {
+        path: 'search/:text',
+        component: SearchComponent,
+        data: { title: 'Book List' }
+    },
+    {
         path: 'books',
         component: BookComponent,
         data: { title: 'Book List' }
@@ -80,7 +98,9 @@ const appRoutes: Routes =[
 		BookCreateComponent,
 		BookEditComponent,
 		AddChapterComponent,
-		BookReadComponent],
+		BookReadComponent,
+		BookTagComponent,
+		SearchComponent],
       imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireStorageModule,
@@ -104,8 +124,8 @@ const appRoutes: Routes =[
                {start: '* ', cmd: 'InsertUnorderedList'},
                {start: '- ', cmd: 'InsertUnorderedList'}
             ]
-        }), MatProgressBarModule, MatProgressSpinnerModule],
-  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService, InterfaceService],
+        }), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule, ReactiveFormsModule],
+  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService,InterfaceService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

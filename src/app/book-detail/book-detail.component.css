@@ -50,10 +50,18 @@ html {
 }
 
 .media-object {
-    width: 70px;
+    object-fit: cover;
+    width: 70px; 
+    height: 70px; 
 }
 
 .comment {
     margin-top: 20px;
     margin-left: 80px;
+}
+
+.media-left {
+    /* width: 70px;
+    height: 70px;
+    overflow: hidden; */
 }

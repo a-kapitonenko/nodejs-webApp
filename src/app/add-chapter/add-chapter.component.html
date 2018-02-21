@@ -19,17 +19,19 @@
                   <label for="name">Название главы</label>
                   <input type="text" class="form-control mb-3" [(ngModel)]="newChapter.name" name="name" id="name" required>
                   <label class="mb-2">Обложка для главы</label>
-                  <div *ngIf="(files==null);else other_content" class="mb-3">                    
-                    <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
-                      (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                  <mat-spinner *ngIf="(isLoading==true);else showImage"></mat-spinner>
+                  <ng-template #showImage>
+                  <div *ngIf="(newChapter.image==null);else other_content" class="mb-3">                    
+                    <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)"         >
                     </file-drop>
                   </div>                
                   <ng-template #other_content>                        
-                      <div><img style="width: 300px" [src]="downloadURL | async"></div>
-                        <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
+                      <div><img style="width: 300px" [src]="newChapter.image"></div>
+                        <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="newChapter.image=null">
                         Хочу другую картинку
                       </button></div>                        
                   </ng-template>
+                </ng-template>
                   <angular-tinymce  [(ngModel)]='newChapter.text' name='content'  ></angular-tinymce>
                   <button class="btn btn-success mt-3" type="button" (click)="addChapter()">ADD CHAPTER</button>
                   <button class="btn btn-secondary mt-3" type="button" (click)="cancel()">CANCEL</button>
@@ -38,18 +40,21 @@
                     <label for="name">Название главы</label>
                     <input type="text" class="form-control mb-3" [(ngModel)]="newChapter.name" name="name" id="name" required>
                     <label class="mb-2">Обложка для главы</label>
+                    <mat-spinner *ngIf="(isLoading==true);else showImage"></mat-spinner>
+                    <ng-template #showImage>
                     <div *ngIf="(newChapter.image==null);else otherImage">
                     <div *ngIf="(files==null);else other_content" class="mb-3">                    
                       <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
-                        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                      >
                       </file-drop>
                     </div>                
                     <ng-template #other_content>                        
                         <div><img style="width: 300px" [src]="downloadURL | async"></div>
-                          <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
+                          <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="newChapter.image=null">
                           Хочу другую картинку
                         </button></div>                        
                     </ng-template>
+                    
                   </div>
                   <ng-template #otherImage>
                       <div *ngIf="(newChapter.image!=null)">
@@ -59,8 +64,10 @@
                        </button></div>  
                       </div>             
                   </ng-template>
+                </ng-template>
                     <angular-tinymce  [(ngModel)]='newChapter.text' name='content'  ></angular-tinymce>
                     <button class="btn btn-success mt-3" type="button" (click)="editChapter()">EDIT CHAPTER</button>
                   </div>
           </div> 
 
+         

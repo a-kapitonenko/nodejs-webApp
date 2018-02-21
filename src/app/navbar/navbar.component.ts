@@ -15,7 +15,8 @@ import { InterfaceService } from '../model/interface.service';
 })
 export class NavbarComponent implements OnInit {
   	private subscriptions: Subscription[] = [];
-  	fullscreen$ :boolean;
+	  fullscreen$ :boolean;
+	  input: string = null;
   	ngOnInit() {
   		const subscription = this.fullScreenService.fullscreen$.subscribe((fullscreen$)=> {
       		this.fullscreen$ = fullscreen$;

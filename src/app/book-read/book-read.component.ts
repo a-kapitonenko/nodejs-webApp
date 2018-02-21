@@ -7,6 +7,7 @@ import { FullscreenService } from '../fullscreen.service';
 import { Subscription } from 'rxjs/Subscription';
 
 
+
 @Component({
   selector: 'app-book-read',
   templateUrl: './book-read.component.html',
@@ -35,8 +36,13 @@ export class BookReadComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.book.chapters=[];
+    console.log("inOninitRead");
       this.getBook(this.route.snapshot.params['id']);
-      this.getChapter(this.route.snapshot.params['num']);
+      setTimeout(()=>{
+        this.getChapter(this.route.snapshot.params['num']);
+      },800);
+      
       const subscription = this.fullScreenService.fullscreen$
       .subscribe((fullscreen$) => {
         this.fullscreen$ = fullscreen$;
@@ -63,7 +69,10 @@ export class BookReadComponent implements OnInit {
       }
 
   getBook(id) {
-      this.book=this.repository.getBook(id);
+    this.repository.getBook(id).subscribe(res=>{
+      this.book=res;
+  }
+  );
       
   }
 
