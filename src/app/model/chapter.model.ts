@@ -3,6 +3,7 @@ export class Chapter {
         public number?: number,
         public name?: string,
         public text?: string,
-        public image?: string
+        public image?: string,
+        public rating?: Array<number>
        ) { }
 }

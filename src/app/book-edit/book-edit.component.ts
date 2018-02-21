@@ -59,7 +59,11 @@ export class BookEditComponent implements OnInit {
         );
      }
 
-    
+     onItemRemoved($event){
+        console.log($event);
+         this.repository.deleteTagBook(this.book,$event);
+         
+     }
 
     constructor(private repository: BookRepository, private router: Router, 
         private storage: AngularFireStorage,  private route: ActivatedRoute, private imageService: ImageuploadService) {

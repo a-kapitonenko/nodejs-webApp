@@ -15,7 +15,7 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { BookRepository } from "./model/book.repository";
-import { BookComponent } from './book/book.component';
+
 
 import { FileDropModule } from 'ngx-file-drop';
 
@@ -40,8 +40,7 @@ import {ImageuploadService} from './imageUpload.service';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BookTagComponent } from './book-tag/book-tag.component'; 
-
-//import { TagCloudModule } from 'angular-tag-cloud-module';
+import { BarRatingModule } from "ngx-bar-rating";
 import { SearchComponent } from './search/search.component';
 
 const appRoutes: Routes =[
@@ -57,11 +56,6 @@ const appRoutes: Routes =[
     {
         path: 'search/:text',
         component: SearchComponent,
-        data: { title: 'Book List' }
-    },
-    {
-        path: 'books',
-        component: BookComponent,
         data: { title: 'Book List' }
     },
     {
@@ -93,7 +87,7 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-  	declarations: [AppComponent, NavbarComponent, HomeComponent, SignUpComponent, LoginComponent, BookComponent,
+  	declarations: [AppComponent, NavbarComponent, HomeComponent, SignUpComponent, LoginComponent, 
 		BookDetailComponent,
 		BookCreateComponent,
 		BookEditComponent,
@@ -104,27 +98,8 @@ const appRoutes: Routes =[
       imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireStorageModule,
-        TinyMceModule.forRoot({
-            tinymceScriptURL: 'assets/tinymce/tinymce.min.js',
-            baseURL: '',
-            skin_url: '/assets/tinymce/skins/lightgray',
-            theme_url: '/assets/tinymce/themes/modern/theme.min.js',
-            selector: 'angular-tinymce',
-            plugins: ['textpattern'],
-            textpattern_patterns: [
-               {start: '*', end: '*', format: 'italic'},
-               {start: '**', end: '**', format: 'bold'},
-               {start: '#', format: 'h1'},
-               {start: '##', format: 'h2'},
-               {start: '###', format: 'h3'},
-               {start: '####', format: 'h4'},
-               {start: '#####', format: 'h5'},
-               {start: '######', format: 'h6'},
-               {start: '1. ', cmd: 'InsertOrderedList'},
-               {start: '* ', cmd: 'InsertUnorderedList'},
-               {start: '- ', cmd: 'InsertUnorderedList'}
-            ]
-        }), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule, ReactiveFormsModule],
+        TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule,
+        ReactiveFormsModule, BarRatingModule],
   	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService,InterfaceService],
   	bootstrap: [AppComponent]
 })

@@ -13,11 +13,7 @@ export class BookRepository implements OnInit {
     
 
     constructor(private http: HttpClient) {
-        console.log("in get book constructor");
-        this.http.get('/book').subscribe(data => {
-            this.books = data;
-            console.log(data);
-        });
+        
         this.http.get('/book/categories').subscribe(data => {
             console.log(data);
             this.categories = data;
@@ -28,9 +24,12 @@ export class BookRepository implements OnInit {
     
     }
 
-    getBooks(category: string = null): Book[] {
-        return this.books
-            .filter(p => category == null || category == p.category);
+    getBooks(): Observable<any> {
+        return this.http.get('/book').map(data => {
+            console.log(data);
+            return data;
+        });
+        
     }
 
     getBook(id: number): Observable<Object> {
@@ -53,7 +52,7 @@ export class BookRepository implements OnInit {
 
     getAllTags(): Observable<any> {
         return this.http.get('/book/tags').map(data => {
-            console.log(data);
+            console.log("All tags"+data);
             return data;
         });
     }
@@ -111,7 +110,38 @@ export class BookRepository implements OnInit {
         return this.categories;
     }
 
+    getStringDate(d: Date){
+        return this.checkDate(d.getDate())+"."+this.checkDate(d.getMonth())+"."+
+        this.checkDate(d.getFullYear())+" "+
+        this.checkDate(d.getHours())+":"+this.checkDate(d.getMinutes());      
+    }
+
+    checkDate(num: number): string{
+        if(num<10){
+            return "0"+num;
+        } else {
+            return num.toString();
+        }
+    }
+
+    deleteTagBook(book: any, tag: any){
+        /* this.getAllTags().subscribe(res=>{
+            let tag=res.find(p=>p.name==tagName);
+            console.log(tag);
+            tag.books.splice(tag.books.findIndex(p=>p==book._id),1);
+            
+        }); */
+        //this.getTag(tagId).subscribe(res=>{
+           // let tag=res;
+            tag.books.splice(tag.books.findIndex(p=>p==book._id),1);
+            this.http.put('/book/tag/'+tag._id, tag)
+                 .subscribe();
+       // });
+        
+    }
+
     saveBook(book: Book, id: number, tags: any[]) {
+        book.updated_date = this.getStringDate(new Date());
         if (id == null || id == 0) {
             this.http.post('/book', book)
             .subscribe(res => {

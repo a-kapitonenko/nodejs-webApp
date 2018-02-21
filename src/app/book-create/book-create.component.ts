@@ -90,10 +90,10 @@ export class BookCreateComponent implements OnInit {
  
     saveBook() {
         this.book.author = this.userRepository.selectedUser.username;
-    
+        
         this.repository.saveBook(this.book, null,this.tags);
         this.router.navigate(['/books']);
-    } 
+    }     
 
     get categories():string[]{
         return this.repository.getCategories();
