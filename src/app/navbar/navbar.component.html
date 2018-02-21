@@ -1,5 +1,5 @@
 <div [ngClass]="{'toolbar-fullscreen': (fullscreen$)}">
-  	<nav class="navbar navbar-expand-lg">
+  	<nav class="navbar navbar-expand-lg ">
 	  	<a class="navbar-brand" [routerLink]="['/']">
 			<img src="https://firebasestorage.googleapis.com/v0/b/nodejs-webapp-956d6.appspot.com/o/logo.png?alt=media&token=76af09f4-9500-4d5e-9bdc-b86aed8d751f" 
 			  		style="width: 140px;">
@@ -18,9 +18,6 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" [routerLink]="['/book-create']" routerLinkActive="active">Создать фанфик</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" [routerLink]="['/books']" routerLinkActive="active">Фанфики</a>
 					</li>
 		  		</ul>
 				<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" 

@@ -73,8 +73,8 @@
               </ng-template>
             </div>
             <label for="tags">Теги</label>
-          <tag-input [(ngModel)]="bookTags"  name="tags" id="tags"  [identifyBy]="'name'" [displayBy]="'name'">
-              <tag-input-dropdown [autocompleteItems]="allTags">
+          <tag-input [(ngModel)]="bookTags" (onRemove)="onItemRemoved($event)" name="tags" id="tags"  [identifyBy]="'name'" [displayBy]="'name'">
+              <tag-input-dropdown [autocompleteItems]="allTags"  >
               </tag-input-dropdown>
             </tag-input>
           </div>

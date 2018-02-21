@@ -24,6 +24,7 @@ export class BookReadComponent implements OnInit {
    private subscriptions: Subscription[] = [];
    fullscreen$;
    value: number=0;
+   rate = 4;
 
   constructor(private repository: BookRepository, private router: Router, private route: ActivatedRoute,
     private fullScreenService: FullscreenService) {

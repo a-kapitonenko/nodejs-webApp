@@ -13,5 +13,26 @@ export const environment = {
     storageBucket: "gs://nodejs-webapp-956d6.appspot.com/",
     messagingSenderId: "533232003352"
   },
+  tinyMce: {
+    tinymceScriptURL: 'assets/tinymce/tinymce.min.js',
+    baseURL: '',
+    skin_url: '/assets/tinymce/skins/lightgray',
+    theme_url: '/assets/tinymce/themes/modern/theme.min.js',
+    selector: 'angular-tinymce',
+    plugins: ['textpattern'],
+    textpattern_patterns: [
+       {start: '*', end: '*', format: 'italic'},
+       {start: '**', end: '**', format: 'bold'},
+       {start: '#', format: 'h1'},
+       {start: '##', format: 'h2'},
+       {start: '###', format: 'h3'},
+       {start: '####', format: 'h4'},
+       {start: '#####', format: 'h5'},
+       {start: '######', format: 'h6'},
+       {start: '1. ', cmd: 'InsertOrderedList'},
+       {start: '* ', cmd: 'InsertUnorderedList'},
+       {start: '- ', cmd: 'InsertUnorderedList'}
+    ]
+  },
   ws_url:'http://localhost:5000'
 };

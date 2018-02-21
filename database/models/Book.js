@@ -4,12 +4,13 @@ var BookSchema = new mongoose.Schema({
     author: String,
     category: String, 
     description: String,
-    updated_date: { type: Date, default: Date.now },
+    updated_date: String,
     chapters:[{
         number: Number,
         name: String,
         text: String,
-        image: String
+        image: String,
+        rating: {type : Array , "default" : []}
     }],
     image: String, 
     comments: [{
@@ -19,11 +20,8 @@ var BookSchema = new mongoose.Schema({
         date: String,
         image: String,
         likes : { type : Number , "default" :0 },
-        userslikes: {type : Array , "default" : [],
-        }
+        userslikes: {type : Array , "default" : []}
     }]
 }).index({'$**': 'text'});
-/* .index({'title': 'text', 'author': 'text', 'category' : 'text','description': 'text',
-'chapters': 'text','comments': 'text'});
- */
+
 module.exports = mongoose.model('Book', BookSchema);
