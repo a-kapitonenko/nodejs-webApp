@@ -101,7 +101,8 @@
     color: #8c1aff;
 }
 .dark label, .dark .card-title, .dark .card-text, .dark .lead, .dark h3, 
-.dark .dropdown-menu a,.dark .dropdown-menu a:hover  {
+.dark .dropdown-menu a, .dark .dropdown-menu a:hover, .dark h2, .dark h4, .dark h5, 
+.dark h6, .dark h1 {
     color:#D7D7D7;
 }
 .dark .card-body, .dark .card-footer {
