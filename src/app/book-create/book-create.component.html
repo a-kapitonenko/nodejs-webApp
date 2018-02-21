@@ -54,24 +54,6 @@
         <label>Обложка для фанфика</label>
       </div>
       <mat-spinner *ngIf="(isLoading==true);else showImage"></mat-spinner>
-<<<<<<< HEAD
-      <ng-template #showImage>
-        <div *ngIf="(files==null);else other_content">
-          <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
-    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-    </file-drop>
-        </div>
-        
-        <ng-template #other_content>
-          
-          <div><img style="width: 300px" [src]="downloadURL | async"></div>
-            <div class="mt-2"><button class="btn btn-secondary" type="button" (click)="otherImage()">
-              <label>Хочу другую картинку</label>
-          </button></div>
-          
-        </ng-template>
-      </ng-template>
-=======
         <ng-template #showImage>      
         <div *ngIf="(book.image==null);else otherImage">
             <div *ngIf="(files==null);else other_content" class="mb-3">                    
@@ -95,7 +77,6 @@
               </div>             
           </ng-template>
           </ng-template>
->>>>>>> d19d8a2cdb6189d3e210a318baeac564b5ff965d
         </div>
         </div>
         
