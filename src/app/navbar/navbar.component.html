@@ -20,10 +20,10 @@
 						<a class="nav-link" [routerLink]="['/book-create']" routerLinkActive="active">Создать фанфик</a>
 					</li>
 		  		</ul>
-				<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" 
-				  		aria-label="Search" style="width: 30%;" id="search">
-				<button class="btn btn-outline-primary my-2 my-sm-0" 
-						for ="search" id="search-btn" type="submit">Поиск</button>
+				<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" [(ngModel)]="input" 
+				  aria-label="Search" style="width: 30%;" id="search" name="input" > 
+				<button class="btn btn-outline-primary my-2 my-sm-0" [routerLink]="['/search/', input]" 
+				  for ="search" id="search-btn" type="submit" (click)="input=null">Поиск</button>
 				<button class="btn theme-btn" (click)="changeTheme()">
 					<i class="fab fa-medapps"></i>
 				</button>
