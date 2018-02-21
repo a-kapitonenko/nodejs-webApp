@@ -1,25 +1,55 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+
 .theme-btn {
     background-color: unset;
 }
-/*.light .fa-medapps{
-    size: 10x;
-}*/
-.light a {
-    color: #8c1aff;
-    text-decoration: none;
+.card-header {
+    background-color:unset;
 }
-.light a:focus,.light a:hover {
+.dropdown-menu {
+    min-width: unset;
+}
+.dropdown-menu a:hover {
     color: #6600cc;
 }
-.light a:focus {
-    outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px
+.dropdown-item {
+    padding: .15rem 1rem;
+}
+.dropdown-item:hover {
+    background-color: unset;
+}
+.fa-bars {
+    color: #D7D7D7; 
+}
+.theme-btn:focus {
+    box-shadow: unset;  
+}
+.light .navbar {
+    background-color: #F8F9FA;
+}
+.light a {
+    color: #7C7C7D;
+    text-decoration: none;
 }
 .light .text-purple {
     color: #8c1aff;
+}
+.light .btn-social {
+    border: none;
+    color: #8c1aff;
+}
+.light #search-btn {
+    color:#8c1aff; 
+    border-color:#8c1aff;
+}
+.light #search-btn:hover {
+    background-color:#8c1aff;
+    color: white !important;
+}
+.light #search-btn:focus {
+    border-color: #8c1aff;
+    box-shadow: unset;
 }
 .light .button-submit {
     color: white;
@@ -44,13 +74,17 @@
 .dark .navbar {
     background-color: #232323;
 }
+.dark a {
+    color: #D7D7D7;
+    text-decoration: none;
+}
 .dark #search {
-    border: none;
+    border-color: #242424;
     background-color: #111111;
     color:#D7D7D7;
 }
 .dark #search-btn {
-    border: none;
+    border-color: #414141;
     background-color: #414141;
     color:#D7D7D7;
 }
@@ -66,21 +100,16 @@
     border: none;
     color: #8c1aff;
 }
-.dark .col-form-label, .dark .card-title, .dark .card-text  {
-    color:#D7D7D7
+.dark label, .dark .card-title, .dark .card-text, .dark .lead, .dark h3, 
+.dark .dropdown-menu a,.dark .dropdown-menu a:hover  {
+    color:#D7D7D7;
 }
-.dark .card-body {
-    background-color:#111111
-}
-.dark .navbar-toggler-icon {
-    color:#D7D7D7
+.dark .card-body, .dark .card-footer {
+    background-color:#111111;
 }
 .dark .dropdown-menu {
     background-color:#232323;
     min-width: unset;
-}
-.dark .dropdown-menu a:hover {
-    color: #6600cc;
 }
 .dark .dropdown-item {
     padding: .15rem 1rem;
@@ -88,9 +117,17 @@
 .dark .dropdown-item:hover {
     background-color: unset;
 }
-.dark a {
-    color: #D7D7D7;
-    text-decoration: none;
+.dark .fa-medapps {
+    border: none;
+    color: #fbff04;
+}
+
+a:hover {
+    color: #6600cc;
+}
+
+.navbar-toggler:focus {
+    outline: unset;
 }
 
 .button-submit:focus {
