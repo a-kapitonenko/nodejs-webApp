@@ -1,4 +1,5 @@
 <div class="container">
+<<<<<<< HEAD
     <div class="row my-2">
         <div class="col-lg-8 order-lg-2">
            <div class="tab-content py-4">             
@@ -20,6 +21,42 @@
                         <div *ngIf="(bookTags[0]!=undefined)" >       
                             <h6>Теги</h6>
                             <a *ngFor="let tag of bookTags" [routerLink]="['/books',tag._id]" class="badge badge-dark badge-pill mr-1">{{tag.name}}</a>
+=======
+        <div class="row my-2">
+            <div class="col-lg-8 order-lg-2">
+                <div class="tab-content py-4"> 
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="pb-2">{{ book.title }}</h5>
+                                <h6>Описание </h6>
+                                <p>
+                                        {{ book.description }}
+                                </p>
+                                <h6>Автор</h6>
+                                <p>
+                                        {{ authorName }}
+                                </p>
+                                <h6>Жанр</h6>
+                                <p>
+                                        {{ book.category }}
+                                </p>
+                            </div>
+
+                            <div class="col ">
+                                    
+                                <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
+                                <a [routerLink]="['/add-chapter', book._id]" class="btn btn-success">ADD CHAPTER</a>
+                                <a *ngIf="(book.chapters[0]!=undefined)" [routerLink]="['/book-read', book._id, book.chapters[0].number]" class="btn btn-success">READ</a>
+                                <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
+                           
+                                <div *ngIf="(bookTags[0]!=undefined)" >       
+                                <h6>Теги</h6>
+                                <a *ngFor="let tag of bookTags" [routerLink]="['/books',tag._id]" class="badge badge-dark badge-pill mr-1">{{tag.name}}</a>
+                            </div>
+                            </div>
+                            <!--/row-->
+>>>>>>> 08b959fbfd5e26f1ecc6bcffbb8d1257671b6426
                         </div>
                     </div>
                 </div>

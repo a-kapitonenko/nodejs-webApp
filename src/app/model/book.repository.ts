@@ -32,7 +32,7 @@ export class BookRepository implements OnInit {
         
     }
 
-    getBook(id: number): Observable<Object> {
+    getBook(id: number): Observable<any> {
         /* let loadBook=this.loadBooks.find(p => p._id == id);
         if(loadBook!=undefined){
             console.log("saved book");

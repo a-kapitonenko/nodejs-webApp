@@ -57,7 +57,7 @@
     
 
 <div *ngIf="(curChapter!=undefined)" class="container mt-3">
-<bar-rating [(rate)]="rate" [max]="5" [theme]="'default'">lol</bar-rating>
+<bar-rating [(ngModel)]="rating.rate" [max]="5" [theme]="'default'" (rateChange)="onRateChange($event)"></bar-rating>
   <div class="text-center mb-3">
     <h4>Глава {{chapterNum}}: {{curChapter.name}}</h4>
   </div>

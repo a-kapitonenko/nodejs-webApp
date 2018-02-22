@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from "../model/book.model";
 import { BookRepository } from "../model/book.repository";
 import { Chapter } from "../model/chapter.model";
+import { Rating } from "../model/rating.model";
 import { FullscreenService } from '../fullscreen.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -24,11 +25,15 @@ export class BookReadComponent implements OnInit {
    private subscriptions: Subscription[] = [];
    fullscreen$;
    value: number=0;
-   rate = 4;
+   rating: Rating = {};
 
   constructor(private repository: BookRepository, private router: Router, private route: ActivatedRoute,
     private fullScreenService: FullscreenService) {
      
+   }
+
+   onRateChange($event){
+    console.log($event);
    }
 
   ngOnDestroy() {
@@ -38,7 +43,6 @@ export class BookReadComponent implements OnInit {
 
   ngOnInit() {
     this.book.chapters=[];
-    console.log("inOninitRead");
       this.getBook(this.route.snapshot.params['id']);
       setTimeout(()=>{
         this.getChapter(this.route.snapshot.params['num']);

@@ -19,6 +19,7 @@ export class BookDetailComponent implements OnInit {
     isTyping = false;
     comment: Comment={};
     bookTags: any[]=[];
+    authorName: any=null;
 
     constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository,
         private chat: CommentsService, private userRepository: UserRepository) {
@@ -30,6 +31,7 @@ export class BookDetailComponent implements OnInit {
             this.bookTags=res;
         }
         );
+
      }
      
     ngOnInit() {
@@ -56,9 +58,14 @@ export class BookDetailComponent implements OnInit {
     getBookDetail(id) {
        this.repository.getBook(id).subscribe(res=>{
             this.book=res;
+            this.userRepository.getUserName(this.book.author).subscribe(res=>{
+                this.authorName = res.username;
+            });
         }
         );
-        console.log("book:"+this.book);
+        
+        console.log("book:"+this.book+"author:"+this.authorName);
+    
         /* this.http.get('/book/'+id).subscribe(data => {
             this.book=data;
         }); */ 
