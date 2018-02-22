@@ -20,3 +20,14 @@ exports.logout = (req, res)=> {
     req.session.passport = undefined;
     res.end();
 }
+
+exports.getUser = (req, res)=> {
+    if(req.session.passport != undefined) {
+        User.findById(req.params.id, (err, user)=> {
+            res.json(user);
+        });
+    }else {
+        res.send("null");
+        console.log("null");
+    }
+} 

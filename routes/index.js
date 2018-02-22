@@ -12,6 +12,7 @@ module.exports = (app)=> {
     app.get('/auth/twitter', require('./passport').twitter); 
     app.get('/auth/twitter/callback', require('./passport').twitterCallback);
     app.get('/logout', require('./user').logout); 
+    app.get('/user/:id', require('./user').getUser); 
     app.get('*', (req, res) => { 
         res.sendFile(path.join(app.get('dirname'), '/dist/index.html')); 
     });

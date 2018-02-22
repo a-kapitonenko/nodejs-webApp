@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Book } from "../model/book.model";
 import { BookRepository } from "../model/book.repository";
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserRepository } from '../model/user.repository';
 
 @Component({
   selector: 'app-book-tag',
@@ -14,8 +15,10 @@ export class BookTagComponent implements OnInit {
   private category: string=null;
   tagId: string=null;
   books: Book[]=[];
+  book: any={};
 
-  constructor(private repository: BookRepository,private route: ActivatedRoute) { 
+  constructor(private repository: BookRepository,private route: ActivatedRoute, 
+    private userRepository: UserRepository) { 
    
   }
 
@@ -32,7 +35,13 @@ export class BookTagComponent implements OnInit {
       for(let bookId of res.books){
         console.log("book:"+ bookId);
         this.repository.getBook(bookId).subscribe(res=>{
-          this.books.push(res);
+          this.book=res;
+          this.userRepository.getUserName(this.book.author).subscribe(res=>{
+            this.book.author = res.username;
+            this.books.push(this.book);
+        });
+         
+
         });
       
     }

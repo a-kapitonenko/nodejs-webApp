@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 router.get('/find/:text', function(req,res,next){
     console.log("server: "+req.params.text);
     Book.find({$text: {$search:  req.params.text}})
-    .skip(20).limit(10)
+    //.skip(20).limit(10)
     .exec(function(err, docs) {
         if (err) return next(err);
         console.log(docs);

@@ -18,7 +18,7 @@
             
             <div *ngIf="(book.category==undefined);else other_content1">
               <label>Выберите жанр</label> <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <label>Жанры</label>
+                  <span>Жанры</span>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" *ngFor="let cat of categories"

@@ -408,5 +408,9 @@ a:hover {
   .br-default .br-unit {
     font-size: 23px;
   }
+
+  .card {
+      border: 0px !important;
+  }
   
   
