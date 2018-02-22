@@ -24,6 +24,9 @@ export class UserRepository {
     login(user: User) {
         return this.http.post('/login', user);
     }
+    isAuth() {
+        return this.selectedUser == null? false: true;
+    }
     logout() {
         this.http.get('/logout').subscribe();
     }
