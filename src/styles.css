@@ -71,6 +71,11 @@
 .dark {
     background-color: #111111;
 }
+
+.dark .mat-dialog-container {
+    background: #111111;
+}
+
 .dark .navbar {
     background-color: #232323;
 }
@@ -102,7 +107,7 @@
 }
 .dark label, .dark .card-title, .dark .card-text, .dark .lead, .dark h3, 
 .dark .dropdown-menu a, .dark .dropdown-menu a:hover, .dark h2, .dark h4, .dark h5, 
-.dark h6, .dark h1 {
+.dark h6, .dark h1, .dark p, .dark span {
     color:#D7D7D7;
 }
 .dark .card-body, .dark .card-footer {
@@ -121,6 +126,28 @@
 .dark .fa-medapps {
     border: none;
     color: #edb867;
+}
+
+.dark .item.list-group-item a{
+
+    color: #ffffff;
+
+}
+
+.dark .item.list-group-item:nth-of-type(2n+1) {
+
+    background: #232323 !important;
+
+}
+
+.dark .item.list-group-item:nth-of-type(2n+1):hover {
+
+    background: #383838 !important;
+
+}
+
+.dark .card {
+    background-color:#111111 !important;
 }
 
 a:hover {
@@ -233,9 +260,15 @@ a:hover {
       color: white !important;
   }
 
+  .content[_ngcontent-c4] {
+    color: #8c1aff;
+  }
 
-body {
-    color: #D7D7D7 !important;
-}
+  .content {
+    color: #8c1aff !important;
+  }
+
+
+
   
   
