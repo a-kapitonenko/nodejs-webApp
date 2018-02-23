@@ -61,7 +61,7 @@
                     </div>
                 </li>
                 <div>
-                    <a (click)="(isTyping=true)" style="color: white;" *ngIf="(isTyping==false)" 
+                    <a (click)="isAuth()" style="color: white;" *ngIf="(isTyping==false)" 
                             class="btn btn-sm button-submit">Добавить комментарий</a>
                 </div>
                 <form (ngSubmit)="sendComment()"  #bookForm="ngForm" *ngIf="(isTyping==true)">
