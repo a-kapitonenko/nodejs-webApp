@@ -30,7 +30,7 @@
                            
                                 <div *ngIf="(bookTags[0]!=undefined)" >       
                                 <h6>Теги</h6>
-                                <a *ngFor="let tag of bookTags" [routerLink]="['/books',tag._id]" class="badge badge-dark badge-pill mr-1">{{tag.name}}</a>
+                                <a *ngFor="let tag of bookTags" [routerLink]="['/books',tag._id]" class="cc badge-dark badge-pill mr-1">{{tag.name}}</a>
                             </div>
                             </div>
                             <!--/row-->
@@ -68,9 +68,11 @@
                         </div>
                         <div class="media-text text-justify" [innerHTML]="curComment.text"></div>
                         <div class="footer-comment">
-            <span class="vote plus" title="Нравится" >
-              <i class="fa fa-thumbs-up" (click)="like(curComment)"></i>
+            <a  (click)="like(curComment)">
+                <span class="vote plus" title="Нравится">
+              <i class="fa fa-thumbs-up" ></i>
             </span>
+            </a>
             <span class="rating">
                 {{curComment.likes}}
             </span>

@@ -43,6 +43,8 @@ import { BookTagComponent } from './book-tag/book-tag.component';
 import { BarRatingModule } from "ngx-bar-rating";
 import { SearchComponent } from './search/search.component';
 
+import { DateService } from './date.service';
+
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
@@ -100,7 +102,8 @@ const appRoutes: Routes =[
         AngularFireStorageModule,
         TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule,
         ReactiveFormsModule, BarRatingModule],
-  	providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService,InterfaceService],
+      providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService,InterfaceService,
+        DateService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

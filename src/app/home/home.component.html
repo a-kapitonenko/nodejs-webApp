@@ -8,70 +8,38 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="card-group">
-                    <div class="card">
-                        <img class="card-img-top" src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
+                        <div class="card" *ngFor="let book of bestBooks1">
+                                <a [routerLink]="['/book-details/', book._id]"><img *ngIf="(book.image==null);else image" class="card-img-top" src="https://insidemanila.ph/images/layout/no-image-available.png" alt="">            
+                                <ng-template #image>                           
+                                <img class="card-img-top" [src]="book.image" alt="">     
+                                </ng-template></a> 
+                                    
+                                <div class="card-body">
+                                    <h5 class="card-title"><a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h5>
+                                    <p class="card-text">{{book.description}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Last updated on {{dateService.getStringDate(book.updated_date)}}</small>
+                                </div>
+                            </div>
                 </div>
             </div>
-            <div class="carousel-item">
+            <div class="carousel-item"  *ngIf="(bestBooks2[0]!=undefined)">
                 <div class="card-group">
-                    <div class="card">
-                        <img class="card-img-top" src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="https://dl1.eduget.com/get/news/348526ea8b5b392a3ebe3082c761f225.jpg?bx=0&by=13&bw=449&bh=337" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
-                        </div>
-                    </div>
+                        <div class="card" *ngFor="let book of bestBooks2">
+                                <a [routerLink]="['/book-details/', book._id]"><img *ngIf="(book.image==null);else image" class="card-img-top" src="https://insidemanila.ph/images/layout/no-image-available.png" alt="">            
+                                <ng-template #image>                           
+                                <img class="card-img-top" [src]="book.image" alt="">     
+                                </ng-template></a> 
+                                    
+                                <div class="card-body">
+                                    <h5 class="card-title"><a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h5>
+                                    <p class="card-text">{{book.description}}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Last updated on {{dateService.getStringDate(book.updated_date)}}</small>
+                                </div>
+                            </div>
                 </div>
             </div>
         </div>
@@ -106,7 +74,7 @@
                             <p class="card-text">{{book.description}}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Last updated on {{book.updated_date}}</small>
+                            <small class="text-muted">Last updated on {{dateService.getStringDate(book.updated_date)}}</small>
                         </div>
                     </div>
                 </div>
@@ -123,7 +91,7 @@
                             <p class="card-text">{{book.description}}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Last updated on {{book.updated_date}}</small>
+                            <small class="text-muted">Last updated on {{dateService.getStringDate(book.updated_date)}}</small>
                         </div>
                     </div>
                 </div>
@@ -141,8 +109,8 @@
     </div>
     <div class="col-sm-3" *ngIf="(allTags[0]!==undefined)">
             <div class="card">
-                    <div class="card-header">
-                         Tag Cloud
+                    <div class="card-header lead text-center">
+                         Облако тегов
                     </div>
                     <div class="card-block mt-1 ml-1 mb-1">
                             <a class = "badge mr-1" *ngFor="let tag of allTags" 

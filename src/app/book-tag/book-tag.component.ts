@@ -22,12 +22,6 @@ export class BookTagComponent implements OnInit {
    
   }
 
-/*  get books(): Book[]{
-
-      return this.repository.getBooks(this.category);
-
-  }  */
-
   getBooksByTag(){
     
       this.repository.getTag(this.tagId).subscribe(res=>{
@@ -35,11 +29,12 @@ export class BookTagComponent implements OnInit {
       for(let bookId of res.books){
         console.log("book:"+ bookId);
         this.repository.getBook(bookId).subscribe(res=>{
-          this.book=res;
-          this.userRepository.getUserName(this.book.author).subscribe(res=>{
+          this.books.push(res);
+         // this.book=res;
+          /* this.userRepository.getUserName(this.book.author).subscribe(res=>{
             this.book.author = res.username;
             this.books.push(this.book);
-        });
+        }); */
          
 
         });

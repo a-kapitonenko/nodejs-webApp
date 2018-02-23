@@ -8,25 +8,28 @@ var Tags = require('../database/models/Tag.js');
 
 
 router.get('/', function(req, res, next) {
-    Book.find(function (err, products) {
+    Book.find({}).sort({ updated_date: -1 }).limit(6).exec(function (err, products) {
         if (err) return next(err);
-        if(products.length>6){
-            products.slice(products.length-7, products.length-1);
-        }
         res.json(products);
     });    
+});
+
+router.get('/best', function(req, res, next) {
+    Book.find({ rating: { $ne: null } }).sort({ rating: -1 }).limit(6).exec(function(err, products) {
+        if (err) return next(err);
+        res.json(products);
+      });
 });
 
 router.get('/find/:text', function(req,res,next){
     console.log("server: "+req.params.text);
     Book.find({$text: {$search:  req.params.text}})
     //.skip(20).limit(10)
-    .exec(function(err, docs) {
+    .exec(function(err,  docs) {
         if (err) return next(err);
-        console.log(docs);
         res.json(docs);
       });
-})
+});
 
 router.get('/categories', function(req, res, next) {
     

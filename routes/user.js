@@ -22,12 +22,12 @@ exports.logout = (req, res)=> {
 }
 
 exports.getUser = (req, res)=> {
-    if(req.session.passport != undefined) {
+    //if(req.session.passport != undefined) {
         User.findById(req.params.id, (err, user)=> {
             res.json(user);
         });
-    }else {
+    /* }else {
         res.send("null");
         console.log("null");
-    }
+    } */
 } 

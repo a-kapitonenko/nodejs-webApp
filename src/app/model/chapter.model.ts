@@ -5,6 +5,7 @@ export class Chapter {
         public name?: string,
         public text?: string,
         public image?: string,
-        public rating?: Array<Rating>
+        public rating?: Array<Rating>,
+        public averageRating?: number
        ) { }
 }

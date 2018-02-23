@@ -90,9 +90,9 @@ export class BookCreateComponent implements OnInit {
  
     saveBook() {
         this.book.author = this.userRepository.selectedUser._id;
-        
+        this.book.rating=null;
         this.repository.saveBook(this.book, null,this.tags);
-        this.router.navigate(['/books']);
+        this.router.navigate(['/']);
     }     
 
     get categories():string[]{

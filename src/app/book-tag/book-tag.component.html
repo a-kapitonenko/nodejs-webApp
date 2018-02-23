@@ -1,7 +1,7 @@
 <div class="container mt-3">
    <div *ngIf="(books[0]!=undefined)">
   <div  *ngFor="let book of books">
-    <div class="item list-group-item col-xs-4 " ><!--  col-lg-4 -->
+        <a [routerLink]="['/book-details/', book._id]"><div class="item list-group-item col-xs-4 " ><!--  col-lg-4 -->
         <div class="thumbnail">
             <div class="caption">
 
@@ -11,16 +11,13 @@
                 <h4 class="group inner list-group-item-heading">
 
                     <a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h4>
-
-                <p class="group inner list-group-item-text">
-                 Автор: {{ book.author }}</p>
                 <p class="group inner list-group-item-text">
                    Жанр: {{ book.category }}</p>
               <p class="group inner list-group-item-text">
                    {{ book.description }}</p>
             </div>
         </div>
-    </div>
+    </div></a>
 
   </div>
 
