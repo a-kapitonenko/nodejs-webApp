@@ -8,8 +8,9 @@
 
 # dependencies
 /node_modules
-/src/assets
+/src/assets/tinymce
 /assets
+
 
 
 

@@ -5,7 +5,7 @@ import { BookRepository } from "../model/book.repository";
 import { CommentsService } from '../comments.service';
 import { Comment } from "../model/comment.model";
 import { UserRepository } from '../model/user.repository';
-
+import { DialogService } from '../dialog.service';
 
 @Component({
     selector: 'app-book-detail',
@@ -22,7 +22,7 @@ export class BookDetailComponent implements OnInit {
     authorName: any=null;
 
     constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository,
-        private chat: CommentsService, private userRepository: UserRepository) {
+        private chat: CommentsService, private userRepository: UserRepository, private dialog: DialogService) {
             
      }
 
@@ -65,10 +65,6 @@ export class BookDetailComponent implements OnInit {
         );
         
         console.log("book:"+this.book+"author:"+this.authorName);
-    
-        /* this.http.get('/book/'+id).subscribe(data => {
-            this.book=data;
-        }); */ 
     }
 
     sendMessage() {
@@ -93,34 +89,41 @@ export class BookDetailComponent implements OnInit {
     }
 
     sendComment(){
-        this.comment.id=this.book.comments.length;
-        this.comment.author = this.userRepository.selectedUser.username;
-        this.comment.image =  this.userRepository.selectedUser.image;   
-        console.log(this.comment.image);
-        this.comment.date= this.getStringDate(new Date());
-        this.comment.userslikes= [];
-        this.comment.likes=0;
-        this.sendMessage();
-        this.book.comments.push(this.comment);
-        this.repository.saveBook(this.book, this.book._id,null);
-        this.isTyping = false;
-        this.comment = {};
-    
+        if(this.userRepository.isAuth()) {
+            this.comment.id=this.book.comments.length;
+            this.comment.author = this.userRepository.selectedUser.username;
+            this.comment.image =  this.userRepository.selectedUser.image;   
+            console.log(this.comment.image);
+            this.comment.date= this.getStringDate(new Date());
+            this.comment.userslikes= [];
+            this.comment.likes=0;
+            this.sendMessage();
+            this.book.comments.push(this.comment);
+            this.repository.saveBook(this.book, this.book._id,null);
+            this.isTyping = false;
+            this.comment = {};
+        } else {
+            this.dialog.openNotificationDialog("Для добавления комментариев войдите в систему", 0);
+        }
     }
     
     like(curComment: Comment){
-        let likedComment = curComment;
-        if(curComment.userslikes.findIndex(p => p ==  this.userRepository.selectedUser.username)==-1){
-            likedComment.likes++;
-            likedComment.userslikes.push(this.userRepository.selectedUser.username);
+        if(this.userRepository.isAuth()) {
+            let likedComment = curComment;
+            if(curComment.userslikes.findIndex(p => p ==  this.userRepository.selectedUser.username)==-1){
+                likedComment.likes++;
+                likedComment.userslikes.push(this.userRepository.selectedUser.username);
+            } else {
+                likedComment.likes--;
+                likedComment.userslikes.splice(likedComment.userslikes.
+                    findIndex(p => p == this.userRepository.selectedUser.username), 1);
+            }
+            this.book.comments.splice(this.book.comments.
+                findIndex(p => p.id == curComment.id), 1, likedComment);
+            this.repository.saveBook(this.book, this.book._id, null);
         } else {
-            likedComment.likes--;
-            likedComment.userslikes.splice(likedComment.userslikes.
-                findIndex(p => p == this.userRepository.selectedUser.username), 1);
+            this.dialog.openNotificationDialog("Войдите в систему, чтобы оценивать комментарии", 0);
         }
-        this.book.comments.splice(this.book.comments.
-            findIndex(p => p.id == curComment.id), 1, likedComment);
-        this.repository.saveBook(this.book, this.book._id, null);
     }
 
     deleteBook(id) {

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from'@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -42,6 +43,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BookTagComponent } from './book-tag/book-tag.component'; 
 import { BarRatingModule } from "ngx-bar-rating";
 import { SearchComponent } from './search/search.component';
+import { AuthGuard } from './guard/auth.guard';
+import { NotificationComponent } from './notification/notification.component';
+import { DialogService } from './dialog.service';
 
 import { DateService } from './date.service';
 
@@ -68,6 +72,7 @@ const appRoutes: Routes =[
     {
         path: 'book-create',
         component: BookCreateComponent,
+        canActivate: [AuthGuard],
         data: { title: 'Create Book' }
     },
     {
@@ -96,14 +101,16 @@ const appRoutes: Routes =[
 		AddChapterComponent,
 		BookReadComponent,
 		BookTagComponent,
-		SearchComponent],
-      imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireStorageModule,
-        TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, TagInputModule, BrowserAnimationsModule,
+		SearchComponent,
+		NotificationComponent],
+    imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
+        AngularFireModule.initializeApp(environment.firebase), AngularFireStorageModule,
+        TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, 
+        TagInputModule, BrowserAnimationsModule, MatDialogModule,
         ReactiveFormsModule, BarRatingModule],
-      providers: [BookRepository, UserRepository, FullscreenService,CommentsService, WebsocketService,ImageuploadService,InterfaceService,
-        DateService],
+    entryComponents: [NotificationComponent],
+    providers: [BookRepository, UserRepository, FullscreenService, CommentsService, 
+        WebsocketService, ImageuploadService, InterfaceService, AuthGuard, DialogService,DateService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

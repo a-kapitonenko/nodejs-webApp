@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
    
 @Injectable()
 export class UserRepository {
-    public selectedUser: any; //User
+    public selectedUser: any; 
     private users: any = [];
     constructor(private http: HttpClient) {
         this.http.get('/selectuser').subscribe(data => {
@@ -25,15 +25,15 @@ export class UserRepository {
     login(user: User) {
         return this.http.post('/login', user);
     }
+    isAuth() {
+        return this.selectedUser == null? false: true;
+    }
     logout() {
         this.http.get('/logout').subscribe();
     }
-
     getUserName(id: string): Observable<any> {
-
-            return this.http.get('/user/'+id).map(data => {
-                console.log(data);
-                return data;
-            });        
+        return this.http.get('/user/'+id).map(data => {
+            return data;
+        });        
     }
 }
