@@ -16,6 +16,7 @@
                     </div>                  
               </div>
               <div *ngIf="(isCreating==true)">
+                  <form  #bookForm="ngForm">
                   <label for="name">Название главы</label>
                   <input type="text" class="form-control mb-3" [(ngModel)]="newChapter.name" name="name" id="name" required>
                   <label class="mb-2">Обложка для главы</label>
@@ -32,15 +33,16 @@
                       </button></div>                        
                   </ng-template>
                 </ng-template>
-                  <angular-tinymce  [(ngModel)]='newChapter.text' name='content'  ></angular-tinymce>
-                  <button class="btn btn-success mt-3" type="button" (click)="addChapter()">ADD CHAPTER</button>
+                  <angular-tinymce  [(ngModel)]='newChapter.text' name='content' required ></angular-tinymce>
+                  <button class="btn btn-success mt-3" type="submit" [disabled]="!bookForm.form.valid" (click)="addChapter()">ADD CHAPTER</button>
                   <button class="btn btn-secondary mt-3" type="button" (click)="cancel()">CANCEL</button>
+                </form>
                 </div>
                 <div *ngIf="(isEditing==true)">
                     <label for="name">Название главы</label>
                     <input type="text" class="form-control mb-3" [(ngModel)]="newChapter.name" name="name" id="name" required>
                     <label class="mb-2">Обложка для главы</label>
-                    <mat-spinner *ngIf="(isLoading==true);else showImage"></mat-spinner>
+                    <mat-spinner *ngIf="(isLoading==true);else showImage" class="mb-2"></mat-spinner>
                     <ng-template #showImage>
                     <div *ngIf="(newChapter.image==null);else otherImage">
                     <div *ngIf="(files==null);else other_content" class="mb-3">                    

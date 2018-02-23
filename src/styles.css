@@ -69,6 +69,11 @@
 .dark {
     background-color: #111111;
 }
+
+.dark .mat-dialog-container {
+    background: #111111;
+}
+
 .dark .navbar {
     background-color: #232323;
 }
@@ -100,7 +105,11 @@
 }
 .dark label, .dark .card-title, .dark .card-text, .dark .lead, .dark h3, 
 .dark .dropdown-menu a, .dark .dropdown-menu a:hover, .dark h2, .dark h4, .dark h5, 
+<<<<<<< HEAD
 .dark h6, .dark h1, .dark p {
+=======
+.dark h6, .dark h1, .dark p, .dark span {
+>>>>>>> 501d6c6cf35ae066e14542a810023ca85203ab5b
     color:#D7D7D7;
 }
 .dark .card-body, .dark .card-footer {
@@ -119,6 +128,28 @@
 .dark .fa-medapps {
     border: none;
     color: #edb867;
+}
+
+.dark .item.list-group-item a{
+
+    color: #ffffff;
+
+}
+
+.dark .item.list-group-item:nth-of-type(2n+1) {
+
+    background: #232323 !important;
+
+}
+
+.dark .item.list-group-item:nth-of-type(2n+1):hover {
+
+    background: #383838 !important;
+
+}
+
+.dark .card {
+    background-color:#111111 !important;
 }
 
 a:hover {
@@ -148,8 +179,6 @@ a:hover {
 .drop-zone {
     border: 2px dotted #8c1aff !important;
 }
-
-/*new*/
 
 .br-custom .br-unit, .br-custom .br-units {
     -webkit-box-align: center;
@@ -202,6 +231,10 @@ a:hover {
   .br-default .br-active:after, .br-default .br-selected:after {
     color: #edb867;
   }
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 501d6c6cf35ae066e14542a810023ca85203ab5b
    .br-default .br-units {
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -230,5 +263,20 @@ a:hover {
   .card {
       border: 0px !important;
   }
+
+  .badge-dark {
+      color: white !important;
+  }
+
+  .content[_ngcontent-c4] {
+    color: #8c1aff;
+  }
+
+  .content {
+    color: #8c1aff !important;
+  }
+
+
+
   
   

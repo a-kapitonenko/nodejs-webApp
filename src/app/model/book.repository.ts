@@ -4,6 +4,7 @@ import { Tag } from "./tag.model";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 
+
 @Injectable()
 export class BookRepository implements OnInit {
     private books: any=[];
@@ -24,11 +25,20 @@ export class BookRepository implements OnInit {
     
     }
 
-    getBooks(): Observable<any> {
+    getBooks(): Observable<any> { 
         return this.http.get('/book').map(data => {
             console.log(data);
             return data;
         });
+        
+    }
+
+    getBestBooks(): Observable<any> { 
+        return this.http.get('/book/best').map(data => {
+                console.log("best books from repository"); 
+                console.log(data); 
+                return data; 
+        }); 
         
     }
 
@@ -40,7 +50,7 @@ export class BookRepository implements OnInit {
         } else { */
             return this.http.get('/book/'+id).map(data => {
                 console.log(data);
-                this.loadBooks.push(data);
+                //this.loadBooks.push(data);
                 return data;
             });
         //}
@@ -110,20 +120,6 @@ export class BookRepository implements OnInit {
         return this.categories;
     }
 
-    getStringDate(d: Date){
-        return this.checkDate(d.getDate())+"."+this.checkDate(d.getMonth())+"."+
-        this.checkDate(d.getFullYear())+" "+
-        this.checkDate(d.getHours())+":"+this.checkDate(d.getMinutes());      
-    }
-
-    checkDate(num: number): string{
-        if(num<10){
-            return "0"+num;
-        } else {
-            return num.toString();
-        }
-    }
-
     deleteTagBook(book: any, tag: any){
         /* this.getAllTags().subscribe(res=>{
             let tag=res.find(p=>p.name==tagName);
@@ -141,7 +137,8 @@ export class BookRepository implements OnInit {
     }
 
     saveBook(book: Book, id: number, tags: any[]) {
-        book.updated_date = this.getStringDate(new Date());
+        book.updated_date = new Date();
+        console.log(book.updated_date);
         if (id == null || id == 0) {
             this.http.post('/book', book)
             .subscribe(res => {

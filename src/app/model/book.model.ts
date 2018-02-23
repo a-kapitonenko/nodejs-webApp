@@ -7,9 +7,10 @@ export class Book {
         public author?: String,
         public category?: string,
         public description?: string,
-        public updated_date?: String,
+        public updated_date?: Date,
         public image?: string,
         public chapters?: Array<Chapter>,
-        public comments?: Array<Comment>
+        public comments?: Array<Comment>,
+        public rating?: number
        ) { }
 }

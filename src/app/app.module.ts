@@ -48,6 +48,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { DialogService } from './dialog.service';
 import { ProfileComponent } from './profile/profile.component';
 
+import { DateService } from './date.service';
+
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
@@ -110,7 +112,7 @@ const appRoutes: Routes =[
         ReactiveFormsModule, BarRatingModule],
     entryComponents: [NotificationComponent],
     providers: [BookRepository, UserRepository, FullscreenService, CommentsService, 
-        WebsocketService, ImageuploadService, InterfaceService, AuthGuard, DialogService],
+        WebsocketService, ImageuploadService, InterfaceService, AuthGuard, DialogService,DateService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }

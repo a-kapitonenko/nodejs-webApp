@@ -6,7 +6,7 @@ import { Chapter } from "../model/chapter.model";
 import { Rating } from "../model/rating.model";
 import { FullscreenService } from '../fullscreen.service';
 import { Subscription } from 'rxjs/Subscription';
-
+import { UserRepository } from '../model/user.repository';
 
 
 @Component({
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class BookReadComponent implements OnInit {
 
-   book : Book= {};
+   book : any= {};
    chapterNum : number;
    curChapter: Chapter = {};
    isFirst: boolean = false;
@@ -25,16 +25,54 @@ export class BookReadComponent implements OnInit {
    private subscriptions: Subscription[] = [];
    fullscreen$;
    value: number=0;
-   rating: Rating = {};
+   rating: Rating;
 
   constructor(private repository: BookRepository, private router: Router, private route: ActivatedRoute,
-    private fullScreenService: FullscreenService) {
+    private fullScreenService: FullscreenService, private userRepository: UserRepository) {
      
    }
 
    onRateChange($event){
-    console.log($event);
+    
+    if(this.rating.rate!=undefined && this.userRepository.selectedUser!=null ){
+      console.log(this.rating.rate);
+      this.rating.user = this.userRepository.selectedUser._id;
+      if(this.book.chapters[this.chapterNum-1].rating.find(p=>p.user==this.rating.user)!=undefined){
+        this.book.chapters[this.chapterNum-1].rating.splice( 
+          this.book.chapters[this.chapterNum-1].rating.findIndex(p=>p.user==this.rating.user),1,this.rating);
+      } else {
+        this.book.chapters[this.chapterNum-1].rating.push(this.rating);
+      } 
+      this.book.chapters[this.chapterNum-1].averageRating=this.getAverageRating();
+      this.setBookRating();
+      console.log("average");
+      console.log(this.book.chapters[this.chapterNum-1].averageRating);
+      this.repository.saveBook(this.book, this.book._id, null);
+      console.log("book saved");
+      console.log(this.book);
+    }
+    
    }
+
+   getAverageRating(): number {
+    let average: number=0;
+    for (let rating of  this.book.chapters[this.chapterNum-1].rating){
+      average+=rating.rate;
+      console.log(average);
+    }
+    return Math.round(average/this.book.chapters[this.chapterNum-1].rating.length);
+  }
+
+  setBookRating(){
+    let rating=0;
+    for(let chapter of this.book.chapters){
+      rating+=chapter.averageRating;
+    }
+    this.book.rating=Math.round(rating/this.book.chapters.length);
+    console.log("book rating");
+    console.log(this.book.rating);
+  
+  }
 
   ngOnDestroy() {
   this.subscriptions
@@ -42,12 +80,10 @@ export class BookReadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.book.chapters=[];
+    this.rating={};
+      this.book.chapters=[];
       this.getBook(this.route.snapshot.params['id']);
-      setTimeout(()=>{
-        this.getChapter(this.route.snapshot.params['num']);
-      },800);
-      
+      //this.getChapter(this.route.snapshot.params['num']);      
       const subscription = this.fullScreenService.fullscreen$
       .subscribe((fullscreen$) => {
         this.fullscreen$ = fullscreen$;
@@ -76,17 +112,38 @@ export class BookReadComponent implements OnInit {
   getBook(id) {
     this.repository.getBook(id).subscribe(res=>{
       this.book=res;
+      this.getChapter(this.route.snapshot.params['num']);    
   }
-  );
-      
+  );      
   }
 
+  
   getChapter(num: number){
+
     this.index = this.chapters.findIndex(p => p.number == num);   
+    console.log("index:"+ this.index);
     this.curChapter = this.book.chapters[this.index];
+    console.log(this.curChapter);
+    this.getRating(this.curChapter);
     this.chapterNum=this.index+1;
     this.checkChapter(this.index);
     this.getValue();
+  }
+
+  getRating(curChapter: Chapter){
+    console.log(curChapter);
+    //console.log(this.userRepository.selectedUser._id);
+    if(this.userRepository.selectedUser!=null){
+      this.rating = curChapter.rating.find(p=>p.user==this.userRepository.selectedUser._id);
+    } else {
+      this.rating = undefined;
+    }
+    console.log(this.rating);
+    if(this.rating==undefined){
+      this.rating={};
+      this.rating.rate=curChapter.averageRating;
+    }
+    
   }
 
   getValue(){
@@ -99,6 +156,7 @@ export class BookReadComponent implements OnInit {
 
   nextChapter(){
     this.curChapter=this.chapters[this.index+1];
+    this.getRating(this.curChapter);
     this.chapterNum++;
     this.checkChapter(++this.index);
     this.getValue();
@@ -106,6 +164,7 @@ export class BookReadComponent implements OnInit {
 
   prevChapter(){
     this.curChapter=this.chapters[this.index-1];
+    this.getRating(this.curChapter);
     this.chapterNum--;
     this.checkChapter(--this.index);
     this.getValue();

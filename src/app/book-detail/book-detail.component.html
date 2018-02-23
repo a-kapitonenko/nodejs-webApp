@@ -52,11 +52,15 @@
                         </div>
                         <div class="media-text text-justify" [innerHTML]="curComment.text"></div>
                         <div class="footer-comment">
-                            <a (click)="like(curComment)">
-                                <span class="vote plus fa fa-thumbs-up" title="Нравится">
-                                </span>
-                            </a>
-                            <span class="rating">{{curComment.likes}}</span>
+            <a  (click)="like(curComment)">
+                <span class="vote plus" title="Нравится">
+              <i class="fa fa-thumbs-up" ></i>
+            </span>
+            </a>
+            <span class="rating">
+                {{curComment.likes}}
+            </span>
+    
                         </div>
                     </div>
                 </li>

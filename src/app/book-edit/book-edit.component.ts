@@ -90,7 +90,7 @@ export class BookEditComponent implements OnInit {
     }
 
     updateBook(id) {
-        this.repository.saveBook(this.book,id, this.bookTags);
+        this.repository.saveBook(this.book, id, this.bookTags);
         this.router.navigate(['/book-details',id ]);
     }
 

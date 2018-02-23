@@ -75,8 +75,17 @@ export class BookDetailComponent implements OnInit {
       }
 
     getStringDate(d: Date){
-        return d.getDate()+"."+d.getMonth()+"."+d.getFullYear()+" "+
-        d.getHours()+":"+d.getMinutes();      
+        return this.checkDate(d.getDate())+"."+this.checkDate(d.getMonth())+"."+
+        this.checkDate(d.getFullYear())+" "+
+        this.checkDate(d.getHours())+":"+this.checkDate(d.getMinutes());      
+    }
+
+    checkDate(num: number): string{
+        if(num<10){
+            return "0"+num;
+        } else {
+            return num.toString();
+        }
     }
     isAuth() {
         if(this.userRepository.isAuth()) {
