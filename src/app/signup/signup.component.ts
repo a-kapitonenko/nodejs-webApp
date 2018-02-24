@@ -4,6 +4,7 @@ import { UserRepository } from '../model/user.repository';
 import { User } from '../model/user.model';
 import {ImageuploadService} from '../imageUpload.service';
 import { UploadEvent, UploadFile } from 'ngx-file-drop';
+import { DialogService } from '../dialog.service';
 
 @Component({
   	selector: 'app-signup',
@@ -29,13 +30,13 @@ export class SignUpComponent {
 		  });
 		  }    
 	} 
-  	constructor(private serv: UserRepository,  private imageService: ImageuploadService) { }
+  	constructor(private userRepository: UserRepository,  private imageService: ImageuploadService, private dialog: DialogService) { }
  	onSubmit(form: NgForm){
 		var data = form.form.controls;
 		this.user = new User(data.email.value, data.password.value, data.name.value);
 		this.user.image = this.imageURL;
-    	this.serv.createUser(this.user).subscribe(data=> {
-        	console.log(data);
+    	this.userRepository.createUser(this.user).subscribe(data=> {
+			this.dialog.openNotificationDialog(data["text"], data["status"]);
     	});
   	}
 }

@@ -1,30 +1,45 @@
 var User = require('../database/models/user').User;
 
 exports.post = function(req,res) {
-    User.findOne({ email : req.body.email }, function(err, user) {
+    User.findOne({ email : req.body.email.toLowerCase() }, function(err, user) {
         if(err) throw err;
-        if(user && !user.social_id) {
-            if(!user.validPassword(req.body.password)) {
+        if(user) {
+            if(user.social_id) {
                 res.send({
-                    "send": "Wrong password!"
+                    "text": "Эта почта используется другим пользователем!",
+                    "status": "0"
                 });
+                res.end();
+            }else if(!user.validPassword(req.body.password)) {
+                res.send({
+                    "text": "Неверный пароль!",
+                    "status": "0"
+                });
+                res.end();
             }else if(user.isBlocked) {
                 res.send({
-                    "send": "You have been baned!"
+                    "text": "Ваш аккаунт был заблокирован!",
+                    "status": "0"
                 });
+                res.end();
             }else if(!user.isActive) {
                 res.send({
-                    "send": "Email is not verifyed"
+                    "text": "Ваш аккаунт не подтвержден!",
+                    "status": "0"
                 });
+                res.end();
             }else {
                 req.session.passport = {};
                 req.session.passport.user = user._id;
                 res.json(user);
+                res.end();
             }
         }else {
             res.send({
-                "send": "Wrong email!"
+                "text": "Неверный  email!",
+                "status": "0"
             });
+            res.end();
         }
     });
 }

@@ -26,7 +26,7 @@
 .light .navbar {
     background-color: #F8F9FA;
 }
-.light a {
+.light a, .light .dropdown-menu span {
     color: #7C7C7D;
     text-decoration: none;
 }
@@ -77,10 +77,6 @@
 .dark .navbar {
     background-color: #232323;
 }
-.dark a {
-    color: #D7D7D7;
-    text-decoration: none;
-}
 .dark #search {
     border-color: #242424;
     background-color: #111111;
@@ -104,12 +100,8 @@
     color: #8c1aff;
 }
 .dark label, .dark .card-title, .dark .card-text, .dark .lead, .dark h3, 
-.dark .dropdown-menu a, .dark .dropdown-menu a:hover, .dark h2, .dark h4, .dark h5, 
-<<<<<<< HEAD
-.dark h6, .dark h1, .dark p {
-=======
+.dark .dropdown-menu a, .dark a, .dark h2, .dark h4, .dark h5, 
 .dark h6, .dark h1, .dark p, .dark span {
->>>>>>> 501d6c6cf35ae066e14542a810023ca85203ab5b
     color:#D7D7D7;
 }
 .dark .card-body, .dark .card-footer {
@@ -118,9 +110,6 @@
 .dark .dropdown-menu {
     background-color:#232323;
     min-width: unset;
-}
-.dark .dropdown-item {
-    padding: .15rem 1rem;
 }
 .dark .dropdown-item:hover {
     background-color: unset;
@@ -151,12 +140,12 @@
 .dark .card {
     background-color:#111111 !important;
 }
-
 a:hover {
     color: #6600cc;
 }
-.dropdown-menu a:hover {
+.dropdown-menu span:hover {
   color: #6600cc;
+  cursor: pointer;
 }
 
 .navbar-toggler:focus {
@@ -231,10 +220,7 @@ a:hover {
   .br-default .br-active:after, .br-default .br-selected:after {
     color: #edb867;
   }
-<<<<<<< HEAD
-=======
   
->>>>>>> 501d6c6cf35ae066e14542a810023ca85203ab5b
    .br-default .br-units {
     -webkit-box-align: center;
     -ms-flex-align: center;

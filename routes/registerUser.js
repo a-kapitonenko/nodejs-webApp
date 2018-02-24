@@ -3,19 +3,19 @@ var config = require('../config');
 var verified = require('../boot/nodemailer').verified;
 var rand;
 
-exports.register = function(req,res,next) {
+exports.register = function(req, res, next) {
     var data = req.body;
-    console.log(data);
-    User.findOne({ "email" : data.email }, function(err, user) {
+    User.findOne({ "email" : data.email.toLowerCase() }, function(err, user) {
         if (err) throw err;
         if (user) {
             res.send({
-                "send": "That email is already taken."
+                "text": "Эта почта уже используется",
+                "status": "0"
             });
             res.end();
         }else {
             var newUser = new User();
-            newUser.email = data.email;
+            newUser.email = data.email.toLowerCase();
             newUser.password = newUser.generateHash(data.password);
             newUser.username = data.username;
             newUser.realname = "";
@@ -25,12 +25,13 @@ exports.register = function(req,res,next) {
             newUser.website = "fanfiction";
             newUser.social_id = null;
             newUser.creat_date = Date.now();
-            newUser.image=data.image;
+            newUser.image = data.image;
             newUser.save(function(err) {
                 if (err) throw err;
-                rand = verified(data.email);
+                rand = verified(data.email.toLowerCase());
                 res.send({
-                    "send": "send"
+                    "text": "Благодарим за регистрацию. Вам на почту было отправлено письмо для подтверждения аккаунта",
+                    "status": "1"
                 });
                 res.end();
             });
