@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from "../model/book.model";
 import { Chapter } from "../model/chapter.model";
@@ -36,6 +36,7 @@ export class AddChapterComponent implements OnInit {
               this.imageService.sendFile(info).subscribe(res => {
                 this.newChapter.image=res;
                 this.isLoading = false;
+                this.cdRef.detectChanges();
                      
             });;
         });
@@ -43,7 +44,7 @@ export class AddChapterComponent implements OnInit {
   } 
 
   constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository,
-    private imageService: ImageuploadService) { }
+    private imageService: ImageuploadService, private cdRef:ChangeDetectorRef) { }
 
   
 

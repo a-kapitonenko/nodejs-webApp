@@ -59,7 +59,7 @@
 						{{userRepository.selectedUser.username}}
 					</a>
 				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="right: 0; left: auto;">
-					<a class="dropdown-item" >Профиль</a>
+					<a class="dropdown-item" [routerLink]="['/profile/',userRepository.selectedUser.username]" >Профиль</a>
 					<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">Выход</a>
 				</div>
 				</div>

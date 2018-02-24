@@ -41,15 +41,16 @@ router.get('/categories', function(req, res, next) {
 
 router.get('/tags', function(req, res, next) {
     
-    Tags.find(function (err, products) {
+    Tags.find({ books: {$ne: []} },function (err, products) {
         if (err) return next(err);
+        console.log(products);
         res.json(products);
     });
 });
 
 router.get('/tags/:id', function(req, res, next) {
     
-    Tags.find({ books: req.params.id }, function (err, products) {
+    Tags.find({ books: req.params.id}, function (err, products) {
         if (err) return next(err);
         res.json(products);
     });
@@ -70,13 +71,19 @@ router.put('/tag/:id', function(req, res, next) {
     });
 });
 
+router.get('/findauth/:id', function(req, res, next) {
+    Book.find( {author: req.params.id}, function (err, post) {
+        if (err) return next(err);
+        res.json(post);
+    });
+});
+
 router.get('/tag/:id', function(req, res, next) {
     Tags.findById( req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
-
 
  router.get('/:id', function(req, res, next) {
     Book.findById( req.params.id , function (err, post) {

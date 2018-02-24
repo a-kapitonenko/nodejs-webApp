@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Book } from "../model/book.model";
@@ -40,6 +40,7 @@ export class BookEditComponent implements OnInit {
                 console.log(this.book.image);
                 this.isLoading = false;
                 console.log(this.isLoading);
+                this.cdRef.detectChanges();
                      
             });;
         });
@@ -66,7 +67,7 @@ export class BookEditComponent implements OnInit {
      }
 
     constructor(private repository: BookRepository, private router: Router, 
-        private storage: AngularFireStorage,  private route: ActivatedRoute, private imageService: ImageuploadService) {
+        private storage: AngularFireStorage, private cdRef:ChangeDetectorRef, private route: ActivatedRoute, private imageService: ImageuploadService) {
             
     }
 

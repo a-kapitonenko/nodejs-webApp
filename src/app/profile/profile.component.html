@@ -1,3 +1,127 @@
-<p>
-  profile works!
-</p>
+
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Обо мне</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#fanfic" data-toggle="tab" class="nav-link">Мои фанфики</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">Информация обо мне</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Имя/Ник</h6>
+                            <p>
+                              <inline-editor type="text" [(ngModel)]="user.username" (onSave)="saveEditable($event)" name="editableText1" size="8"></inline-editor>          
+                            </p>
+                        </div>
+
+                    <!--/row-->
+                </div>
+                </div>
+                <div class="tab-pane" id="fanfic">
+
+                  <div class="text-right">
+                    <button class="btn btn-secondary btn-sm" [routerLink]="['/book-create']" routerLinkActive="active">Создать фанфик</button>
+                  </div>
+                  <div class="text-center" *ngIf="(books[0]==null)">
+                      <p>У вас пока нет фанфиков</p>
+                    </div>
+                    <!-- *ngIf="(books[0]!=undefined)" -->
+                    <div class="example-header">
+                        <mat-form-field>
+                          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                        </mat-form-field>
+                      </div>
+                    <mat-table [dataSource]="dataSource"  #table matSort>
+                          <ng-container matColumnDef="title">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+                            <mat-cell *matCellDef="let book"> {{book.title}} </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="date">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header> Updated Date </mat-header-cell>
+                              <mat-cell *matCellDef="let book"> {{dateService.getStringDate(book.updated_date)}} </mat-cell>
+                            </ng-container> <!--  | date:'DD MMM YYYY, HH:mm' -->
+                          <ng-container matColumnDef="options">
+                              <mat-header-cell *matHeaderCellDef > Options </mat-header-cell>
+                              <mat-cell *matCellDef="let book; let i=index">
+                                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <button type="button" class="btn btn-secondary btn-sm" [routerLink]="['/book-edit', book._id]">
+                                    <span class="fa fa-edit"  ></span>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm " [routerLink]="['/add-chapter', book._id]" >
+                                    <span class="fa fa-plus"  ></span>
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" (click)="deleteBook(book._id)">
+                                  <span class="fa fa-trash-alt"  ></span>
+                                </button></div></div> </mat-cell>
+                            </ng-container>
+
+                          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+                      </mat-table>
+                    <!-- <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col" >#</th>
+                            <th scope="col" >Название</th>
+                            <th scope="col" >Описание </th>
+                            <th scope="col">Действия</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Мой фанфик</td>
+                            <td>Описание</td>
+                            <td><div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <div class="btn-group mr-2" role="group" aria-label="First group">
+                                    <button type="button" class="btn btn-secondary">Редактировать</button>
+                                    <button type="button" class="btn btn-secondary">Удалить</button>
+                                </div></div></td>
+                        </tr>
+                        </tbody>
+                    </table> -->
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <div class="upload-img">
+                <div>
+                <label>Мой аватар</label>
+              </div>
+              <mat-spinner class="ml-5" *ngIf="(isLoading==true);else showImage"></mat-spinner>
+              <ng-template #showImage>      
+              <div *ngIf="(user.image==null);else otherImage">
+                  <div *ngIf="(files==null);else other_content" class="mb-3">                    
+                    <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+                      (onFileOver)="imageService.fileOver($event)" (onFileLeave)="imageService.fileLeave($event)">
+                    </file-drop>
+                  </div>                
+                  <ng-template #other_content>                        
+                      <div><img style="width: 300px" [src]="downloadURL | async"></div>
+                        <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
+                        Хочу другую картинку
+                      </button></div>                        
+                  </ng-template>
+                </div>
+                <ng-template #otherImage>
+                    <div *ngIf="(user.image!=null)">
+                    <div><img style="width: 300px" [src]="user.image"></div>
+                    <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="user.image=null">
+                    Хочу другую картинку
+                     </button></div>  
+                    </div>             
+                </ng-template>
+                </ng-template>
+              </div>
+        </div>
+    </div>
+</div>

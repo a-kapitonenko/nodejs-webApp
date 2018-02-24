@@ -13,10 +13,10 @@
                         <p>{{ book.category }}</p>
                     </div>
                     <div class="col ">
-                        <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
-                        <a [routerLink]="['/add-chapter', book._id]" class="btn btn-success">ADD CHAPTER</a>
+                        <!-- <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
+                        <a [routerLink]="['/add-chapter', book._id]" class="btn btn-success">ADD CHAPTER</a> -->
                         <a *ngIf="(book.chapters[0]!=undefined)" [routerLink]="['/book-read', book._id, book.chapters[0].number]" class="btn btn-success">READ</a>
-                        <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button>
+                        <!-- <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button> -->
                         <div *ngIf="(bookTags[0]!=undefined)" >       
                             <h6>Теги</h6>
                             <a *ngFor="let tag of bookTags" [routerLink]="['/books',tag._id]" class="badge badge-dark badge-pill mr-1">{{tag.name}}</a>

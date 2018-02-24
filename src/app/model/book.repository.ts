@@ -137,7 +137,7 @@ export class BookRepository implements OnInit {
     }
 
     saveBook(book: Book, id: number, tags: any[]) {
-        book.updated_date = new Date();
+        book.updated_date = new Date().toString();
         console.log(book.updated_date);
         if (id == null || id == 0) {
             this.http.post('/book', book)
@@ -154,6 +154,13 @@ export class BookRepository implements OnInit {
             });
         }
     }
+
+    findBooksByAuthor(id: number): Observable<any> {
+        return this.http.get('/book/findauth/'+id).map(data => {
+            console.log(data);
+            return data;
+        });        
+}
 
     searchBooks(text: string): Observable<any> {
             return this.http.get('/book/find/'+text).map(data => {

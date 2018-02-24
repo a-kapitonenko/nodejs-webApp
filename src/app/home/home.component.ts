@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 //import { CloudData, CloudOptions, ZoomOnHoverOptions } from 'angular-tag-cloud-module';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   bestBooks2: any[]=[];
 
   
-  constructor(private repository: BookRepository, private dateService: DateService) { }
+  constructor(private repository: BookRepository, private dateService: DateService,private cdRef:ChangeDetectorRef) { }
 
   ngOnInit() {
     
@@ -29,19 +29,23 @@ export class HomeComponent implements OnInit {
     this.getBest();
     setTimeout(()=>{
     this.getAllTags();
-    },500);
+    },1000);
   }
 
 
   getAllTags(){
     this.repository.getAllTags().subscribe(res=>{
-      console.log("tags loaded");
       this.allTags=res;
-      for(let tag of this.allTags){
+      /* for(let tag of this.allTags){
+        console.log("see");
+        console.log(tag);
         if(tag.books.length==0){
           this.allTags.splice(this.allTags.findIndex(p=>p._id==tag._id),1);
+          console.log("deleted"+tag._id);
         }
-      }      
+      } */
+      this.cdRef.detectChanges(); 
+
     });
 }
 

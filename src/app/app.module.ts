@@ -48,13 +48,25 @@ import { NotificationComponent } from './notification/notification.component';
 import { DialogService } from './dialog.service';
 import { ProfileComponent } from './profile/profile.component';
 
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material';
+import { MatFormFieldModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+
 import { DateService } from './date.service';
+import {InlineEditorModule} from '@qontu/ngx-inline-editor';
+
 
 const appRoutes: Routes =[
     { path: '', component: HomeComponent},
 	{ path: 'signup', component: SignUpComponent },
     { path: 'login', component: LoginComponent,data: { title: 'Войти' } },
     { path: 'logout', redirectTo: '/' },
+    {
+        path: 'profile/:name',
+        component: ProfileComponent,
+        data: { title: 'Profile' }
+    },
 	{
         path: 'books/:tagId',
         component: BookTagComponent,
@@ -109,7 +121,8 @@ const appRoutes: Routes =[
         AngularFireModule.initializeApp(environment.firebase), AngularFireStorageModule,
         TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, 
         TagInputModule, BrowserAnimationsModule, MatDialogModule,
-        ReactiveFormsModule, BarRatingModule],
+        ReactiveFormsModule, BarRatingModule, MatTableModule, InlineEditorModule,MatSortModule,MatFormFieldModule,
+        MatInputModule],
     entryComponents: [NotificationComponent],
     providers: [BookRepository, UserRepository, FullscreenService, CommentsService, 
         WebsocketService, ImageuploadService, InterfaceService, AuthGuard, DialogService,DateService],
