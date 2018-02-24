@@ -13,6 +13,7 @@ export class SearchComponent implements OnInit {
   query : string;
   books: Book[]=[];
   isFound: boolean = false;
+  isEmpty = false;
 
   constructor(private repository: BookRepository,private route: ActivatedRoute, private router: Router) { }
 
@@ -30,6 +31,11 @@ export class SearchComponent implements OnInit {
 
   findBooks(){
     this.repository.searchBooks(this.query).subscribe(res =>{
+      if(res[0]==null){
+        this.isEmpty = true;
+      } else {
+        this.isEmpty=false;
+      }
       this.books=res;
       console.log(this.books);
       this.isFound = true;

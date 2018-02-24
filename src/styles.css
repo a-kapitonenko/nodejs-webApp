@@ -150,6 +150,20 @@
     background-color:#111111 !important;
 }
 
+.ng2-tag-input {
+    background: white !important;
+}
+
+.ng2-tag-input.ng2-tag-input--focused {
+
+    border-bottom: 2px solid #8c1aff !important;
+
+}
+
+.dark .media-body .author {
+    color: white;
+}
+
 a:hover {
     color: #6600cc;
 }
