@@ -4,3 +4,8 @@
 .active {
     color:#8c1aff;
 }
+a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+    color: unset;
+    text-decoration: none;
+}
+

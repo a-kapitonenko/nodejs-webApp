@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   	ngOnDestroy() {
   		this.subscriptions.forEach(s => s.unsubscribe());
   	}
-  	constructor(private router: Router,private repository: BookRepository, 
+  	constructor(private router: Router, private repository: BookRepository, 
 		private fullScreenService: FullscreenService, private userRepository: UserRepository,
 		private interfaceService: InterfaceService) { 
   	}
@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
 	logout() {
 		this.userRepository.selectUser(null);
 		this.userRepository.logout();
+		this.router.navigate(['']);
 	}
 	changeTheme() {
 		this.interfaceService.changeTheme();

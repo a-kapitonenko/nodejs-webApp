@@ -17,6 +17,7 @@ exports.getUsers = (req, res)=> {
     });
 }
 exports.logout = (req, res)=> {
+    console.log("11");
     req.session.passport = undefined;
     res.end();
 }
