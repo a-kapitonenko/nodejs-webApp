@@ -46,6 +46,7 @@ import { SearchComponent } from './search/search.component';
 import { AuthGuard } from './guard/auth.guard';
 import { NotificationComponent } from './notification/notification.component';
 import { DialogService } from './dialog.service';
+import { ProfileComponent } from './profile/profile.component';
 
 import { DateService } from './date.service';
 
@@ -102,7 +103,8 @@ const appRoutes: Routes =[
 		BookReadComponent,
 		BookTagComponent,
 		SearchComponent,
-		NotificationComponent],
+		NotificationComponent,
+		ProfileComponent],
     imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
         AngularFireModule.initializeApp(environment.firebase), AngularFireStorageModule,
         TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, 

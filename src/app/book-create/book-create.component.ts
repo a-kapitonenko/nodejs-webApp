@@ -46,7 +46,7 @@ export class BookCreateComponent implements OnInit {
         }    
   } 
 
-  getAllTags(){
+  getAllTags(){ 
       this.repository.getAllTags().subscribe(res=>{
         this.allTags=res.map(p=>p.name);
       });
@@ -57,7 +57,7 @@ export class BookCreateComponent implements OnInit {
           tag.books=[];
           console.log(tag.name);
           this.repository.saveTag(tag,this.book);
-      }
+      } 
   } */
 
   onItemAdded($event){

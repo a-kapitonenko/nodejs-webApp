@@ -10,9 +10,7 @@
 .dropdown-menu {
     min-width: unset;
 }
-.dropdown-menu a:hover {
-    color: #6600cc;
-}
+
 .dropdown-item {
     padding: .15rem 1rem;
 }
@@ -107,7 +105,11 @@
 }
 .dark label, .dark .card-title, .dark .card-text, .dark .lead, .dark h3, 
 .dark .dropdown-menu a, .dark .dropdown-menu a:hover, .dark h2, .dark h4, .dark h5, 
+<<<<<<< HEAD
+.dark h6, .dark h1, .dark p {
+=======
 .dark h6, .dark h1, .dark p, .dark span {
+>>>>>>> 501d6c6cf35ae066e14542a810023ca85203ab5b
     color:#D7D7D7;
 }
 .dark .card-body, .dark .card-footer {
@@ -166,6 +168,9 @@
 
 a:hover {
     color: #6600cc;
+}
+.dropdown-menu a:hover {
+  color: #6600cc;
 }
 
 .navbar-toggler:focus {
@@ -240,7 +245,10 @@ a:hover {
   .br-default .br-active:after, .br-default .br-selected:after {
     color: #edb867;
   }
+<<<<<<< HEAD
+=======
   
+>>>>>>> 501d6c6cf35ae066e14542a810023ca85203ab5b
    .br-default .br-units {
     -webkit-box-align: center;
     -ms-flex-align: center;

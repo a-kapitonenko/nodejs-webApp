@@ -87,24 +87,26 @@ export class BookDetailComponent implements OnInit {
             return num.toString();
         }
     }
-
-    sendComment(){
+    isAuth() {
         if(this.userRepository.isAuth()) {
-            this.comment.id=this.book.comments.length;
-            this.comment.author = this.userRepository.selectedUser.username;
-            this.comment.image =  this.userRepository.selectedUser.image;   
-            console.log(this.comment.image);
-            this.comment.date= this.getStringDate(new Date());
-            this.comment.userslikes= [];
-            this.comment.likes=0;
-            this.sendMessage();
-            this.book.comments.push(this.comment);
-            this.repository.saveBook(this.book, this.book._id,null);
-            this.isTyping = false;
-            this.comment = {};
+            this.isTyping = true;
         } else {
             this.dialog.openNotificationDialog("Для добавления комментариев войдите в систему", 0);
         }
+    }
+    sendComment(){
+        this.comment.id=this.book.comments.length;
+        this.comment.author = this.userRepository.selectedUser.username;
+        this.comment.image =  this.userRepository.selectedUser.image;   
+        console.log(this.comment.image);
+        this.comment.date= this.getStringDate(new Date());
+        this.comment.userslikes= [];
+        this.comment.likes=0;
+        this.sendMessage();
+        this.book.comments.push(this.comment);
+        this.repository.saveBook(this.book, this.book._id,null);
+        this.isTyping = false;
+        this.comment = {};
     }
     
     like(curComment: Comment){
