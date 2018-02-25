@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from'@angular/material';
+import { MatTableModule } from'@angular/material';
+import { MatSortModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -49,16 +51,35 @@ import { DialogService } from './dialog.service';
 import { ProfileComponent } from './profile/profile.component';
 
 import { DateService } from './date.service';
+import { DashBoardComponent } from './dash-board/dash-board.component';
 
 const appRoutes: Routes =[
-    { path: '', component: HomeComponent},
-	{ path: 'signup', component: SignUpComponent },
-    { path: 'login', component: LoginComponent,data: { title: 'Войти' } },
-    { path: 'logout', redirectTo: '/' },
-	{
-        path: 'books/:tagId',
-        component: BookTagComponent,
-        data: { title: 'Book List' }
+    { 
+        path: '', 
+        component: HomeComponent
+    },
+	{ 
+        path: 'signup', 
+        component: SignUpComponent 
+    },
+    { 
+        path: 'login', 
+        component: LoginComponent,
+        data: { title: 'Войти' } 
+    },
+    { 
+        path: 'logout', 
+        redirectTo: '/' 
+    },
+    { 
+        path: 'dashboard', 
+        component: DashBoardComponent, 
+        data: { title: 'DashBoard' } 
+    },
+	{ 
+        path: 'books/:tagId', 
+        component: BookTagComponent, 
+        data: { title: 'Book List' } 
     },
     {
         path: 'search/:text',
@@ -104,11 +125,12 @@ const appRoutes: Routes =[
 		BookTagComponent,
 		SearchComponent,
 		NotificationComponent,
-		ProfileComponent],
+		ProfileComponent,
+		DashBoardComponent],
     imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
         AngularFireModule.initializeApp(environment.firebase), AngularFireStorageModule,
         TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, 
-        TagInputModule, BrowserAnimationsModule, MatDialogModule,
+        TagInputModule, BrowserAnimationsModule, MatDialogModule, MatTableModule, MatSortModule,
         ReactiveFormsModule, BarRatingModule],
     entryComponents: [NotificationComponent],
     providers: [BookRepository, UserRepository, FullscreenService, CommentsService, 

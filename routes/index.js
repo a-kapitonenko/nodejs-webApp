@@ -5,6 +5,11 @@ module.exports = (app)=> {
     app.get('/verify', require('./registerUser').verify);
     app.post('/login', require('./login').post);
     app.get('/selectuser', require('./user').selectUser);
+    app.get('/getusers', require('./user').getUsers);
+    app.post('/blockuser', require('./user').blockUser);
+    app.post('/unblockuser', require('./user').unblockUser);
+    app.post('/setadmin', require('./user').setAdmin);
+    app.post('/deleteuser', require('./user').deleteUser);
     app.get('/auth/facebook', require('./passport').facebook);
     app.get('/auth/facebook/callback', require('./passport').facebookCallback);
     app.get('/auth/vk', require('./passport').vk);

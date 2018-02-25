@@ -16,11 +16,27 @@ export class UserRepository {
             }
         });
     }
+    getUsers() {
+        return this.http.get<User[]>('/getusers');
+    }
     selectUser(user: User) {
         this.selectedUser = user;
     }
     createUser(user: User) {
         return this.http.post('/registeruser', user); 
+    }
+    blockUser(user: User[]) {
+        console.log("112");
+        return this.http.post('/blockuser', user);
+    }
+    unblockUser(user: User[]) {
+        return this.http.post('/unblockuser', user);
+    }
+    setAdmin(user: User[]) {
+        return this.http.post('/setadmin', user);
+    }
+    deleteUser(user: User[]) {
+        return this.http.post('/deleteuser', user);
     }
     login(user: User) {
         return this.http.post('/login', user);

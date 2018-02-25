@@ -8,24 +8,45 @@ exports.selectUser = (req, res)=> {
         });
     }else {
         res.send("null");
-        console.log("null");
     }
 }
 exports.getUsers = (req, res)=> {
     User.find({}, (err, user)=> {
-        res.send(200,JSON.stringify(user));
+        res.json(user);
     });
 }
 exports.logout = (req, res)=> {
-    console.log("11");
     req.session.passport = undefined;
+    res.end();
+}
+
+exports.blockUser = (req, res)=> {
+    req.body.forEach(buf => {
+        User.findByIdAndUpdate(buf._id, {isBlocked: true}, (err, user)=> {});
+    });
+    res.end();
+}
+exports.unblockUser = (req, res)=> {
+    req.body.forEach(buf => {
+        User.findByIdAndUpdate(buf._id, {isBlocked: false}, (err, user)=> {});
+    });
+    res.end();
+}
+exports.setAdmin = (req, res)=> {
+    req.body.forEach(buf => {
+        User.findByIdAndUpdate(buf._id, {role: "admin"}, (err, user)=> {});
+    });
+    res.end();
+}
+exports.deleteUser = (req, res)=> {
+    req.body.forEach(buf => {
+        User.findByIdAndRemove(buf._id, (err, user)=> {});
+    });
     res.end();
 }
 
 exports.getUser = (req, res)=> {
     User.findById(req.params.id, (err, user)=> {
-        console.log(req.params.id);
-        console.log(user);
         res.json(user);
     });
 } 

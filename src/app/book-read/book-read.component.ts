@@ -7,7 +7,7 @@ import { Rating } from "../model/rating.model";
 import { FullscreenService } from '../fullscreen.service';
 import { Subscription } from 'rxjs/Subscription';
 import { UserRepository } from '../model/user.repository';
-
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'app-book-read',
@@ -15,44 +15,46 @@ import { UserRepository } from '../model/user.repository';
   styleUrls: ['./book-read.component.css']
 })
 export class BookReadComponent implements OnInit {
-
-   book : any= {};
-   chapterNum : number;
-   curChapter: Chapter = {};
-   isFirst: boolean = false;
-   isLast: boolean = false;
-   index: number;
-   private subscriptions: Subscription[] = [];
-   fullscreen$;
-   value: number=0;
-   rating: Rating;
+	starBarPointer: any;
+   	book : any= {};
+   	chapterNum : number;
+   	curChapter: Chapter = {};
+   	isFirst: boolean = false;
+   	isLast: boolean = false;
+   	index: number;
+   	private subscriptions: Subscription[] = [];
+   	fullscreen$;
+   	value: number=0;
+   	rating: Rating;
 
   constructor(private repository: BookRepository, private router: Router, private route: ActivatedRoute,
-    private fullScreenService: FullscreenService, private userRepository: UserRepository) {
+    private fullScreenService: FullscreenService, private userRepository: UserRepository,
+  private dialog: DialogService) {
      
    }
 
-   onRateChange($event){
-    
-    if(this.rating.rate!=undefined && this.userRepository.selectedUser!=null ){
-      console.log(this.rating.rate);
-      this.rating.user = this.userRepository.selectedUser._id;
-      if(this.book.chapters[this.chapterNum-1].rating.find(p=>p.user==this.rating.user)!=undefined){
-        this.book.chapters[this.chapterNum-1].rating.splice( 
-          this.book.chapters[this.chapterNum-1].rating.findIndex(p=>p.user==this.rating.user),1,this.rating);
-      } else {
-        this.book.chapters[this.chapterNum-1].rating.push(this.rating);
-      } 
-      this.book.chapters[this.chapterNum-1].averageRating=this.getAverageRating();
-      this.setBookRating();
-      console.log("average");
-      console.log(this.book.chapters[this.chapterNum-1].averageRating);
-      this.repository.saveBook(this.book, this.book._id, null);
-      console.log("book saved");
-      console.log(this.book);
-    }
-    
-   }
+   	onRateChange($event){
+		this.starBarPointer++;
+    	if(this.rating.rate!=undefined && this.userRepository.selectedUser!=null ){
+      		console.log(this.rating.rate);
+      		this.rating.user = this.userRepository.selectedUser._id;
+      		if(this.book.chapters[this.chapterNum-1].rating.find(p=>p.user==this.rating.user)!=undefined){
+        		this.book.chapters[this.chapterNum-1].rating.splice( 
+          			this.book.chapters[this.chapterNum-1].rating.findIndex(p=>p.user==this.rating.user),1,this.rating);
+      		} else {
+       			this.book.chapters[this.chapterNum-1].rating.push(this.rating);
+      		} 
+      		this.book.chapters[this.chapterNum-1].averageRating=this.getAverageRating();
+      		this.setBookRating();
+      		console.log("average");
+      		console.log(this.book.chapters[this.chapterNum-1].averageRating);
+      		this.repository.saveBook(this.book, this.book._id, null);
+      		console.log("book saved");
+      		console.log(this.book);
+		} else if(this.starBarPointer > 3){
+			this.dialog.openNotificationDialog("Войдите в систему, чтобы оценивать фанфики", 0);
+		}
+   	}
 
    getAverageRating(): number {
     let average: number=0;
@@ -74,22 +76,22 @@ export class BookReadComponent implements OnInit {
   
   }
 
-  ngOnDestroy() {
-  this.subscriptions
-    .forEach(s => s.unsubscribe());
-  }
+  	ngOnDestroy() {
+  		this.subscriptions.forEach(s => s.unsubscribe());
+  	}
 
-  ngOnInit() {
-    this.rating={};
-      this.book.chapters=[];
-      this.getBook(this.route.snapshot.params['id']);
-      //this.getChapter(this.route.snapshot.params['num']);      
-      const subscription = this.fullScreenService.fullscreen$
-      .subscribe((fullscreen$) => {
-        this.fullscreen$ = fullscreen$;
-       });
-      this.subscriptions.push(subscription);
-   }
+  	ngOnInit() {
+	  	this.starBarPointer = 0;
+    	this.rating={};
+      	this.book.chapters=[];
+      	this.getBook(this.route.snapshot.params['id']);
+      	//this.getChapter(this.route.snapshot.params['num']);      
+      	const subscription = this.fullScreenService.fullscreen$
+      	.subscribe((fullscreen$) => {
+        	this.fullscreen$ = fullscreen$;
+       	});
+      	this.subscriptions.push(subscription);
+   	}
 
    changeFullScreen(){
      this.fullScreenService.setFullScreen(!this.fullscreen$);
