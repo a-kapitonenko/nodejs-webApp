@@ -36,14 +36,6 @@ export class HomeComponent implements OnInit {
   getAllTags(){
     this.repository.getAllTags().subscribe(res=>{
       this.allTags=res;
-      /* for(let tag of this.allTags){
-        console.log("see");
-        console.log(tag);
-        if(tag.books.length==0){
-          this.allTags.splice(this.allTags.findIndex(p=>p._id==tag._id),1);
-          console.log("deleted"+tag._id);
-        }
-      } */
       this.cdRef.detectChanges(); 
 
     });

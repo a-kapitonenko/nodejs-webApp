@@ -4,21 +4,26 @@
             <div class="tab-content py-4">                 
                 <div class="row">
                     <div class="col-md-6">
-                        <h5 class="pb-2">{{ book.title }}</h5>
-                        <h6>Описание </h6>
+                        <div class="mb-1" style="display: inline-block;">
+                            <h5  style="display: inline;">{{ book.title }}</h5>                         
+                            <button class="btn btn-light btn-sm ml-1" 
+                            *ngIf="(book.chapters[0]!=undefined)" 
+                            [routerLink]="['/book-read', book._id, book.chapters[0].number]" >{{ 'READ' | translate}}</button>
+                        </div>
+                        <h6>{{ 'DESCR' | translate}} </h6>
                         <p>{{ book.description }}</p>
-                        <h6>Автор</h6>
+                        <h6>{{ 'AUTHOR' | translate}}</h6>
                         <p>{{ authorName }}</p>
-                        <h6>Жанр</h6>
+                        <h6>{{ 'CATEGORY' | translate}}</h6>
                         <p>{{ book.category }}</p>
+                        
                     </div>
                     <div class="col ">
                         <!-- <a [routerLink]="['/book-edit', book._id]" class="btn btn-success">EDIT</a>
                         <a [routerLink]="['/add-chapter', book._id]" class="btn btn-success">ADD CHAPTER</a> -->
-                        <a *ngIf="(book.chapters[0]!=undefined)" [routerLink]="['/book-read', book._id, book.chapters[0].number]" class="btn btn-success">READ</a>
                         <!-- <button class="btn btn-danger" type="button" (click)="deleteBook(book._id)">DELETE</button> -->
                         <div *ngIf="(bookTags[0]!=undefined)" >       
-                            <h6>Теги</h6>
+                            <h6>{{ 'TAGS' | translate}}</h6>
                             <a *ngFor="let tag of bookTags" [routerLink]="['/books',tag._id]" class="badge badge-dark badge-pill mr-1">{{tag.name}}</a>
                         </div>
                     </div>
@@ -30,10 +35,12 @@
                 <img style="width: 300px" [src]="book.image" alt="avatar">
             </div>
         </div>
+        
     </div>  
+    
     <div class="container">
         <div class="comments">
-            <h6 class="title-comments mt-3">Комментарии ({{book.comments.length}})</h6>
+            <h6 class="title-comments mt-3">{{ 'COMMENTS' | translate}} ({{book.comments.length}})</h6>
             <ul class="media-list">
                 <!-- Комментарий (уровень 1) -->
                 <li *ngFor="let curComment of book.comments" class="media">
@@ -53,7 +60,7 @@
                         <div class="media-text text-justify" [innerHTML]="curComment.text"></div>
                         <div class="footer-comment">
             <a  (click)="like(curComment)">
-                <span class="vote plus" title="Нравится">
+                <span class="vote plus" title="Like">
               <i class="fa fa-thumbs-up" ></i>
             </span>
             </a>
@@ -66,7 +73,7 @@
                 </li>
                 <div>
                     <a (click)="isAuth()" style="color: white;" *ngIf="(isTyping==false)" 
-                            class="btn btn-sm button-submit">Добавить комментарий</a>
+                            class="btn btn-sm button-submit">{{ 'ADDCOM' | translate}}</a>
                 </div>
                 <form (ngSubmit)="sendComment()"  #bookForm="ngForm" *ngIf="(isTyping==true)">
                     <ul class="media-list mt-2">
@@ -84,7 +91,7 @@
                                 </div>
                                 <angular-tinymce  [(ngModel)]='comment.text' name='content' required ></angular-tinymce>
                                 <div class="form-group">
-                                    <button type="submit" class="btn button-submit mt-2" [disabled]="!bookForm.form.valid">Create</button>
+                                    <button type="submit" class="btn button-submit mt-2" [disabled]="!bookForm.form.valid">{{ 'CRBTN' | translate}}</button>
                                 </div>
                             </div>
                         </li>

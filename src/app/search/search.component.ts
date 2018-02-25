@@ -30,8 +30,6 @@ export class SearchComponent implements OnInit {
       }   
   }); 
   }
-  
-  
 
   findBooks(query: string){
       this.repository.searchBooks(query).subscribe(res =>{

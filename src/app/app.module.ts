@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatDialogModule } from'@angular/material';
 
 import { AppComponent } from './app.component';
@@ -55,6 +55,8 @@ import { MatInputModule } from '@angular/material';
 
 import { DateService } from './date.service';
 import {InlineEditorModule} from '@qontu/ngx-inline-editor';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 
 const appRoutes: Routes =[
@@ -122,10 +124,20 @@ const appRoutes: Routes =[
         TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, 
         TagInputModule, BrowserAnimationsModule, MatDialogModule,
         ReactiveFormsModule, BarRatingModule, MatTableModule, InlineEditorModule,MatSortModule,MatFormFieldModule,
-        MatInputModule],
+        MatInputModule, TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })],
     entryComponents: [NotificationComponent],
     providers: [BookRepository, UserRepository, FullscreenService, CommentsService, 
         WebsocketService, ImageuploadService, InterfaceService, AuthGuard, DialogService,DateService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}

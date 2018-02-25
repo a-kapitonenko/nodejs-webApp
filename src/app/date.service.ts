@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
     export class DateService {
         getStringDate(d: String){
             let date=d.split("T");
-            return date[0]+" at "+date[1].split('.')[0];
+            return date[0]+" "+date[1].split('.')[0];
         }
     
 

@@ -6,6 +6,7 @@ import { CommentsService } from '../comments.service';
 import { Comment } from "../model/comment.model";
 import { UserRepository } from '../model/user.repository';
 import { DialogService } from '../dialog.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'app-book-detail',
@@ -22,7 +23,8 @@ export class BookDetailComponent implements OnInit {
     authorName: any=null;
 
     constructor(private router: Router, private route: ActivatedRoute, private repository: BookRepository,
-        private chat: CommentsService, private userRepository: UserRepository, private dialog: DialogService) {
+        private chat: CommentsService, private userRepository: UserRepository, private dialog: DialogService,
+    public translate:TranslateService ) {
             
      }
 
@@ -91,7 +93,10 @@ export class BookDetailComponent implements OnInit {
         if(this.userRepository.isAuth()) {
             this.isTyping = true;
         } else {
-            this.dialog.openNotificationDialog("Для добавления комментариев войдите в систему", 0);
+            this.translate.get("BLOCKCOM").subscribe(res=>{
+                this.dialog.openNotificationDialog(res, 0);
+            });
+            
         }
     }
     sendComment(){
@@ -124,7 +129,10 @@ export class BookDetailComponent implements OnInit {
                 findIndex(p => p.id == curComment.id), 1, likedComment);
             this.repository.saveBook(this.book, this.book._id, null);
         } else {
-            this.dialog.openNotificationDialog("Войдите в систему, чтобы оценивать комментарии", 0);
+            this.translate.get("BLOCKLIKE").subscribe(res=>{
+                this.dialog.openNotificationDialog(res, 0);
+            });
+            
         }
     }
 

@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   books: any=[];
   dataSource: any;
 
-  displayedColumns = [ 'title','date', 'options'];
+  displayedColumns = [ 'title', 'options'];
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -53,15 +53,8 @@ export class ProfileComponent implements OnInit {
   loadBooks(){
     this.bookRepository.findBooksByAuthor(this.user._id).subscribe(res=>{
       this.books=res;
-     /*  for(let book of this.books){
-        book.updated_date = book.updated_date.split('.')[0].toString();
-        console.log(book.updated_date);
-      } */
-
-        this.dataSource = new MatTableDataSource(this.books);
-        this.dataSource.sort = this.sort;
- 
-      
+      this.dataSource = new MatTableDataSource(this.books);
+      this.dataSource.sort = this.sort;
     });
   }
 
@@ -82,7 +75,7 @@ export class ProfileComponent implements OnInit {
         this.user = this.userRepository.selectedUser;
         console.log(this.user);
         this.loadBooks();
-    },1000);
+    },700);
    
   }
 
@@ -97,3 +90,6 @@ export class ProfileComponent implements OnInit {
 }
 
 }
+
+
+

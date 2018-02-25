@@ -12,7 +12,7 @@
 
                     <a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h4>
                 <p class="group inner list-group-item-text">
-                   Жанр: {{ book.category }}</p>
+                        {{ 'CATEGORY' | translate}}: {{ book.category }}</p>
               <p class="group inner list-group-item-text">
                    {{ book.description }}</p>
             </div>

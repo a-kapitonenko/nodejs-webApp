@@ -43,7 +43,6 @@ router.get('/tags', function(req, res, next) {
     
     Tags.find({ books: {$ne: []} },function (err, products) {
         if (err) return next(err);
-        console.log(products);
         res.json(products);
     });
 });

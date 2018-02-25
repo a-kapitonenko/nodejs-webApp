@@ -1,15 +1,15 @@
 
 <div class="container">
-  <h3 class="mt-2">Создание фанфика</h3>
+  <h3 class="mt-2"> {{ 'NEWFANF' | translate}}</h3>
       <form (ngSubmit)="saveBook()" #bookForm="ngForm">
         <div class='row'>
       <div class="col">
         <div class="form-group">
-          <label for="title">Название</label>
+          <label for="title"> {{ 'TITLE' | translate}}</label>
           <input type="text" class="form-control" [(ngModel)]="book.title" name="title" id="title" required>
         </div>
         <div class="form-group">
-          <label for="description">Описание</label>
+          <label for="description"> {{ 'DESCR' | translate}}</label>
           <textarea class="form-control" [(ngModel)]="book.description" name="description" id="description" required></textarea>
         </div>
         <div class="form-group">
@@ -17,8 +17,8 @@
           <div class="dropdown">  
             
             <div *ngIf="(book.category==undefined);else other_content1">
-              <label>Выберите жанр</label> <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span>Жанры</span>
+              <label> {{ 'CHCATEGORY' | translate}}</label> <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span> {{ 'CATEGORIES' | translate}}</span>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <a class="dropdown-item" *ngFor="let cat of categories"
@@ -27,7 +27,7 @@
             </div>
             
             <ng-template #other_content1>
-              <label>Выберите жанр</label> <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <label>{{ 'CHCATEGORY' | translate}}</label> <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{book.category}}
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -36,7 +36,7 @@
                 </div>
             </ng-template>
           </div>
-          <label for="tags">Теги</label>
+          <label for="tags">{{ 'TAGS' | translate}}</label>
           <tag-input [(ngModel)]="items" (onRemove)="onItemRemoved($event)" 
           (onAdd)="onItemAdded($event)"  name="tags" id="tags"  [identifyBy]="'name'" [displayBy]="'name'">
               <tag-input-dropdown [autocompleteItems]="allTags">
@@ -45,13 +45,13 @@
 
         </div>
         <div class="form-group">
-            <button type="submit" class="btn button-submit" [disabled]="!bookForm.form.valid">Create</button>
+            <button type="submit" class="btn button-submit" [disabled]="!bookForm.form.valid">{{ 'CRBTN' | translate}}</button>
           </div>
       </div>
     <div class="col" >
       <div class="upload-img">
         <div>
-        <label>Обложка для фанфика</label>
+        <label>{{ 'FANFPIC' | translate}}</label>
       </div>
       <mat-spinner *ngIf="(isLoading==true);else showImage"></mat-spinner>
         <ng-template #showImage>      
@@ -64,7 +64,7 @@
             <ng-template #other_content>                        
                 <div><img style="width: 300px" [src]="downloadURL | async"></div>
                   <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
-                  Хочу другую картинку
+                      {{ 'ANOTHERPIC' | translate}}
                 </button></div>                        
             </ng-template>
           </div>
@@ -72,7 +72,7 @@
               <div *ngIf="(book.image!=null)">
               <div><img style="width: 300px" [src]="book.image"></div>
               <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="book.image=null">
-              Хочу другую картинку
+                  {{ 'ANOTHERPIC' | translate}}
                </button></div>  
               </div>             
           </ng-template>
