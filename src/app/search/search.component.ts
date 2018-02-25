@@ -14,23 +14,25 @@ export class SearchComponent implements OnInit {
   books: Book[]=[];
   isFound: boolean = false;
   isEmpty = false;
+  searchElse = false;
 
   constructor(private repository: BookRepository,private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.query=this.route.snapshot.params['text'];
-    this.findBooks();
-    this.router.events.subscribe((event) => {
+    this.findBooks(this.query);
+     this.router.events.subscribe((event) => {
       console.log(event);
-      this.query=this.route.snapshot.params['text'];
-      this.findBooks();
-  });
+      let query=this.route.snapshot.params['text'];
+      if(query!=this.query){
+        this.query=query;
+        this.findBooks(this.query);
+      }   
+  }); 
   }
-  
-  
 
-  findBooks(){
-    this.repository.searchBooks(this.query).subscribe(res =>{
+  findBooks(query: string){
+      this.repository.searchBooks(query).subscribe(res =>{
       if(res[0]==null){
         this.isEmpty = true;
       } else {
@@ -40,6 +42,8 @@ export class SearchComponent implements OnInit {
       console.log(this.books);
       this.isFound = true;
     });
+
+    
   }
 
 }

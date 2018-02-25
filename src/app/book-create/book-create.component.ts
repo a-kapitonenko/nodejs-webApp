@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation,  EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation,  EventEmitter, ChangeDetectorRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from "../model/book.model";
 import { BookRepository } from "../model/book.repository";
@@ -40,6 +40,7 @@ export class BookCreateComponent implements OnInit {
                 console.log(this.book.image);
                 this.isLoading = false;
                 console.log(this.isLoading);
+                this.cdRef.detectChanges();
                      
             });;
         });
@@ -75,7 +76,7 @@ export class BookCreateComponent implements OnInit {
   
 
     constructor(private repository: BookRepository, private router: Router, 
-         private userRepository: UserRepository, private imageService: ImageuploadService) {
+         private userRepository: UserRepository, private cdRef:ChangeDetectorRef, private imageService: ImageuploadService) {
             
     }
 

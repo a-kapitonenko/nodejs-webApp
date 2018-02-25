@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatDialogModule } from'@angular/material';
 import { MatTableModule } from'@angular/material';
 import { MatSortModule } from '@angular/material';
@@ -50,8 +50,14 @@ import { NotificationComponent } from './notification/notification.component';
 import { DialogService } from './dialog.service';
 import { ProfileComponent } from './profile/profile.component';
 
+import { MatFormFieldModule } from '@angular/material';
+import { MatInputModule } from '@angular/material';
+
 import { DateService } from './date.service';
 import { DashBoardComponent } from './dash-board/dash-board.component';
+import {InlineEditorModule} from '@qontu/ngx-inline-editor';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 const appRoutes: Routes =[
     { 
@@ -130,11 +136,22 @@ const appRoutes: Routes =[
     imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes), HttpClientModule, FileDropModule,
         AngularFireModule.initializeApp(environment.firebase), AngularFireStorageModule,
         TinyMceModule.forRoot(environment.tinyMce), MatProgressBarModule, MatProgressSpinnerModule, 
-        TagInputModule, BrowserAnimationsModule, MatDialogModule, MatTableModule, MatSortModule,
-        ReactiveFormsModule, BarRatingModule],
+        TagInputModule, BrowserAnimationsModule, MatDialogModule,
+        ReactiveFormsModule, BarRatingModule, MatTableModule, InlineEditorModule,MatSortModule,MatFormFieldModule,
+        MatInputModule, TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })],
     entryComponents: [NotificationComponent],
     providers: [BookRepository, UserRepository, FullscreenService, CommentsService, 
         WebsocketService, ImageuploadService, InterfaceService, AuthGuard, DialogService,DateService],
   	bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}

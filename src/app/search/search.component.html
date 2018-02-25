@@ -1,6 +1,6 @@
 <div class="container mt-3">
     <div *ngIf="(isEmpty==true)">
-        <p>Ничего не найдено</p>
+        <p>{{ 'NOTHING' | translate}}</p>
     </div>
   <div *ngIf="(isFound==true)">
  <div  *ngFor="let book of books">
@@ -16,7 +16,7 @@
                    <a [routerLink]="['/book-details/', book._id]" >{{book.title}}</a></h4>
 
                <p class="group inner list-group-item-text">
-                  Жанр: {{ book.category }}</p>
+                    {{ 'CATEGORY' | translate}}: {{ book.category }}</p>
              <p class="group inner list-group-item-text">
                   {{ book.description }}</p>
            </div>

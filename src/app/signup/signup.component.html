@@ -4,25 +4,25 @@
       	<div class="mt-4">
   			<form role="form" #myForm="ngForm" novalidate (ngSubmit)="onSubmit(myForm)">
      			<div class="form-group row">
-         	 		<label class="col-lg-3 col-form-label form-control-label">Ник</label>
+         	 		<label class="col-lg-3 col-form-label form-control-label">{{ 'NAME' | translate}}</label>
           			<div class="col-lg-9">
               			<input class="form-control" type="text" value="" name="name"  ngModel required>
           			</div>
       			</div>
       			<div class="form-group row">
-         			<label class="col-lg-3 col-form-label form-control-label">Email</label>
+         			<label class="col-lg-3 col-form-label form-control-label">{{ 'EMAIL' | translate}}</label>
           			<div class="col-lg-9">
               			<input class="form-control" type="email" value="" name="email"  ngModel required>
           			</div>
       			</div>
       			<div class="form-group row">
-          			<label class="col-lg-3 col-form-label form-control-label">Пароль</label>
+          			<label class="col-lg-3 col-form-label form-control-label">{{ 'PASSWORD' | translate}}</label>
           			<div class="col-lg-9">
               			<input class="form-control" type="password" value="" name="password" ngModel required>
           			</div>
       			</div>
       			<div class="form-group row">
-          			<label class="col-lg-3 col-form-label form-control-label ">Подтвердите пароль</label>
+          			<label class="col-lg-3 col-form-label form-control-label ">{{ 'REPPASSWORD' | translate}}</label>
           			<div class="col-lg-9">
               			<input class="form-control" type="password" value="" name="passport1" ngModel required>
           			</div>
@@ -30,9 +30,8 @@
       			<div class="form-group row">
           			<label class="col-lg-3 col-form-label form-control-label"></label>
           			<div class="col-lg-9">
-              			<input type="reset" class="btn btn-secondary" value="Отмена">
-						<input type="submit" [disabled]="myForm.invalid" 
-						  	class="btn button-submit"  value="Зарегистрироваться">
+              			<button type="reset" class="btn btn-secondary" > {{ 'CANCEL' | translate}}</button>
+                    <button type="submit" [disabled]="myForm.invalid" class="btn button-submit" >{{ 'SIGNUP' | translate}}</button>
           			</div>
       			</div>
   			</form>
@@ -41,7 +40,7 @@
 		  <div class="col">
 				<div class="upload-img mt-4">
 						<div>
-						<label>Выберите Аватар</label>
+						<label>{{ 'AVATAR' | translate}}</label>
 					  </div>
 					  <mat-spinner *ngIf="(isLoading==true);else showImage"></mat-spinner>
 						<ng-template #showImage>      
@@ -54,7 +53,7 @@
 							<ng-template #other_content>                        
 								<div><img style="width: 300px" [src]="imageURL"></div>
 								  <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="otherImage()">
-								  Хочу другую картинку
+											{{ 'ANOTHERPIC' | translate}}
 								</button></div>                        
 							</ng-template>
 						  </div>
@@ -62,7 +61,7 @@
 							  <div *ngIf="(imageURL!=null)">
 							  <div><img style="width: 300px" [src]="imageURL"></div>
 							  <div class="mt-2"><button class="btn btn-secondary mb-3"  type="button" (click)="imageURL=null">
-							  Хочу другую картинку
+										{{ 'ANOTHERPIC' | translate}}
 							   </button></div>  
 							  </div>             
 						  </ng-template>

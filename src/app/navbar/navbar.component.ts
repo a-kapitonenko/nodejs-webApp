@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { User } from '../model/user.model';
 import { UserRepository } from '../model/user.repository';
 import { InterfaceService } from '../model/interface.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   	selector: 'app-navbar',
@@ -17,18 +18,21 @@ export class NavbarComponent implements OnInit {
   	private subscriptions: Subscription[] = [];
 	  fullscreen$ :boolean;
 	  input: string = null;
+	  curLang: string = null;
   	ngOnInit() {
   		const subscription = this.fullScreenService.fullscreen$.subscribe((fullscreen$)=> {
       		this.fullscreen$ = fullscreen$;
     	});
-  		this.subscriptions.push(subscription);
+		  this.subscriptions.push(subscription);
+
   	}
   	ngOnDestroy() {
   		this.subscriptions.forEach(s => s.unsubscribe());
   	}
   	constructor(private router: Router, private repository: BookRepository, 
 		private fullScreenService: FullscreenService, private userRepository: UserRepository,
-		private interfaceService: InterfaceService) { 
+		private interfaceService: InterfaceService,  public translate: TranslateService ) { 
+			this.curLang=translate.currentLang;
   	}
   	get categories():string[] {
     	return this.repository.getCategories();
@@ -40,5 +44,15 @@ export class NavbarComponent implements OnInit {
 	}
 	changeTheme() {
 		this.interfaceService.changeTheme();
+	}
+
+	changeLang() {
+		if(this.curLang=='ru'){
+			this.curLang='en';
+			
+		} else {
+			this.curLang='ru';
+		}
+		this.translate.use(this.curLang);
 	}
 }

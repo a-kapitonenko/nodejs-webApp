@@ -2,7 +2,7 @@
     <div class="row">
    <div class="col">
     <div class="card-header text-center ">
-        <span class="lead">Лидеры по рейтингу</span>
+        <span class="lead">{{ 'BEST' | translate}}</span>
     </div>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -19,7 +19,7 @@
                                     <p class="card-text">{{book.description}}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted">Last updated on {{dateService.getStringDate(book.updated_date)}}</small>
+                                    <small class="text-muted">{{ 'UPDATED' | translate}} {{dateService.getStringDate(book.updated_date)}}</small>
                                 </div>
                             </div>
                 </div>
@@ -37,7 +37,7 @@
                                     <p class="card-text">{{book.description}}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted">Last updated on {{dateService.getStringDate(book.updated_date)}}</small>
+                                    <small class="text-muted">{{ 'UPDATED' | translate}} {{dateService.getStringDate(book.updated_date)}}</small>
                                 </div>
                             </div>
                 </div>
@@ -57,7 +57,7 @@
 
 
     <div class="card-header text-center ">
-        <span class="lead">Недавно обновленные</span>
+        <span class="lead">{{ 'LATEST' | translate}} </span>
     </div>
     <div id="carouselExampleControls2" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -74,7 +74,7 @@
                             <p class="card-text">{{book.description}}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Last updated on {{dateService.getStringDate(book.updated_date)}}</small>
+                            <small class="text-muted">{{ 'UPDATED' | translate}} {{dateService.getStringDate(book.updated_date)}}</small>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                             <p class="card-text">{{book.description}}</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Last updated on {{dateService.getStringDate(book.updated_date)}}</small>
+                            <small class="text-muted">{{ 'UPDATED' | translate}} {{dateService.getStringDate(book.updated_date)}}</small>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
     <div class="col-sm-3" *ngIf="(allTags[0]!==undefined)">
             <div class="card">
                     <div class="card-header lead text-center">
-                         Облако тегов
+                            {{ 'TAGCLOUD' | translate}} 
                     </div>
                     <div class="card-block mt-1 ml-1 mb-1">
                             <a class = "badge mr-1" *ngFor="let tag of allTags" 

@@ -52,4 +52,9 @@ export class UserRepository {
             return data;
         });        
     }
+
+    saveUser(id: string, user: User){
+        this.http.put('/saveuser/'+id, user)
+            .subscribe();
+    }
 }

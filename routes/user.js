@@ -47,6 +47,13 @@ exports.deleteUser = (req, res)=> {
 
 exports.getUser = (req, res)=> {
     User.findById(req.params.id, (err, user)=> {
+        console.log(req.params.id);
+        res.json(user);
+    });
+} 
+
+exports.saveUser = (req, res)=> {
+    User.findByIdAndUpdate(req.params.id,{image: req.body.image, username:req.body.username }, (err, user)=> {
         res.json(user);
     });
 } 

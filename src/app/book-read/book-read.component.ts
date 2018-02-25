@@ -8,6 +8,7 @@ import { FullscreenService } from '../fullscreen.service';
 import { Subscription } from 'rxjs/Subscription';
 import { UserRepository } from '../model/user.repository';
 import { DialogService } from '../dialog.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-book-read',
@@ -60,7 +61,6 @@ export class BookReadComponent implements OnInit {
     let average: number=0;
     for (let rating of  this.book.chapters[this.chapterNum-1].rating){
       average+=rating.rate;
-      console.log(average);
     }
     return Math.round(average/this.book.chapters[this.chapterNum-1].rating.length);
   }
@@ -71,27 +71,23 @@ export class BookReadComponent implements OnInit {
       rating+=chapter.averageRating;
     }
     this.book.rating=Math.round(rating/this.book.chapters.length);
-    console.log("book rating");
-    console.log(this.book.rating);
-  
   }
 
-  	ngOnDestroy() {
-  		this.subscriptions.forEach(s => s.unsubscribe());
-  	}
+  ngOnDestroy() {
+  this.subscriptions
+    .forEach(s => s.unsubscribe());
+  }
 
-  	ngOnInit() {
-	  	this.starBarPointer = 0;
-    	this.rating={};
-      	this.book.chapters=[];
-      	this.getBook(this.route.snapshot.params['id']);
-      	//this.getChapter(this.route.snapshot.params['num']);      
-      	const subscription = this.fullScreenService.fullscreen$
-      	.subscribe((fullscreen$) => {
-        	this.fullscreen$ = fullscreen$;
-       	});
-      	this.subscriptions.push(subscription);
-   	}
+  ngOnInit() {
+    this.rating={};
+      this.book.chapters=[];
+      this.getBook(this.route.snapshot.params['id']);  
+      const subscription = this.fullScreenService.fullscreen$
+      .subscribe((fullscreen$) => {
+        this.fullscreen$ = fullscreen$;
+       });
+      this.subscriptions.push(subscription);
+   }
 
    changeFullScreen(){
      this.fullScreenService.setFullScreen(!this.fullscreen$);
@@ -134,13 +130,11 @@ export class BookReadComponent implements OnInit {
 
   getRating(curChapter: Chapter){
     console.log(curChapter);
-    //console.log(this.userRepository.selectedUser._id);
     if(this.userRepository.selectedUser!=null){
       this.rating = curChapter.rating.find(p=>p.user==this.userRepository.selectedUser._id);
     } else {
       this.rating = undefined;
     }
-    console.log(this.rating);
     if(this.rating==undefined){
       this.rating={};
       this.rating.rate=curChapter.averageRating;
