@@ -72,8 +72,8 @@
                     </div>
                 </li>
                 <div>
-                    <a (click)="isAuth()" style="color: white;" *ngIf="(isTyping==false)" 
-                            class="btn btn-sm button-submit">{{ 'ADDCOM' | translate}}</a>
+                    <button (click)="isAuth()" style="color: white;" *ngIf="(isTyping==false)" 
+                            class="btn btn-sm button-submit">{{ 'ADDCOM' | translate}}</button>
                 </div>
                 <form (ngSubmit)="sendComment()"  #bookForm="ngForm" *ngIf="(isTyping==true)">
                     <ul class="media-list mt-2">

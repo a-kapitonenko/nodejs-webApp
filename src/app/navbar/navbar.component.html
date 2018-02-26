@@ -62,8 +62,11 @@
 							aria-haspopup="true" aria-expanded="false">
 						{{userRepository.selectedUser.username}}
 					</a>
-				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="right: 0; left: auto;">
+				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
 					<a class="dropdown-item" [routerLink]="['/profile/',userRepository.selectedUser.username]" >{{ 'PROFILE' | translate}}</a>
+					<div *ngIf="userRepository.selectedUser.role == 'admin'">
+						<a class="dropdown-item" [routerLink]="['/dashboard']" >{{ 'DASHBOARD' | translate}}</a>
+					</div>
 					<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">{{ 'LOGOUT' | translate}}</a>
 				</div>
 				</div>

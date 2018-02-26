@@ -7,7 +7,7 @@
                   <div class="container">
                     <h6>{{ 'CONTENTS' | translate}}</h6>
                         <div *ngFor="let chapter of chapters; let i = index;" class="mb-1">        
-                                {{ 'CHAPTER' | translate}} {{i+1}}:<a [routerLink]="['/book-read', book._id, chapter.number]" class=""> "{{chapter.name}}"</a>
+                                <span>{{ 'CHAPTER' | translate}} {{i+1}}:</span><a [routerLink]="['/book-read', book._id, chapter.number]" class=""> "{{chapter.name}}"</a>
                             <div class="btn-toolbar" style="display: inline-block;" role="toolbar" aria-label="Toolbar with button groups">
                                 <div class="btn-group mr-2" role="group" aria-label="First group">
                                 <button type="button" class="btn btn-secondary btn-sm" (click)="startEditChapter(chapter.number)" >

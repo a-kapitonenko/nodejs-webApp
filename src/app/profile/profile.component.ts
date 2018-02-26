@@ -46,7 +46,6 @@ export class ProfileComponent implements OnInit {
   }        
 
   saveEditable(value) {
-    console.log('saved ' + this.user.username);
     this.userRepository.saveUser(this.user._id,this.user);        
   }
 
@@ -73,7 +72,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     setTimeout(()=>{
         this.user = this.userRepository.selectedUser;
-        console.log(this.user);
         this.loadBooks();
     },700);
    

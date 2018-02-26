@@ -3,6 +3,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../model/user.model';
 import { UserRepository } from '../model/user.repository';
+import { Router } from '@angular/router';
 
 @Component({
   	selector: 'app-dash-board',
@@ -15,7 +16,7 @@ export class DashBoardComponent implements OnInit{
 	dataSource: any;
 	displayedColumns = ["check", "username", "email", "role", "isBlocked"];
 	@ViewChild(MatSort) sort: MatSort;
-	constructor(private userRepository: UserRepository) {
+	constructor(private userRepository: UserRepository, private router: Router) {
 		this.userRepository.getUsers().subscribe(data => {
 			this.users = data;
 			this.dataSource = new MatTableDataSource(this.users);
@@ -59,6 +60,9 @@ export class DashBoardComponent implements OnInit{
 		this.userRepository.deleteUser(this.selectedUsers).subscribe(data => {
 			this.getUsers();
 		});
+	}
+	onRowClicked(row) {
+		this.router.navigate(['/profile/',row.username]);
 	}
 	ngOnInit() {
 		

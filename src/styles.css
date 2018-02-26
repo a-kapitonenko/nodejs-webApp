@@ -113,7 +113,7 @@
     background-color: #111111;
     color:#D7D7D7;
 }
-.dark .ng2-tag-input {
+.ng2-tag-input {
     padding: unset !important;
 }
 .dark #search:focus, .dark .form-control:focus {
