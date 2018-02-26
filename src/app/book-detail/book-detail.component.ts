@@ -37,18 +37,11 @@ export class BookDetailComponent implements OnInit {
      }
      
     ngOnInit() {
-        console.log("in oninit");
         this.book.chapters=[];
         this.book.comments=[];
-        
         this.getBookDetail(this.route.snapshot.params['id']);
         this.getBookTags(this.route.snapshot.params['id']);
-               
-        console.log("id:"+this.route.snapshot.params['id']);
-        console.log(this.book.chapters);
-        
         this.chat.messages.subscribe(msg => {
-            console.log(msg);
             msg = JSON.parse(msg.message);
             if(msg.id==this.book._id &&  this.userRepository.selectedUser.username!=msg.comment.author ){
                 this.book.comments.push(msg.comment);
@@ -63,10 +56,7 @@ export class BookDetailComponent implements OnInit {
             this.userRepository.getUserName(this.book.author).subscribe(res=>{
                 this.authorName = res.username;
             });
-        }
-        );
-        
-        console.log("book:"+this.book+"author:"+this.authorName);
+        });
     }
 
     sendMessage() {
@@ -103,7 +93,6 @@ export class BookDetailComponent implements OnInit {
         this.comment.id=this.book.comments.length;
         this.comment.author = this.userRepository.selectedUser.username;
         this.comment.image =  this.userRepository.selectedUser.image;   
-        console.log(this.comment.image);
         this.comment.date= this.getStringDate(new Date());
         this.comment.userslikes= [];
         this.comment.likes=0;
@@ -137,7 +126,6 @@ export class BookDetailComponent implements OnInit {
     }
 
     deleteBook(id) {
-
         this.repository.deleteBook(id);
         this.router.navigate(['/books']);
     }

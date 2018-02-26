@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatDialogModule } from'@angular/material';
 import { MatTableModule } from'@angular/material';
@@ -31,15 +31,15 @@ import { AddChapterComponent } from './add-chapter/add-chapter.component';
 import { BookReadComponent } from './book-read/book-read.component';
 
 import { FullscreenService } from './fullscreen.service';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { User } from './model/user.model';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {CommentsService} from './comments.service';
-import {WebsocketService} from './websocket.service';
-import {InterfaceService} from './model/interface.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommentsService } from './comments.service';
+import { WebsocketService } from './websocket.service';
+import { InterfaceService } from './model/interface.service';
 
-import {ImageuploadService} from './imageUpload.service';
+import { ImageuploadService } from './imageUpload.service';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BookTagComponent } from './book-tag/book-tag.component'; 
@@ -55,27 +55,34 @@ import { MatInputModule } from '@angular/material';
 
 import { DateService } from './date.service';
 import { DashBoardComponent } from './dash-board/dash-board.component';
-import {InlineEditorModule} from '@qontu/ngx-inline-editor';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { InlineEditorModule } from '@qontu/ngx-inline-editor';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const appRoutes: Routes =[
     { 
         path: '', 
-        component: HomeComponent
+        component: HomeComponent,
+        data: { title: 'Home' }
     },
 	{ 
         path: 'signup', 
-        component: SignUpComponent 
+        component: SignUpComponent,
+        data: { title: 'Sign Up' }
     },
     { 
         path: 'login', 
         component: LoginComponent,
-        data: { title: 'Войти' } 
+        data: { title: 'Sign Ip' } 
     },
     { 
         path: 'logout', 
         redirectTo: '/' 
+    },
+    {
+        path: 'profile/:name',
+        component: ProfileComponent,
+        data: { title: 'Profile' }
     },
     { 
         path: 'dashboard', 

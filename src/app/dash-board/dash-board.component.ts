@@ -30,7 +30,7 @@ export class DashBoardComponent implements OnInit{
 		});
 	}
 	checkUser(user) {
-		if(this.selectedUsers.length != 0){
+		if(this.selectedUsers.length != 0) {
 			if(this.selectedUsers.indexOf(user) != -1) {
 				this.selectedUsers.splice(this.selectedUsers.indexOf(user), 1);
 			}else {
@@ -41,10 +41,8 @@ export class DashBoardComponent implements OnInit{
 		}
 	}
 	blockUser() {
-		console.log("11");
 		this.userRepository.blockUser(this.selectedUsers).subscribe(data => {
 			this.getUsers();
-			console.log("22");
 		});
 	}
 	unblockUser() {

@@ -1,7 +1,8 @@
 var User = require('../database/models/user').User;
 var config = require('../config');
 var verified = require('../boot/nodemailer').verified;
-var rand;
+
+var randArray = [];
 
 exports.register = function(req, res, next) {
     var data = req.body;
@@ -9,8 +10,8 @@ exports.register = function(req, res, next) {
         if (err) throw err;
         if (user) {
             res.send({
-                "text": "Эта почта уже используется",
-                "status": "0"
+                "text" : "This email is already use!",
+                "status" : "0"
             });
             res.end();
         }else {
@@ -28,10 +29,12 @@ exports.register = function(req, res, next) {
             newUser.image = data.image;
             newUser.save(function(err) {
                 if (err) throw err;
-                rand = verified(data.email.toLowerCase());
+                let rand = verified(data.email.toLowerCase());
+                randArray.push(rand);
+                console.log(randArray);
                 res.send({
-                    "text": "Благодарим за регистрацию. Вам на почту было отправлено письмо для подтверждения аккаунта",
-                    "status": "1"
+                    "text" : "Thank you fo registering. Please, confirm your account",
+                    "status" : "1"
                 });
                 res.end();
             });
@@ -39,12 +42,16 @@ exports.register = function(req, res, next) {
     });    
 };
 exports.verify = function(req,res) {
-    if(req.query.id == rand){
+    console.log(randArray);
+    let rand = req.query.id;
+    if(randArray.indexOf(rand) != -1){
         User.findOneAndUpdate({ email: req.query.email }, { isActive: true }, (error, user)=> {
             if(error) throw error;
+            randArray.splice(randArray.indexOf(rand),1);
+            console.log(randArray);
             res.sendfile("dist/index.html");
         });
     }else {
-        res.end("<h1>Bad Request</h1>");
+        res.send("<h1>Bad Request</h1>");
     }
 }

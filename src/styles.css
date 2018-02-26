@@ -1,15 +1,12 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-
 .theme-btn {
     background-color: unset;
 }
-
 .light .lang-btn {
     background-color: unset;
     color: #232323;
 }
-
 .lang-btn:focus {
     box-shadow: unset;  
 }
@@ -18,13 +15,11 @@
     background-color: unset;
     color: #D7D7D7;
 }
-
 .dark .btn-light {
     color: #fff;
     background-color: #343a40;
     border-color: #343a40;
 }
-
 .dark .navbar-light .navbar-brand {
     color: #D7D7D7;
 }
@@ -112,20 +107,28 @@
 .dark .navbar {
     background-color: #232323;
 }
-.dark #search {
+.dark #search, .dark .form-control, .dark .ng2-tags-container[_ngcontent-c4], 
+.dark .ng2-tag-input__text-input[_ngcontent-c8], .dark .ng2-tag-input {
     border-color: #242424;
     background-color: #111111;
     color:#D7D7D7;
 }
-.dark #search-btn {
+.dark .ng2-tag-input {
+    padding: unset !important;
+}
+.dark #search:focus, .dark .form-control:focus {
+    border-color: #8c1aff;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #ab5afc;
+}
+.dark #search-btn, .dark .button-submit {
     border-color: #414141;
     background-color: #414141;
     color:#D7D7D7;
 }
-.dark #search-btn:hover {
+.dark #search-btn:hover, .dark .button-submit:hover {
     background-color: #343434;
 }
-.dark #search-btn:focus {
+.dark #search-btn:focus, .dark .button-submit:focus {
     border-color: #8c1aff;
     background-color: #8c1aff;
     box-shadow: unset;
@@ -133,6 +136,10 @@
 .dark .btn-social {
     border: none;
     color: #8c1aff;
+}
+.dark .btn-secondary {
+    border: #383D41 !important;
+    background-color: #383D41 !important;
 }
 .dark label, .dark .card-title, .dark .card-text, .dark .lead, .dark h3, 
 .dark .dropdown-menu a, .dark a, .dark h2, .dark h4, .dark h5, 
@@ -210,7 +217,8 @@
 }
 
 a:hover {
-    color: #6600cc;
+    color: #6600cc !important;
+    cursor: pointer !important;
 }
 .dropdown-menu span:hover {
   color: #6600cc;
