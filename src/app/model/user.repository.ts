@@ -19,6 +19,9 @@ export class UserRepository {
     getUsers() {
         return this.http.get<User[]>('/getusers');
     }
+    getUser(id: any) {
+        return this.http.get('/user/'+id);
+    }
     selectUser(user: User) {
         this.selectedUser = user;
     }
@@ -26,7 +29,6 @@ export class UserRepository {
         return this.http.post('/registeruser', user); 
     }
     blockUser(user: User[]) {
-        console.log("112");
         return this.http.post('/blockuser', user);
     }
     unblockUser(user: User[]) {

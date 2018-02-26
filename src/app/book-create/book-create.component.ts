@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation,  EventEmitter, ChangeDetectorRef  } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Book } from "../model/book.model";
 import { BookRepository } from "../model/book.repository";
 import { Tag } from "../model/tag.model";
@@ -21,7 +21,7 @@ import {ImageuploadService} from '../imageUpload.service';
     encapsulation: ViewEncapsulation.None
 })
 export class BookCreateComponent implements OnInit {
-
+    user: any;
     book: Book={} ;
     public downloadURL: Observable<string>;
     isLoading=false;
@@ -33,13 +33,9 @@ export class BookCreateComponent implements OnInit {
         this.isLoading = true;
         for (const file of event.files) {
             file.fileEntry.file(info => {
-              console.log(info);
               this.imageService.sendFile(info).subscribe(res => {
-                console.log(res);
                 this.book.image=res;
-                console.log(this.book.image);
                 this.isLoading = false;
-                console.log(this.isLoading);
                 this.cdRef.detectChanges();
                      
             });;
@@ -52,32 +48,25 @@ export class BookCreateComponent implements OnInit {
         this.allTags=res.map(p=>p.name);
       });
   }
-
-  /* saveTags(){
-      for(let tag of this.tags){
-          tag.books=[];
-          console.log(tag.name);
-          this.repository.saveTag(tag,this.book);
-      } 
-  } */
-
   onItemAdded($event){
       this.tags.push($event);
       console.log(this.tags);
-    //this.repository.saveTag($event,this.book);
   }
 
   onItemRemoved($event){
       this.tags.splice(this.tags.findIndex(p=> p.name==$event.name),1);
       console.log(this.tags);
   }
-
- 
-  
-
     constructor(private repository: BookRepository, private router: Router, 
-         private userRepository: UserRepository, private cdRef:ChangeDetectorRef, private imageService: ImageuploadService) {
-            
+            private userRepository: UserRepository, private cdRef:ChangeDetectorRef, private imageService: ImageuploadService,
+            private route: ActivatedRoute) {
+        this.userRepository.getUser(this.route.snapshot.params['id']).subscribe(data => {
+            if(data == null) {
+                this.router.navigate(['']);
+            } else{
+                this.user = data;
+            }
+        });
     }
 
     ngOnInit() {
@@ -90,7 +79,7 @@ export class BookCreateComponent implements OnInit {
     }    
  
     saveBook() {
-        this.book.author = this.userRepository.selectedUser._id;
+        this.book.author = this.user._id;
         this.book.rating=null;
         this.repository.saveBook(this.book, null,this.tags);
         this.router.navigate(['/']);

@@ -17,7 +17,9 @@
 								[routerLinkActiveOptions]="{exact:true}">{{ 'HOME' | translate}}</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" [routerLink]="['/book-create']" routerLinkActive="active">{{ 'CREATE' | translate}}</a>
+						<div *ngIf="userRepository.selectedUser != null">
+								<a class="nav-link" [routerLink]="['/book-create/',userRepository.selectedUser._id]" routerLinkActive="active">{{ 'CREATE' | translate}}</a>
+						</div> 
 					</li>
 		  		</ul>
 				<input class="form-control mr-sm-2 ml-2" type="search" placeholder="Search" [(ngModel)]="input" 
@@ -62,8 +64,8 @@
 							aria-haspopup="true" aria-expanded="false">
 						{{userRepository.selectedUser.username}}
 					</a>
-				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item" [routerLink]="['/profile/',userRepository.selectedUser.username]" >{{ 'PROFILE' | translate}}</a>
+				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="right: 0; left: auto;">
+					<a class="dropdown-item" [routerLink]="['/profile/',userRepository.selectedUser._id]" >{{ 'PROFILE' | translate}}</a>
 					<div *ngIf="userRepository.selectedUser.role == 'admin'">
 						<a class="dropdown-item" [routerLink]="['/dashboard']" >{{ 'DASHBOARD' | translate}}</a>
 					</div>

@@ -80,7 +80,7 @@ const appRoutes: Routes =[
         redirectTo: '/' 
     },
     {
-        path: 'profile/:name',
+        path: 'profile/:id',
         component: ProfileComponent,
         data: { title: 'Profile' }
     },
@@ -105,7 +105,7 @@ const appRoutes: Routes =[
         data: { title: 'Book Details' }
     },
     {
-        path: 'book-create',
+        path: 'book-create/:id',
         component: BookCreateComponent,
         canActivate: [AuthGuard],
         data: { title: 'Create Book' }

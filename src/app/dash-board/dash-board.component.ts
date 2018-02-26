@@ -44,25 +44,32 @@ export class DashBoardComponent implements OnInit{
 	blockUser() {
 		this.userRepository.blockUser(this.selectedUsers).subscribe(data => {
 			this.getUsers();
+			this.clearSelectedUsers();
 		});
 	}
 	unblockUser() {
 		this.userRepository.unblockUser(this.selectedUsers).subscribe(data => {
 			this.getUsers();
+			this.clearSelectedUsers();
 		});
 	}
 	setAdmin() {
 		this.userRepository.setAdmin(this.selectedUsers).subscribe(data => {
 			this.getUsers();
+			this.clearSelectedUsers();
 		});
 	}
 	deleteUser() {
 		this.userRepository.deleteUser(this.selectedUsers).subscribe(data => {
 			this.getUsers();
+			this.clearSelectedUsers();
 		});
 	}
 	onRowClicked(row) {
-		this.router.navigate(['/profile/',row.username]);
+		this.router.navigate(['/profile/',row._id]);
+	}
+	clearSelectedUsers() {
+		this.selectedUsers = [];
 	}
 	ngOnInit() {
 		

@@ -46,6 +46,7 @@ exports.deleteUser = (req, res) => {
 
 exports.getUser = (req, res) => {
     User.findById(req.params.id, (err, user) => {
+        console.log(user);
         res.json(user);
     });
 } 

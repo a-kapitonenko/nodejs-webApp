@@ -8,6 +8,7 @@ import { User } from '../model/user.model';
 import { UserRepository } from '../model/user.repository';
 import { InterfaceService } from '../model/interface.service';
 import {TranslateService} from '@ngx-translate/core';
+import { DialogService } from '../dialog.service';
 
 @Component({
   	selector: 'app-navbar',
@@ -31,7 +32,7 @@ export class NavbarComponent implements OnInit {
   	}
   	constructor(private router: Router, private repository: BookRepository, 
 		private fullScreenService: FullscreenService, private userRepository: UserRepository,
-		private interfaceService: InterfaceService,  public translate: TranslateService ) { 
+		private interfaceService: InterfaceService,  public translate: TranslateService,private dialog: DialogService ) { 
 			this.curLang=translate.currentLang;
   	}
   	get categories():string[] {
@@ -54,5 +55,12 @@ export class NavbarComponent implements OnInit {
 			this.curLang='ru';
 		}
 		this.translate.use(this.curLang);
+	}
+	createBook() {
+		if(this.userRepository.selectedUser == null) {
+			this.dialog.openNotificationDialog("Please, signin", 0);
+		}else {
+			this.router.navigate(['book-create', this.userRepository.selectedUser._id]);
+		}
 	}
 }

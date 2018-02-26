@@ -7,7 +7,7 @@
 			<span class="fa fa-lock-open"></span>
 		</button>
 		<button type="button" class="btn btn-secondary btn-sm" (click)="setAdmin()">
-				<span class="fa fa-qq"></span>
+				<span class="fab fa-qq"></span>
 			</button>
 		<button type="button" class="btn btn-secondary btn-sm" (click)="deleteUser()">
 	  		<span class="fa fa-trash-alt"></span>
@@ -26,25 +26,25 @@
 
     	<ng-container matColumnDef="username">
       		<mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
-      		<mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+      		<mat-cell *matCellDef="let user" (click)="onRowClicked(user)"> {{user.username}} </mat-cell>
     	</ng-container>
 
     	<ng-container matColumnDef="email">
       		<mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-      		<mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+      		<mat-cell *matCellDef="let user" (click)="onRowClicked(user)"> {{user.email}} </mat-cell>
     	</ng-container>
 
     	<ng-container matColumnDef="role">
       		<mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
-      		<mat-cell *matCellDef="let user"> {{user.role}} </mat-cell>
+      		<mat-cell *matCellDef="let user" (click)="onRowClicked(user)"> {{user.role}} </mat-cell>
 		</ng-container>
 
 		<ng-container matColumnDef="isBlocked">
 				<mat-header-cell *matHeaderCellDef mat-sort-header> IsBlocked </mat-header-cell>
-				<mat-cell *matCellDef="let user"> {{user.isBlocked}} </mat-cell>
+				<mat-cell *matCellDef="let user" (click)="onRowClicked(user)"> {{user.isBlocked}} </mat-cell>
 		  </ng-container>
 
     	<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    	<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></mat-row>
+    	<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   	</mat-table>
 </div>

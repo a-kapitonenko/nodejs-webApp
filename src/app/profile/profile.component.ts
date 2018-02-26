@@ -7,7 +7,7 @@ import { User } from '../model/user.model';
 import { UserRepository } from '../model/user.repository';
 import {MatTableDataSource, MatSort} from '@angular/material';
 import { DateService } from '../date.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -66,15 +66,17 @@ export class ProfileComponent implements OnInit {
 
   constructor(private imageService: ImageuploadService, private userRepository: UserRepository,
     private cdRef:ChangeDetectorRef, private bookRepository: BookRepository, private dateService: DateService,
-    private router: Router) {    
+    private router: Router, private route: ActivatedRoute) { 
+      this.userRepository.getUser(this.route.snapshot.params['id']).subscribe(data => {
+        if(data == null) {
+          this.router.navigate(['']);
+        } else{
+          this.user = data;
+          this.loadBooks();}
+      });   
     }
 
   ngOnInit() {
-    setTimeout(()=>{
-        this.user = this.userRepository.selectedUser;
-        this.loadBooks();
-    },700);
-   
   }
 
   applyFilter(filterValue: string) {
@@ -85,6 +87,9 @@ export class ProfileComponent implements OnInit {
 
   onRowClicked(row) {
     this.router.navigate(['/book-details/',row._id]);
+}
+createBook(){
+  this.router.navigate(['/book-create/',this.user._id]);
 }
 
 }
