@@ -1,6 +1,7 @@
 # Kursach
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+You can see this app hosted here http://whispering-anchorage-41881.herokuapp.com/
 
 ## Development server
 
