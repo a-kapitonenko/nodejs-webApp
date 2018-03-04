@@ -16,7 +16,7 @@ import { NgClass } from '@angular/common';
   styleUrls: ['./book-read.component.css']
 })
 export class BookReadComponent implements OnInit {
-	starBarPointer: any;
+	
    	book : any= {};
    	chapterNum : number;
    	curChapter: Chapter = {};
@@ -35,7 +35,7 @@ export class BookReadComponent implements OnInit {
    }
 
    	onRateChange($event){
-		this.starBarPointer++;
+
     	if(this.rating.rate!=undefined && this.userRepository.selectedUser!=null ){
       		console.log(this.rating.rate);
       		this.rating.user = this.userRepository.selectedUser._id;
@@ -48,13 +48,13 @@ export class BookReadComponent implements OnInit {
       		this.book.chapters[this.chapterNum-1].averageRating=this.getAverageRating();
       		this.setBookRating();
       		console.log("average");
-      		console.log(this.book.chapters[this.chapterNum-1].averageRating);
+          console.log(this.book.chapters[this.chapterNum-1].averageRating);
+          console.log("book rating");
+      		console.log(this.book.rating);
       		this.repository.saveBook(this.book, this.book._id, null);
       		console.log("book saved");
       		console.log(this.book);
-		} else if(this.starBarPointer > 3){
-			this.dialog.openNotificationDialog("Войдите в систему, чтобы оценивать фанфики", 0);
-		}
+		} 
    	}
 
    getAverageRating(): number {
@@ -68,7 +68,9 @@ export class BookReadComponent implements OnInit {
   setBookRating(){
     let rating=0;
     for(let chapter of this.book.chapters){
-      rating+=chapter.averageRating;
+      if(chapter.averageRating!=null){
+        rating+=chapter.averageRating;
+      }
     }
     this.book.rating=Math.round(rating/this.book.chapters.length);
   }

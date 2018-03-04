@@ -67,7 +67,7 @@
 				<div class="dropdown-menu " aria-labelledby="dropdownMenuLink" style="right: 0; left: auto;">
 					<a class="dropdown-item" [routerLink]="['/profile/',userRepository.selectedUser._id]" >{{ 'PROFILE' | translate}}</a>
 					<div *ngIf="userRepository.selectedUser.role == 'admin'">
-						<a class="dropdown-item" [routerLink]="['/dashboard']" >{{ 'DASHBOARD' | translate}}</a>
+						<a class="dropdown-item" [routerLink]="['/dashboard']" >{{ 'ADMIN' | translate}}</a>
 					</div>
 					<a class="dropdown-item" (click)="logout()" [routerLink]="['/logout']">{{ 'LOGOUT' | translate}}</a>
 				</div>

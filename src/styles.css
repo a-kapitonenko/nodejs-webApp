@@ -24,8 +24,16 @@
     color: #D7D7D7;
 }
 
+.dark body {
+    color: #D7D7D7 !important;
+}
+
 .navbar.fixed-bottom.navbar-light.navbar-expand-md.justify-content-between {
     background-color: #f0ecf8 !important;
+}
+
+.dark .read-btn {
+    color: #D7D7D7 !important;
 }
 
 .dark .navbar.fixed-bottom.navbar-light.navbar-expand-md.justify-content-between {
@@ -143,8 +151,11 @@
 }
 .dark label, .dark .card-title, .dark .card-text, .dark .lead, .dark h3, 
 .dark .dropdown-menu a, .dark a, .dark h2, .dark h4, .dark h5, 
-.dark h6, .dark h1, .dark p, .dark span {
-    color:#D7D7D7;
+.dark h6, .dark h1, .dark p, .dark span, .dark div {
+    color:#D7D7D7 !important;
+}
+.dark a:hover {
+    color: #8c1aff;
 }
 .dark .card-body, .dark .card-footer {
     background-color:#111111;

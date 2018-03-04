@@ -46,7 +46,8 @@
     "REPPASSWORD":"Repeat password",
     "BLOCKCOM":"Sign in to add comments",
     "BLOCKLIKE":"Sign in to like comments",
-    "NOTHING": "We can't find anything :("
+    "NOTHING": "We can't find anything :(",
+    "ADMIN": "Dashboard"
 
 
 
